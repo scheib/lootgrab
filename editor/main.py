@@ -32,87 +32,60 @@ def id_decode(s):
     n = n * BASE + ALPHABET_REVERSE[c]
   return n
 
-# Models
-class Entity(db.Model):
-  name = db.StringProperty()
-  img_url = db.StringProperty()
-  x = db.IntegerProperty(default=0)
-  y = db.IntegerProperty(default=0)
-  width = db.IntegerProperty(default=0)
-  height = db.IntegerProperty(default=0)
+def get_data(obj):
+  data = {}
+  data['id'] = obj.get_id()
+  for name in obj.properties():
+    data[name] = getattr(obj, name)
 
+  for name in obj.dynamic_properties():
+    data[name] = getattr(obj, name)
+
+  return data
+
+# Models
+class Entity(db.Expando):
+  name = db.StringProperty()
   def get_id(self):
     return id_encode(self.key().id())
-
-  def get_data(self):
-    return {
-      'id' : self.get_id(),
-      'name' : self.name,
-      'img' : self.img_url,
-      'x' : self.x,
-      'y' : self.y,
-      'width' : self.width,
-      'height' : self.height
-    }
 
 def dbEntity(id):
   return Entity.get_by_id(int(id_decode(id)))
 
 
-class Cell(db.Model):
-  ground = db.StringProperty() #EntityID
-  entities = db.ListProperty(str, default=[]) #EntityIDs
-
+class Cell(db.Expando):
+  entities = db.ListProperty(str, default=[])
   def get_id(self):
     return id_encode(self.key().id())
-  
-  def get_data(self):
-    return {
-      'id' : self.get_id(),
-      'ground' : self.ground,
-      'entities' : self.entities
-    }
 
 def dbCell(id):
   return Cell.get_by_id(int(id_decode(id)))
 
 
-class World(db.Model):
+class World(db.Expando):
   name = db.StringProperty()
-  width = db.IntegerProperty()
-  height = db.IntegerProperty()
   cells = db.ListProperty(str, default=[])
-
   def get_id(self):
     return id_encode(self.key().id())
-
-  def get_data(self):
-    return {
-      'id' : self.get_id(),
-      'name' : self.name,
-      'width' : self.width,
-      'height' : self.height,
-      'cell' : self.cells
-    }
-
   def get_all_data(self):
-    data = self.get_data()
+    data = get_data(self)
     data['cells'] = {}
     data['entities'] = {}
 
+    entities_to_get = {}
+
     for cell_id in self.cells:
-      if not cell_id:
-        continue
-
       cell = dbCell(cell_id)
-
-      data.cells[cell.get_id()] = cell.get_data()
-
+      if not cell: continue
       for entity_id in cell.entities:
-        if entity_id not in data.entities:
-          data.entities[entity_id] = cell.get_data()
-    return data
+        entities_to_get[entity_id] = entity_id
+      data['cells'][cell_id] = get_data(cell)
 
+    for entity_id in entities_to_get:
+      entity = dbEntity(entity_id)
+      if not entity: continue
+      data['entities'][entity_id] = get_data(entity)
+    return data
 
 def dbWorld(id):
   return World.get_by_id(int(id_decode(id)))
@@ -131,31 +104,16 @@ class SaveEntity(webapp.RequestHandler):
     entity = None
     if 'id' in data and data['id'] != "":
       entity = dbEntity(data['id'])
-    
     if not entity:
       entity = Entity()
     
-    entity.img_url = data['img_url']
-    entity.mimetype = 'image/png'
-    entity.name = data['name']
-    entity.x = int(data['x'])
-    entity.y = int(data['y'])
-    entity.width = int(data['width'])
-    entity.height = int(data['height'])
-
+    for name in data:
+      if name == 'id': continue
+      setattr(entity, name, data[name])
     entity.put()
 
     self.response.out.write(entity.get_id())
 
-class GetImage(webapp.RequestHandler):
-  def get(id):
-    entity = dbEntity(id)
-
-    if entity.mimetype:
-      self.response.headers['Content-Type'] = entity.mimetype
-    else:
-      self.response.headers['Content-Type'] = 'image/png'
-    self.response.out.write(entity.img)
 
 class SaveCell(webapp.RequestHandler):
   def post(self):
@@ -168,9 +126,9 @@ class SaveCell(webapp.RequestHandler):
     if not cell:
       cell = Cell()
     
-    # TODO(glen): Validate data.
-    cell.ground = int(data['ground'])
-    cell.entities = data['entities']
+    for name in data:
+      if name == 'id': continue
+      setattr(cell, name, data[name])
     cell.put()
 
     self.response.out.write(cell.get_id())
@@ -179,17 +137,15 @@ class SaveWorld(webapp.RequestHandler):
   def post(self):
     data = simplejson.loads(self.request.body)
     world = None
-    if 'id' in data and data['id'] != "":
+
+    if 'id' in data:
       world = dbWorld(data['id'])
-    
-    if not world:
+    else:
       world = World()
     
-    # TODO(glen): Validate data.
-    world.name = data['name']
-    world.width = int(data['width'])
-    world.height = int(data['height'])
-    world.cells = data['cells']
+    for name in data:
+      if name == 'id': continue
+      setattr(world, name, data[name])
     world.put()
 
     self.response.out.write(world.get_id())
@@ -201,7 +157,9 @@ class GetWorld(webapp.RequestHandler):
     if not world:
       return
     
-    data = world.get_all_data()
+    data = {}
+    for name in world:
+      data[name] = world[name]
     self.response.out.write(simplejson.dumps(data))
 
 class DbgEditor(webapp.RequestHandler):
@@ -232,7 +190,7 @@ def main():
     ('/api/savecell', SaveCell),
     ('/api/saveworld', SaveWorld),
     ('/api/getworld/(.*)', GetWorld),
-    ('/images/(.*)', GetImage),
+    #('/images/(.*)', GetImage),
   ], debug=True)
   util.run_wsgi_app(application)
 
