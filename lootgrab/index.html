@@ -5,12 +5,15 @@
 <script type="text/javascript" src="../tdl/base.js"></script>
 <script type="text/javascript">
 tdl.require('tdl.log');
+tdl.require('lootgrab.foo');
 
 function initialize() {
   var canvas = document.getElementById("game");
   var ctx = canvas.getContext("2d");
   ctx.fillStyle = "rgb(255,0,0)";
   ctx.fillRect(10,10,30,10);
+
+  foobar();
 }
 
 $(function(){
