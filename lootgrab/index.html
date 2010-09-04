@@ -34,17 +34,18 @@ function initialize() {
   var r = new Render();
   tdl.log("World created: ", w.width,w.height)
 
-  setInterval(
-    function () {
-    draw();
-    },
-  32);
-
+  var drawIntervalID = setInterval(draw, 32);
   function draw() {
-    draw_pending = false;
-    w.draw_dbg(gfx.tileCtx);
-    r.draw(w, gfx.tileCtx);
+    try {                       
+      w.draw_dbg(gfx.tileCtx);
+      r.draw(w, gfx.tileCtx);
+    } catch(e) {
+      tdl.log("Stopping repaint loop...");                    
+      clearInterval(drawIntervalID);
+      throw e;
+    }
   }
+
 }
 
 $(function(){

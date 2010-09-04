@@ -6,7 +6,7 @@ cellWidth = 20;
 cellHeight = 20;
 
 function Render() {
-  
+    
 }
 
 Render.prototype.draw = function(w, ctx) {
