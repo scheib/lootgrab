@@ -1,6 +1,6 @@
 tdl.provide('world')
 
-function EntityID(world,id,json) {
+function Entity(world,id,json) {
     this.id = id;
     if(json.type == "image") {
         this.img.src = json.img;
@@ -31,6 +31,8 @@ function World(json) {
     for(var i = 0; i < json.world.cells.length; ++i) {
         var cellID = json.world.cells[i++]
         var cell = new Cell(this,cellID, json.cells[cellID])
+        cx = i % this.width
+        cy = Math.floor(i / this.width)
         this.cells.push(cell)
     }
 }
