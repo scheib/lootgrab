@@ -19,7 +19,6 @@ CANVAS {
 <script type="text/javascript">
 tdl.require('tdl.log');
 tdl.require('lootgrab.world');
-tdl.require('lootgrab.foo');
 tdl.require('json.example');
 tdl.require('lootgrab.editor');
 
@@ -34,11 +33,6 @@ function initialize() {
   tdl.log("World created: ", w.width,w.height)
 
   w.draw_dbg(ctx);
-
-  a = new BaseClass("abc");
-  b = new SubClass("def", 123);
-  a.dump();
-  b.dump();
 }
 
 $(function(){
