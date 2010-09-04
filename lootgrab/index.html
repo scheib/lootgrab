@@ -1,11 +1,30 @@
 <html>
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  font-family: sans-serif;
+}
+CANVAS {
+  background-color: gray;
+}
+#editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+</style>
 <link type="text/css" href="../jquery-ui-1.8.2.custom/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-ui-1.8.2.custom.min.js"></script>
 <script type="text/javascript" src="../tdl/base.js"></script>
 <script type="text/javascript">
 tdl.require('tdl.log');
-tdl.require('lootgrab.world');
+tdl.require('lootgrab.foo');
 
 function initialize() {
   var canvas = document.getElementById("game");
@@ -13,21 +32,19 @@ function initialize() {
   ctx.fillStyle = "rgb(255,0,0)";
   ctx.fillRect(10,10,30,10);
 
-  json = {
-    width: 6,
-    height: 6,
-  };
-  w = new World(json)
-  tdl.log("World created with width=%i height=%i", w.width,w.height)
+  foobar();
 }
 
 $(function(){
   initialize();
+  $("#editorButton").click(function(){$("#editor").show();});
+  $("#editor").hide();
 });
 
 </script>
 <body>
 <canvas width="800" height="600" id="game"></canvas>
-<div id="editor"></div>
+<div id="editorButton">edit level<div>
+<div id="editor">the editor</div>
 </body>
 </html>
