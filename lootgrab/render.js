@@ -58,10 +58,10 @@ function Render(world,ctx) {
 Render.prototype.draw = function() {
   var ctx = this.ctx;
   var w = this.world;
-  this.ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
+  ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
 
-  cell_width = ctx.canvas.width / this.world.width;
-  cell_height = ctx.canvas.height / this.world.height;
+  cell_width = ctx.canvas.width / w.width;
+  cell_height = ctx.canvas.height / w.height;
 
   for(var i = 0; i < w.cells.length; ++i) {
     var cell = w.cells[i];
