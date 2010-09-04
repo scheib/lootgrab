@@ -15,6 +15,8 @@ tdl.require('json.level1');
 tdl.require('lootgrab.editor');
 tdl.require('lootgrab.audio');
 
+var DEBUG = false;
+
 function initialize() {
   var editor = lootgrab.editor.init(document.getElementById("game"));
 
@@ -23,18 +25,26 @@ function initialize() {
 
   var json = getData();
   var w = new World(json);
-  var r = new Render();
+  var r = new Render(w);
   tdl.log("World created: ", w.width, w.height)
 
   var drawIntervalID = setInterval(draw, 32);
   function draw() {
-    try {                       
-      w.draw_dbg(editor.tileCtx);
-      r.draw(w, editor.tileCtx);
-    } catch(e) {
-      tdl.log("Stopping repaint loop...");                    
-      clearInterval(drawIntervalID);
-      throw e;
+//    try {
+      editor.tileCtx.clearRect(0,0,editor.tileCtx.canvas.width, editor.tileCtx.canvas.height);
+      r.draw(editor.tileCtx);
+      if(DEBUG)
+        w.draw_dbg(editor.tileCtx);
+//    } catch(e) {
+//      tdl.log("Stopping repaint loop...");                    
+//    clearInterval(drawIntervalID);
+//      throw e;
+//    }
+  }
+
+  window.onkeydown = function(evt) {
+    if(evt.keyCode == 192) { // ~
+      DEBUG = !DEBUG;
     }
   }
 }
