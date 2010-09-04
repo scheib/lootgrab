@@ -4,3 +4,5 @@ syntax: glob
 *.swp
 *.bat
 *.bak
+*.orig
+.idea/*
