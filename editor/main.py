@@ -157,10 +157,7 @@ class GetWorld(webapp.RequestHandler):
     if not world:
       return
     
-    data = {}
-    for name in world:
-      data[name] = world[name]
-    self.response.out.write(simplejson.dumps(data))
+    self.response.out.write(simplejson.dumps(world.get_all_data()))
 
 class DbgEditor(webapp.RequestHandler):
   def get(self):
