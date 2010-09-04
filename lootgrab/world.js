@@ -65,6 +65,11 @@ function World(json) {
     var cell = new Cell(this,cellID, cx, cy,json.cells[cellID])
     this.cells.push(cell)
   }
+
+  this.actors = {};
+  for(var actorID in json.actors) {
+    
+  }
 }
 
 World.prototype.get_def = function(entID) {
@@ -88,6 +93,17 @@ World.prototype.newEntity = function(entID) {
   return e;
 }
 
+/**
+ *
+ * @param x {Number}
+ * @param y {Number}
+ * @return {Cell}
+ */
+World.prototype.entityAt = function(x,y) {
+  idx = x * this.width + y;
+  return this.cells[idx];
+}
+
 World.prototype.draw_dbg = function (ctx) {
   cell_width = ctx.canvas.width / this.width;
   cell_height = ctx.canvas.height / this.height;
@@ -99,3 +115,5 @@ World.prototype.draw_dbg = function (ctx) {
             cell_width, cell_height);
   }
 }
+
+World.prototype.actors = {};
