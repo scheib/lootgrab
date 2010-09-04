@@ -7,7 +7,7 @@ function Tile(id,json) {
 function World(json) {
     this.width = json.width;
     this.height = json.height;
-    this.tiles = Array(width * height)
+    this.tiles = []
     this.entities = {}
     for(var y = 0; y < this._height; ++y) {
         for(var x = 0; x < this._width; ++x) {
