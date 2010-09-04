@@ -44,7 +44,6 @@ World.prototype.newEntity = function(entDefID) {
   return e;
 }
 
-
 World.prototype.getDef = function(entDefID) {
   return this._entity_defs[entDefID];
 }

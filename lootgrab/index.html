@@ -26,24 +26,14 @@ function initialize() {
 
   var json = getData();
   var w = new World(json);
-  var r = new Render(w);
+  var r = new Render(w,gfx.tileCtx.tileCtx);
   tdl.log("World created: ", w.width, w.height)
 
   editor.setup(w);
 
   var drawIntervalID = setInterval(draw, 32);
   function draw() {
-//    try {
-      gfx.tileCtx.clearRect(
-          0, 0, gfx.tileCtx.canvas.width, gfx.tileCtx.canvas.height);
-      r.draw(gfx.tileCtx);
-      if(DEBUG)
-        w.draw_dbg(gfx.tileCtx);
-//    } catch(e) {
-//      tdl.log("Stopping repaint loop...");
-//    clearInterval(drawIntervalID);
-//      throw e;
-//    }
+      r.draw();
   }
 
   window.onkeydown = function(evt) {
