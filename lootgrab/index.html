@@ -20,6 +20,7 @@ CANVAS {
 tdl.require('tdl.log');
 tdl.require('lootgrab.world');
 tdl.require('lootgrab.render');
+tdl.require('lootgrab.foo');
 tdl.require('json.example');
 tdl.require('lootgrab.editor');
 
@@ -29,11 +30,16 @@ function initialize() {
   ctx.fillStyle = "rgb(255,0,0)";
   ctx.fillRect(10,10,30,10);
 
-  json = getData();
-  w = new World(json)
-  r = new Render();
+  var json = getData();
+  var w = new World(json);
   tdl.log("World created: ", w.width,w.height)
-  r.draw(w, ctx);
+
+  w.draw_dbg(ctx);
+
+  a = new BaseClass("abc");
+  b = new SubClass("def", 123);
+  a.dump();
+  b.dump();
 }
 
 $(function(){
