@@ -19,6 +19,7 @@ CANVAS {
 <script type="text/javascript">
 tdl.require('tdl.log');
 tdl.require('lootgrab.world');
+tdl.require('lootgrab.editor');
 
 function initialize() {
   var canvas = document.getElementById("game");
@@ -36,16 +37,7 @@ function initialize() {
 
 $(function(){
   initialize();
-  var editor = $('<div></div>')
-    .html('This dialog will show every time!')
-    .dialog({
-      autoOpen: false,
-      title: 'Basic Dialog'
-    });
-  $("#editorButton").click(function(){
-    editor.dialog('open');
-    return false;
-  });
+  lootgrab.editor.init("editorButton");
 });
 
 </script>
