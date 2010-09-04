@@ -13,6 +13,7 @@ tdl.require('lootgrab.world');
 tdl.require('lootgrab.render');
 tdl.require('json.level1');
 tdl.require('lootgrab.editor');
+tdl.require('lootgrab.audio');
 
 function initialize() {
   var infos = [
@@ -50,6 +51,7 @@ function initialize() {
 $(function(){
   initialize();
   lootgrab.editor.init("editorButton");
+  lootgrab.audio.init();
 });
 
 </script>
