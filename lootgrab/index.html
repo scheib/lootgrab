@@ -19,24 +19,28 @@ var DEBUG = false;
 
 function initialize() {
   var editor = lootgrab.editor.init(document.getElementById("game"));
+  var gfx = editor.gfx;
 
-  editor.entityCtx.fillStyle = "rgb(255,0,0)";
-  editor.entityCtx.fillRect(10,10,30,10);
+  gfx.entityCtx.fillStyle = "rgb(255,0,0)";
+  gfx.entityCtx.fillRect(10,10,30,10);
 
   var json = getData();
   var w = new World(json);
   var r = new Render(w);
   tdl.log("World created: ", w.width, w.height)
 
+  editor.setup(w);
+
   var drawIntervalID = setInterval(draw, 32);
   function draw() {
 //    try {
-      editor.tileCtx.clearRect(0,0,editor.tileCtx.canvas.width, editor.tileCtx.canvas.height);
-      r.draw(editor.tileCtx);
+      gfx.tileCtx.clearRect(
+          0, 0, gfx.tileCtx.canvas.width, gfx.tileCtx.canvas.height);
+      r.draw(gfx.tileCtx);
       if(DEBUG)
-        w.draw_dbg(editor.tileCtx);
+        w.draw_dbg(gfx.tileCtx);
 //    } catch(e) {
-//      tdl.log("Stopping repaint loop...");                    
+//      tdl.log("Stopping repaint loop...");
 //    clearInterval(drawIntervalID);
 //      throw e;
 //    }
