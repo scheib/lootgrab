@@ -3,10 +3,11 @@ var getData = function() {
         entities : {
             "dirt" : {
                 type : "image",
-                img : "http://blah.com/i.png",
+                img : "images/previewenv.png",
             },
             "grass" : {
-                img : "http://blah.com/chew.png",
+                type : "image",
+                img : "images/previewenv.png",
             },
         },
 
