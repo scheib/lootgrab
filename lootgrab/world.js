@@ -47,6 +47,7 @@ World.prototype.newEntity = function(entDefID) {
 
 World.prototype.getDef = function(entDefID) {
   return this._entity_defs[entDefID];
+}
 
  /**
  *
@@ -72,3 +73,4 @@ World.prototype.draw_dbg = function (ctx) {
 }
 
 World.prototype.actors = {};
+
