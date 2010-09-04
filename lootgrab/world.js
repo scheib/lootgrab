@@ -28,7 +28,6 @@ Cell.prototype.draw_dbg = function(ctx,x,y,w,h) {
   ctx.drawImage(this.ground_ent.img, x,y,w,h);
 }
 
-
 function World(json) {
   this.width = json.world.width;
   this.height = json.world.height;
