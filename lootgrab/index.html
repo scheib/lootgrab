@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>lootiegrabber</title>
+<link type="text/css" href="lootgrab.css" rel="stylesheet" />
+<link type="text/css" href="editor.css" rel="stylesheet" />
+<link type="text/css" href="../jquery-ui-1.8.2.custom/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-ui-1.8.2.custom.min.js"></script>
+<script type="text/javascript" src="../tdl/base.js"></script>
+<script type="text/javascript">
+tdl.require('tdl.log');
+tdl.require('lootgrab.world');
+tdl.require('lootgrab.render');
+tdl.require('json.level1');
+tdl.require('lootgrab.editor');
+tdl.require('lootgrab.audio');
+
+function initialize() {
+  var editor = lootgrab.editor.init(document.getElementById("game"));
+
+  editor.entityCtx.fillStyle = "rgb(255,0,0)";
+  editor.entityCtx.fillRect(10,10,30,10);
+
+  var json = getData();
+  var w = new World(json);
+  var r = new Render();
+  tdl.log("World created: ", w.width, w.height)
+
+  var drawIntervalID = setInterval(draw, 32);
+  function draw() {
+    try {                       
+      w.draw_dbg(editor.tileCtx);
+      r.draw(w, editor.tileCtx);
+    } catch(e) {
+      tdl.log("Stopping repaint loop...");                    
+      clearInterval(drawIntervalID);
+      throw e;
+    }
+  }
+}
+
+$(function(){
+  initialize();
+  lootgrab.audio.init();
+});
+
+</script>
+</head>
+<body>
+<div id="game">
+</div>
+</body>
+</html>
