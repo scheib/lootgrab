@@ -5,15 +5,21 @@ lootgrab.editor = (function() {
 
  var editorHTML;
 
- function init(element) {
-   element.innerHTML = '<div>foo</div>';
- }
-
- function showEditor() {
+ function init(editorButtonId) {
+   var editor = $('<div></div>')
+     .html('This dialog will show every time!')
+     .dialog({
+       autoOpen: false,
+       title: 'Basic Dialog',
+       modal: true,
+     });
+   $("#" + editorButtonId).click(function(){
+     editor.dialog('open');
+     return false;
+   });
  }
 
  return {
    init: init,
-   showEditor: showEditor,
  };
 })();
