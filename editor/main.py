@@ -3,6 +3,7 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 from google.appengine.ext import db
+from google.appengine.api import images
 from django.utils import simplejson
 
 # Functions
@@ -43,7 +44,7 @@ class Entity(db.Model):
   def get_data(self):
     return {
       'name' : self.name,
-      'img' : get_serving_url(self.img)
+      'img' : '/images/' + self.get_id()
     }
 
 def dbEntity(id):
@@ -107,6 +108,7 @@ class SaveEntity(webapp.RequestHandler):
     
     if self.request.get("imgfile"):
       entity.img = self.request.get("imgfile")
+      entity.mimetype = 'image/png' #hax
     if self.request.get("name"):
       entity.name = self.request.get("name")
 
@@ -114,6 +116,15 @@ class SaveEntity(webapp.RequestHandler):
 
     self.response.out.write(entity.get_id())
 
+class GetImage(webapp.RequestHandler):
+  def get(id):
+    entity = dbEntity(id)
+
+    if entity.mimetype:
+      self.response.headers['Content-Type'] = entity.mimetype
+    else:
+      self.response.headers['Content-Type'] = 'image/png'
+    self.response.out.write(entity.img)
 
 class SaveCell(webapp.RequestHandler):
   def post(self):
@@ -178,7 +189,8 @@ def main():
     ('/api/saveentity', SaveEntity),
     ('/api/savecell', SaveCell),
     ('/api/saveworld', SaveWorld),
-    ('/api/getworld/(.*)', GetWorld)
+    ('/api/getworld/(.*)', GetWorld),
+    ('/images/(.*)', GetImage),
   ], debug=True)
   util.run_wsgi_app(application)
 
