@@ -1,3 +1,5 @@
+tdl.provide("level1");
+
 var getData = function() {
     return {
         entities : {
