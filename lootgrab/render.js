@@ -50,31 +50,26 @@ Cell.prototype.draw = function(ctx,x,y,w,h) {
 
 ///////////////////////////////////////////////////////////////////////////
 
-function Render(world) {
+function Render(world,ctx) {
+  this.ctx = ctx;
   this.world = world;;
 }
 
-Render.prototype.draw = function(ctx) {
+Render.prototype.draw = function() {
+  var ctx = this.ctx;
+  var w = this.world;
+  this.ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
+
   cell_width = ctx.canvas.width / this.world.width;
   cell_height = ctx.canvas.height / this.world.height;
-  var w = this.world;
-/*  for (x = 0; x < w.width; ++x) {
-    for (y = 0; y < w.height; ++y) {
-      if ( (x + y) % 2 == 1) {
-        ctx.fillStyle = "rgb(0,0,0)";
-      } else {
-        ctx.fillStyle = "rgb(255,255,255)";
-      }
-      xx = x * cell_width;
-      yy = y * cell_height;
-      
-      ctx.fillRect( xx, yy, cellWidth, cellHeight);
-    }
-  }*/
+
   for(var i = 0; i < w.cells.length; ++i) {
     var cell = w.cells[i];
     x = cell.x * cell_width;
     y = cell.y * cell_height;
     w.cells[i].draw(ctx,x,y,cell_width,cell_height);
   }
+  if(DEBUG)
+    w.draw_dbg(ctx);
+  
 }
