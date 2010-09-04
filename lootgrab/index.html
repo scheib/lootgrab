@@ -1,0 +1,33 @@
+<html>
+<link type="text/css" href="../jquery-ui-1.8.2.custom/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-ui-1.8.2.custom.min.js"></script>
+<script type="text/javascript" src="../tdl/base.js"></script>
+<script type="text/javascript">
+tdl.require('tdl.log');
+tdl.require('lootgrab.world');
+
+function initialize() {
+  var canvas = document.getElementById("game");
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "rgb(255,0,0)";
+  ctx.fillRect(10,10,30,10);
+
+  json = {
+    width: 6,
+    height: 6,
+  };
+  w = new World(json)
+  tdl.log("World created: ", w.width,w.height)
+}
+
+$(function(){
+  initialize();
+});
+
+</script>
+<body>
+<canvas width="800" height="600" id="game"></canvas>
+<div id="editor"></div>
+</body>
+</html>
