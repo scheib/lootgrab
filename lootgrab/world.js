@@ -60,6 +60,10 @@ World.prototype.cellAt = function(x,y) {
   return this.cells[Math.Floor(idx)];
 }
 
+World.prototype.defAt = function(x, y) {
+  return this.getDef(this.cellAt(x, y).id);
+}
+
 World.prototype.draw_dbg = function (ctx) {
   cell_width = ctx.canvas.width / this.width;
   cell_height = ctx.canvas.height / this.height;
