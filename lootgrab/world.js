@@ -57,7 +57,7 @@ function World(json) {
   
   // init the cell grid
   this.cells = []
-  var i = 0
+  var i = 0;
   for(var i = 0; i < json.world.cells.length; ++i) {
     var cellID = json.world.cells[i]
     cx = i % this.width

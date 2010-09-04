@@ -13,54 +13,41 @@ tdl.require('lootgrab.world');
 tdl.require('lootgrab.render');
 tdl.require('json.level1');
 tdl.require('lootgrab.editor');
+tdl.require('lootgrab.audio');
 
 function initialize() {
-  var infos = [
-    { id: "gamelayer1", baseName: "tile" },
-    { id: "gamelayer2", baseName: "entity" },
-    { id: "gamelayer3", baseName: "effect" }
-  ];
-  var gfx = {};
-  for (var ii = 0; ii < infos.length; ++ii) {
-    var info = infos[ii];
-    var canvas = document.getElementById(info.id);
-    gfx[info.baseName + "Ctx"] = canvas.getContext("2d");
-  }
-  gfx.tileCtx.fillStyle = "rgb(255,0,0)";
-  gfx.tileCtx.fillRect(10,10,30,10);
+  var editor = lootgrab.editor.init(document.getElementById("game"));
+
+  editor.entityCtx.fillStyle = "rgb(255,0,0)";
+  editor.entityCtx.fillRect(10,10,30,10);
 
   var json = getData();
   var w = new World(json);
   var r = new Render();
-  tdl.log("World created: ", w.width,w.height)
+  tdl.log("World created: ", w.width, w.height)
 
   var drawIntervalID = setInterval(draw, 32);
   function draw() {
     try {                       
-      w.draw_dbg(gfx.tileCtx);
-      r.draw(w, gfx.tileCtx);
+      w.draw_dbg(editor.tileCtx);
+      r.draw(w, editor.tileCtx);
     } catch(e) {
       tdl.log("Stopping repaint loop...");                    
       clearInterval(drawIntervalID);
       throw e;
     }
   }
-
 }
 
 $(function(){
   initialize();
-  lootgrab.editor.init("editorButton");
+  lootgrab.audio.init();
 });
 
 </script>
 </head>
 <body>
 <div id="game">
-<canvas class="gamelayer" id="gamelayer1" width="800" height="600"></canvas>
-<canvas class="gamelayer" id="gamelayer2" width="800" height="600"></canvas>
-<canvas class="gamelayer" id="gamelayer3" width="800" height="600"></canvas>
 </div>
-<div id="editorButton">edit level<div>
 </body>
 </html>
