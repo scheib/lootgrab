@@ -11,12 +11,6 @@ html, body {
 CANVAS {
   background-color: gray;
 }
-#editor {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 20;
-}
 </style>
 <link type="text/css" href="../jquery-ui-1.8.2.custom/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-1.4.2.min.js"></script>
@@ -24,7 +18,7 @@ CANVAS {
 <script type="text/javascript" src="../tdl/base.js"></script>
 <script type="text/javascript">
 tdl.require('tdl.log');
-tdl.require('lootgrab.foo');
+tdl.require('lootgrab.world');
 
 function initialize() {
   var canvas = document.getElementById("game");
@@ -42,14 +36,21 @@ function initialize() {
 
 $(function(){
   initialize();
-  $("#editorButton").click(function(){$("#editor").show();});
-  $("#editor").hide();
+  var editor = $('<div></div>')
+    .html('This dialog will show every time!')
+    .dialog({
+      autoOpen: false,
+      title: 'Basic Dialog'
+    });
+  $("#editorButton").click(function(){
+    editor.dialog('open');
+    return false;
+  });
 });
 
 </script>
 <body>
 <canvas width="800" height="600" id="game"></canvas>
 <div id="editorButton">edit level<div>
-<div id="editor">the editor</div>
 </body>
 </html>
