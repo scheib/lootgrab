@@ -48,7 +48,11 @@ class Entity(db.Model):
     return {
       'id' : self.get_id(),
       'name' : self.name,
-      'img' : self.img_url
+      'img' : self.img_url,
+      'x' : self.x,
+      'y' : self.y,
+      'width' : self.width,
+      'height' : self.height
     }
 
 def dbEntity(id):
@@ -122,19 +126,22 @@ class MainHandler(webapp.RequestHandler):
 
 class SaveEntity(webapp.RequestHandler):
   def post(self):
-    data = simplejson.loads(self.request.get("data"))
-    img = self.request.get('imgfile')
+    data = simplejson.loads(self.request.body)
 
     entity = None
-    if 'id' in data:
-      entity = dbEntity(data.id)
+    if 'id' in data and data['id'] != "":
+      entity = dbEntity(data['id'])
     
     if not entity:
       entity = Entity()
     
-    entity.img_url = data.img_url
+    entity.img_url = data['img_url']
     entity.mimetype = 'image/png'
-    entity.name = data.name
+    entity.name = data['name']
+    entity.x = int(data['x'])
+    entity.y = int(data['y'])
+    entity.width = int(data['width'])
+    entity.height = int(data['height'])
 
     entity.put()
 
@@ -152,37 +159,37 @@ class GetImage(webapp.RequestHandler):
 
 class SaveCell(webapp.RequestHandler):
   def post(self):
-    data = simplejson.loads(self.request.get("data"))
+    data = simplejson.loads(self.request.body)
 
     cell = None
-    if 'id' in data:
-      cell = dbCell(data.id)
+    if 'id' in data and data['id'] != "":
+      cell = dbCell(data['id'])
     
     if not cell:
       cell = Cell()
     
     # TODO(glen): Validate data.
-    cell.ground = int(self.request.get("ground"))
-    cell.entities = self.request.get("entities")
+    cell.ground = int(data['ground'])
+    cell.entities = data['entities']
     cell.put()
 
     self.response.out.write(cell.get_id())
 
 class SaveWorld(webapp.RequestHandler):
   def post(self):
-    data = simplejson.loads(self.request.get("data"))
+    data = simplejson.loads(self.request.body)
     world = None
-    if 'id' in data:
-      world = dbWorld(data.id)
+    if 'id' in data and data['id'] != "":
+      world = dbWorld(data['id'])
     
     if not world:
       world = World()
     
     # TODO(glen): Validate data.
-    world.name = self.request.get("name")
-    world.width = int(self.request.get("width"))
-    world.height = int(self.request.get("height"))
-    world.cells = self.request.get("cells")
+    world.name = data['name']
+    world.width = int(data['width'])
+    world.height = int(data['height'])
+    world.cells = data['cells']
     world.put()
 
     self.response.out.write(world.get_id())
