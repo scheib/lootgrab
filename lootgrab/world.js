@@ -44,21 +44,19 @@ World.prototype.newEntity = function(entDefID) {
   return e;
 }
 
-<<<<<<< local
 
 World.prototype.getDef = function(entDefID) {
   return this._entity_defs[entDefID];
-=======
-/**
+
+ /**
  *
  * @param x {Number}
  * @param y {Number}
  * @return {Cell}
  */
-World.prototype.entityAt = function(x,y) {
+World.prototype.cellAt = function(x,y) {
   idx = x * this.width + y;
-  return this.cells[idx];
->>>>>>> other
+  return this.cells[Math.Floor(idx)];
 }
 
 World.prototype.draw_dbg = function (ctx) {

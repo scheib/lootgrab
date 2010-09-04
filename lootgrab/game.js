@@ -24,6 +24,7 @@ Game.prototype.debug_draw = function(ctx, scale) {
         c.y * scale,
         scale,
         scale);
+    ctx.strokeText(c.ent)
 
   }
 
@@ -34,6 +35,7 @@ Game.prototype.debug_draw = function(ctx, scale) {
         a.position.x * scale,
         a.position.y * scale,
         a.radius,
-        );
+        0,
+        2 * Math.PI);
   }
 }
