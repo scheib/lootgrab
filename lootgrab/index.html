@@ -26,7 +26,7 @@ function initialize() {
 
   var json = getData();
   var w = new World(json);
-  var r = new Render(w,gfx.tileCtx.tileCtx);
+  var r = new Render(w,gfx.tileCtx);
   tdl.log("World created: ", w.width, w.height)
 
   editor.setup(w);
