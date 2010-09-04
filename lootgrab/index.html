@@ -32,9 +32,11 @@ function initialize() {
 
   var json = getData();
   var w = new World(json);
+  var r = new Render();
   tdl.log("World created: ", w.width,w.height)
 
   w.draw_dbg(ctx);
+  r.draw(w,ctx);
 
   a = new BaseClass("abc");
   b = new SubClass("def", 123);
