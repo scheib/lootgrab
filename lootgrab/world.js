@@ -1,5 +1,9 @@
 tdl.provide('world')
 
+function Tile(id,json) {
+    self.id = id
+}
+
 function World(json) {
     this.width = json.width;
     this.height = json.height;
