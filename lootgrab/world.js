@@ -1,12 +1,17 @@
 tdl.provide('world')
 
 function EntityID(world,id,json) {
-    self.id = id
-    
+    this.id = id;
+    if(json.type == "image") {
+        this.img.src = json.img;
+        this.img = new Image();
+        this.img.src = this.src;
+    }
 }
 
 function Cell(world,id,json) {
-    self.id = id;
+    this.id = id;
+    this.ground_ent = world.entities[json.ground_id];
 }
 
 function World(json) {
