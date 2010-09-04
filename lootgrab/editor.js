@@ -7,9 +7,9 @@ lootgrab.editor = (function() {
 '<div id="editor">' +
 '<div id="toolbar">toolbar</div>' +
 '<div id="level">' +
-'<canvas class="gamelayer" id="gamelayer1" width="800" height="600"></canvas>' +
-'<canvas class="gamelayer" id="gamelayer2" width="800" height="600"></canvas>' +
-'<canvas class="gamelayer" id="gamelayer3" width="800" height="600"></canvas>' +
+'<canvas class="gamelayer" id="gamelayer1" width="512" height="384"></canvas>' +
+'<canvas class="gamelayer" id="gamelayer2" width="512" height="384"></canvas>' +
+'<canvas class="gamelayer" id="gamelayer3" width="512" height="384"></canvas>' +
 '</div>' +
 '<div id="tiles">tiles</div>' +
 '</div>';
