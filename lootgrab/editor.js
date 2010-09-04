@@ -13,8 +13,27 @@ lootgrab.editor = (function() {
 '<div class="gamelayer" id="selector" style="width: 512px; height: 384px">' +
 '</div>' +
 '</div>' +
-'<div id="tiles">tiles</div>' +
+'<div id="tiles"><div id="tileScrollbar"></div>' +
 '</div>';
+
+ var world;
+ var gfx;
+
+ function setup(_world) {
+   world = _world;
+ };
+
+ function mousemove(e) {
+   var tileWidth = world.tileVisualWidth(gfx.tileCtx);
+   var tileHeight = world.tileVisualHeight(gfx.tileCtx);
+
+   var off = $(this).offset();
+   tdl.log("off", off.left, off.top);
+   var x = Math.floor((e.pageX - off.left) / tileWidth);
+   var y = Math.floor((e.pageY - off.top) / tileHeight);
+
+   tdl.log(x +', '+ y);
+ };
 
  function init(element) {
    var editor = $('<div></div>').html(editorHTML);
@@ -22,17 +41,17 @@ lootgrab.editor = (function() {
 
    element.appendChild(editor.get()[0]);
 
-   editor.find("#selector").mousemove(function(e) {
-      var x = e.pageX - this.offsetLeft;
-      var y = e.pageY - this.offsetTop;
+   editor.find("#selector").mousemove(mousemove);
 
-//      tdl.log(x +', '+ y);
-   });
-
-   return {
+   gfx = {
      tileCtx: canvases.get()[0].getContext("2d"),
      entityCtx: canvases.get()[1].getContext("2d"),
      effectCtx: canvases.get()[2].getContext("2d")
+   };
+
+   return {
+     setup: setup,
+     gfx: gfx
    };
  }
 

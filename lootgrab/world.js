@@ -5,11 +5,11 @@ tdl.provide('world')
 function World(json) {
   this.width = json.world.width;
   this.height = json.world.height;
-  
+
   // entity defs are demand-initalized so that
   // entity defs can reference other entity defs during load
   this._entity_defs = json.entities;
-  
+
   // init the cell grid
   this.cells = []
   var i = 0;
@@ -23,7 +23,7 @@ function World(json) {
 
   this.actors = {};
   for(var actorID in json.actors) {
-    
+
   }
 }
 
@@ -32,7 +32,7 @@ World.prototype.newEntity = function(entDefID) {
   def = this.getDef(entDefID);
   if(def === undefined)
     throw "No entity def found for " + entDefID;
-  
+
   if(def.type == "image") {
     e = new ImageEntity(this,entDefID)
   } else if(def.type == "tile") {
@@ -77,4 +77,13 @@ World.prototype.draw_dbg = function (ctx) {
 }
 
 World.prototype.actors = {};
+
+World.prototype.tileVisualWidth = function(ctx) {
+  return ctx.canvas.clientWidth / this.width;
+};
+
+World.prototype.tileVisualHeight = function(ctx) {
+  return ctx.canvas.clientHeight / this.width;
+};
+
 
