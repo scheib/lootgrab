@@ -1,0 +1,57 @@
+<html>
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  font-family: sans-serif;
+}
+CANVAS {
+  background-color: gray;
+}
+</style>
+<link type="text/css" href="../jquery-ui-1.8.2.custom/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-ui-1.8.2.custom.min.js"></script>
+<script type="text/javascript" src="../tdl/base.js"></script>
+<script type="text/javascript">
+tdl.require('tdl.log');
+tdl.require('lootgrab.world');
+tdl.require('lootgrab.render');
+tdl.require('lootgrab.foo');
+tdl.require('json.example');
+tdl.require('lootgrab.editor');
+
+function initialize() {
+  var canvas = document.getElementById("game");
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "rgb(255,0,0)";
+  ctx.fillRect(10,10,30,10);
+
+  var json = getData();
+  var w = new World(json);
+  var r = new Render();
+  tdl.log("World created: ", w.width,w.height)
+
+  w.draw_dbg(ctx);
+  r.draw(w,ctx);
+
+  a = new BaseClass("abc");
+  b = new SubClass("def", 123);
+  a.dump();
+  b.dump();
+}
+
+$(function(){
+  initialize();
+  lootgrab.editor.init("editorButton");
+});
+
+</script>
+<body>
+<canvas width="800" height="600" id="game"></canvas>
+<div id="editorButton">edit level<div>
+</body>
+</html>
