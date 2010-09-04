@@ -34,20 +34,6 @@ TileEntity.prototype.draw = function(ctx, x,y,w,h) {
 }
 
 
-//////////////////////////////////////////////////
-function Cell(world,id,x,y,json) {
-  this.id = id;
-  this.x = x;
-  this.y = y;
-  this.ground_ent = world.newEntity(json.ground_id)
-  if(this.ground_ent === undefined)
-    throw "Could not instantiate " + json.ground_id
-}
-
-Cell.prototype.draw = function(ctx,x,y,w,h) {
-  this.ground_ent.draw(ctx,x,y,w,h);
-}
-
 ///////////////////////////////////////////////////////////////////////////
 
 function Render(world,ctx) {
