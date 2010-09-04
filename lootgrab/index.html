@@ -20,7 +20,6 @@ CANVAS {
 tdl.require('tdl.log');
 tdl.require('lootgrab.world');
 tdl.require('lootgrab.render');
-tdl.require('lootgrab.foo');
 tdl.require('json.example');
 tdl.require('lootgrab.editor');
 
@@ -37,11 +36,6 @@ function initialize() {
 
   w.draw_dbg(ctx);
   r.draw(w,ctx);
-
-  a = new BaseClass("abc");
-  b = new SubClass("def", 123);
-  a.dump();
-  b.dump();
 }
 
 $(function(){
