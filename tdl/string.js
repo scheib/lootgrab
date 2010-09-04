@@ -72,11 +72,17 @@ tdl.string.argsToString = function(args) {
   var strs = [];
   for (var ii = 0; ii < numArgs; ++ii) {
     var arg = args[ii];
-    if (typeof arg == 'number') {
+    if (arg === undefined) {
+      strs.push('undefined');
+    } else if (typeof arg == 'number') {
       if (lastArgWasNumber) {
         strs.push(", ");
       }
-      strs.push(arg.toFixed(3));
+      if (arg == Math.floor(arg)) {
+        strs.push(arg.toFixed(0));
+      } else {
+        strs.push(arg.toFixed(3));
+      }
       lastArgWasNumber = true;
     } else if (window.Float32Array && arg instanceof Float32Array) {
       // TODO(gman): Make this handle other types of arrays.
