@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>lootiegrabber</title>
+<link type="text/css" href="lootgrab.css" rel="stylesheet" />
+<link type="text/css" href="editor.css" rel="stylesheet" />
+<link type="text/css" href="../jquery-ui-1.8.2.custom/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-ui-1.8.2.custom.min.js"></script>
+<script type="text/javascript" src="../tdl/base.js"></script>
+<script type="text/javascript">
+tdl.require('tdl.log');
+tdl.require('lootgrab.world');
+tdl.require('lootgrab.render');
+tdl.require('json.level1');
+tdl.require('lootgrab.editor');
+
+function initialize() {
+  var infos = [
+    { id: "gamelayer1", baseName: "tile" },
+    { id: "gamelayer2", baseName: "entity" },
+    { id: "gamelayer3", baseName: "effect" }
+  ];
+  var gfx = {};
+  for (var ii = 0; ii < infos.length; ++ii) {
+    var info = infos[ii];
+    var canvas = document.getElementById(info.id);
+    gfx[info.baseName + "Ctx"] = canvas.getContext("2d");
+  }
+  gfx.tileCtx.fillStyle = "rgb(255,0,0)";
+  gfx.tileCtx.fillRect(10,10,30,10);
+
+  var json = getData();
+  var w = new World(json);
+  var r = new Render();
+  tdl.log("World created: ", w.width,w.height)
+
+  w.draw_dbg(gfx.tileCtx);
+  r.draw(w, gfx.tileCtx);
+}
+
+$(function(){
+  initialize();
+  lootgrab.editor.init("editorButton");
+});
+
+</script>
+</head>
+<body>
+<div id="game">
+<canvas class="gamelayer" id="gamelayer1" width="800" height="600"></canvas>
+<canvas class="gamelayer" id="gamelayer2" width="800" height="600"></canvas>
+<canvas class="gamelayer" id="gamelayer3" width="800" height="600"></canvas>
+</div>
+<div id="editorButton">edit level<div>
+</body>
+</html>
