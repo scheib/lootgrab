@@ -50,13 +50,7 @@ Game.prototype.update = function(tick, elapsed) {
 
   for (var i = 0, corpse; corpse = freshlyDead[i]; i++) {
     if (corpse == this.world.hero) {
-      var death_message = document.createElement('div');
-      death_message.className = 'deathmessage'
-      death_message.appendChild(document.createTextNode("You died"));
-      document.body.appendChild(death_message);
-      setTimeout(function() {death_message.className = 'deathmessage done';}, 1);
-
-      this.status = Game.LOSS;
+      this.lose();
     }
     corpse.killed();
   }
@@ -78,6 +72,16 @@ Game.prototype.resolveCollisions = function() {
       }
     }
   }
+}
+
+Game.prototype.lose = function() {
+  this.world.showMessage("You lose", "deathmessage");
+  this.status = Game.LOSS;
+}
+
+Game.prototype.win = function() {
+  this.world.showMessage("You won", "winmessage");
+  this.status = Game.WIN;
 }
 
 /**
