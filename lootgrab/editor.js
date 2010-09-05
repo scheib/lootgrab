@@ -5,7 +5,14 @@ lootgrab.editor = (function() {
 
  var editorHTML = '' +
 '<div id="editor">' +
-'<div id="toolbar">toolbar</div>' +
+'<div id="toolbar">' +
+ '<h1>lutefiskgrabber</h1>' +
+ '<div class="button">play</div>' +
+ '<div class="button">reset</div>' +
+ '<div class="button">edit</div>' +
+ '<div class="button">load</div>' +
+ '<div class="button">save</div>' +
+'</div>' +
 '<div id="level">' +
 '<canvas class="gamelayer" id="gamelayer1" width="512" height="384"></canvas>' +
 '<canvas class="gamelayer" id="gamelayer2" width="512" height="384"></canvas>' +
@@ -239,6 +246,8 @@ lootgrab.editor = (function() {
 
    tileListCtx = editor.find("#tileList").get()[0].getContext("2d");
    currentTileCtx = editor.find("#currentTile").get()[0].getContext("2d");
+
+   editor.find(".button").button();
 
    gfx = {
      tileCtx: canvases.get()[0].getContext("2d"),
