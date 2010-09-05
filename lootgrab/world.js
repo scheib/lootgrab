@@ -30,23 +30,24 @@ function World(entityDefs, level) {
   this.height = level.height;
   this.hero = null;
   this.game = null;
-  this.renderEnts = []
+  this.renderEnts = [];
 
   // entity defs are demand-initalized so that
   // entity defs can reference other entity defs during load
   this._entity_defs = entityDefs;
   this.levelData_ = level;
-  this.init_();
+  this.init_(this.levelData_);
 }
 
 World.prototype.reset = function() {
-  this.init_();
+  this.init_(this.levelData_);
+  this.game.reset();
 }
 
 World.prototype.init_ = function() {
   // init the cell grid
   var level = this.levelData_;
-  this.cells = []
+  this.cells = [];
   var i = 0;
   for(var i = 0; i < level.cells.length; ++i) {
     var cellType = level.cells[i]
