@@ -46,6 +46,9 @@ function getLevelData(level) {
             actor_def: "actorMeat",
             position : {x : 9, y: 4},
           },
+          { actor_def: "actorFlameSkull",
+            position : { x : 8, y : 3 },
+          },
           //{ actor_def: "actorKey", position : { x : 1, y : 1 } },
           { actor_def: "actorKey", position : { x : 2, y : 1 } },
           { actor_def: "actorSword", position : { x : 1, y : 1 } },
@@ -60,6 +63,9 @@ function getLevelData(level) {
           "actorKey",
           "actorDoor",
           "actorTimedWall",
+          "actorTrapdoor",
+          "actorGoldChest",
+          "actorGoldBars",          
         ],
     }
 }
