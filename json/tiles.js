@@ -2,10 +2,9 @@ tdl.provide("tiles");
 
 var getEntityDefs = function() {
   return {
-    "Hero" : {
+    "HeroActor" : {
       type : "Hero",
       sprite : "spriteHero",
-      position : { x : 2, y : 2}
     },
     
     // Level pieces
