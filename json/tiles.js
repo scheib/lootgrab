@@ -6,7 +6,7 @@ var getEntityDefs = function() {
     "actorHero"           : { type : "Hero",      sprite : "spriteHero",            heading: "RIGHT", speed : .025, killable: true },
     "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", heading: "UP",    speed : .015, killable: true },
     "actorFlameSkull"     : { type : "FSkull",    sprite : "spriteFlamingSkull",    heading: "UP",    speed : .01, speed2 : .04, killable: true },
-    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper",    heading: "UP",    speed : .025, killable: true },
+    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper",    heading: "UP",    speed : .025, killable: false },
     "actorKey"            : { type : "Key",       sprite : "spriteKey",             loot : true },
     "actorShield"         : { type : "Shield",    sprite : "spriteShield",          loot : true },
     "actorFire"           : { type : "Fire",      sprite : "spriteFire",            loot : true },
@@ -22,7 +22,7 @@ var getEntityDefs = function() {
     "actorCircle"         : { type : "Circle",    sprite : "spriteCircle",          loot : true },
     "actorExit"           : { type : "Exit",      sprite : "spriteStairsUp",        loot : true },
     "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            loot : false },
-    "actorTrapdoor"       : { type : "Trapdoor",  sprite : "spriteTrapdoorClosed",  loot : false,     openSprite: "spriteTrapdoorOpen" },
+    "actorTrapdoor"       : { type : "Trapdoor",  sprite : "spriteTrapdoorClosed",  loot : false,     renderBackground: true,   openSprite: "spriteTrapdoorOpen" },
 
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },

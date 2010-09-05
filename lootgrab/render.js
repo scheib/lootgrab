@@ -126,8 +126,15 @@ Render.prototype.draw = function() {
   }
 
   // Actors - fork into new canvas.
+
+  // Render background actors first.
   for(var i = 0, actor; actor = w.actors[i]; ++i) {
-    if (!actor.isDead())
+    if (!actor.isDead() && actor.renderBackground)
+      actor.draw(ctx, cellWidth, cellHeight);
+  }
+  // Render foreground actors.
+  for(var i = 0, actor; actor = w.actors[i]; ++i) {
+    if (!actor.isDead() && !actor.renderBackground)
       actor.draw(ctx, cellWidth, cellHeight);
   }
 
