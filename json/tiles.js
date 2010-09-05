@@ -27,6 +27,9 @@ var getEntityDefs = function() {
     "cellFloorB"          : { type: "Cell", sprite: "spriteFloorB"         , passable : true },
     "cellFloorC"          : { type: "Cell", sprite: "spriteFloorC"         , passable : true },
     "cellFloorRug"        : { type: "Cell", sprite: "spriteFloorRug"       , passable : true },
+    "cellFloorRug2"       : { type: "Cell", sprite: "spriteFloorRug2"      , passable : true },
+    "cellFloorRug3"       : { type: "Cell", sprite: "spriteFloorRug3"      , passable : true },
+    "cellFloorRug4"       : { type: "Cell", sprite: "spriteFloorRug4"      , passable : true },
     "cellHole"            : { type: "Cell", sprite: "spriteHole"           , passable : true },
     "cellStairsDown"      : { type: "Cell", sprite: "spriteStairsDown"     , passable : true },
     "cellStairsUp"        : { type: "Cell", sprite: "spriteStairsUp"       , passable : true },
@@ -36,6 +39,9 @@ var getEntityDefs = function() {
     "cellWallHCrumbled"   : { type: "Cell", sprite: "spriteWallHCrumbled"  , passable : false },
     "cellWallHTorch"      : { type: "Cell", sprite: "spriteWallHTorch"     , passable : false },
     "cellWallV"           : { type: "Cell", sprite: "spriteWallV"          , passable : false },
+    "cellWater"           : { type: "Cell", sprite: "spriteWater"          , passable : true },
+    "cellLava"            : { type: "Cell", sprite: "spriteLava"           , passable : true },
+    "cellDoor"            : { type: "Cell", sprite: "spriteDoor"           , passable : true },
       
     // Sprite Definitions --------------------------------
    
@@ -58,6 +64,12 @@ var getEntityDefs = function() {
     "spriteTrapdoorOpen"    : { type : "Sprite", tileset : "tileset_env", start_x: 11, start_y: 0, frames: 1 },
     "spriteFloorC"          : { type : "Sprite", tileset : "tileset_env", start_x: 12, start_y: 0, frames: 1 },
     "spriteFloorRug"        : { type : "Sprite", tileset : "tileset_env", start_x: 13, start_y: 0, frames: 1 },
+    "spriteFloorRug2"       : { type : "Sprite", tileset : "tileset_env", start_x: 13, start_y: 1, frames: 1 },
+    "spriteFloorRug3"       : { type : "Sprite", tileset : "tileset_env", start_x: 13, start_y: 2, frames: 1 },
+    "spriteFloorRug4"       : { type : "Sprite", tileset : "tileset_env", start_x: 13, start_y: 3, frames: 1 },
+    "spriteWater"           : { type : "Sprite", tileset : "tileset_env", start_x:  2, start_y: 6, frames: 2 },
+    "spriteLava"            : { type : "Sprite", tileset : "tileset_env", start_x:  3, start_y: 7, frames: 2 },
+    "spriteDoor"            : { type : "Sprite", tileset : "tileset_env", start_x:  1, start_y:12, frames: 1 },
     "spriteCancel"          : { type : "Sprite", tileset : "tileset_env", start_x: 15, start_y:15, frames: 1 },
 
 
