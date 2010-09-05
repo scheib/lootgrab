@@ -140,7 +140,7 @@ World.prototype.deleteActorsInCell = function(x, y) {
 };
 
 // Deletes the actors from the level definition.
-World.prototype.deleteActorsInLevel = function(x, y) {
+World.prototype.deleteActorsInLevelData = function(x, y) {
   var ii = 0;
   while (ii < this.levelData_.actors.length) {
     var actor = this.levelData_.actors.length;
@@ -153,7 +153,7 @@ World.prototype.deleteActorsInLevel = function(x, y) {
 };
 
 // Adds an actor to the level definition
-World.prototype.addActorToLevel = function(defName, x, y) {
+World.prototype.addActorToLevelData = function(defName, x, y) {
   this.levelData_.actors.push({
     actor_def: defName,
     position: { x: x, y: y }
@@ -260,7 +260,7 @@ World.prototype.getEditorActions = function() {
     sprite: this.newEntity("spriteCancel"),
     apply: function(x,y) {
       that.deleteActorsInCell(x, y);
-      that.deleteActorsInLevel(x, y);
+      that.deleteActorsInLevelData(x, y);
     }
   });
 
@@ -293,9 +293,9 @@ World.prototype.getEditorActions = function() {
           sprite: that.newEntity(def.sprite),
           apply: function(x,y) {
             that.deleteActorsInCell(x, y);
-            that.deleteActorsInLevel(x, y);
+            that.deleteActorsInLevelData(x, y);
             that.addActor(defName, x, y);
-            that.addActorToLevel(defName, x, y);
+            that.addActorToLevelData(defName, x, y);
           }
         });
       }
@@ -321,12 +321,17 @@ World.prototype.getPlaytimeEditorActions = function() {
         type: "click",
         sprite: that.newEntity(def.sprite),
         apply: function(x,y) {
-          var a = that.newEntity(defName);
-          a.init({
-            position: {x: x, y: y},
-            heading: "RIGHT"
-          });
-          that.actors.push(a);
+          // Check that we can place the item
+          // OTODODODOTOTODO
+          // OTODODODOTOTODO
+          // OTODODODOTOTODO
+          // Place it
+          that.deleteActorsInCell(x, y);
+          that.addActor(defName, x, y);
+          // If we are placing the item, remove it from inventory
+          // OTODODODOTOTODO
+          // OTODODODOTOTODO
+          // OTODODODOTOTODO
         }
       });
     })();

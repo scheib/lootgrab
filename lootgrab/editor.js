@@ -183,10 +183,10 @@ var editorHTML = '' +
 
    switch(editorMode) {
    case "LevelEditMode":
-     editorActions_ = world_.getPlaytimeEditorActions();
+     editorActions_ = world_.getEditorActions();
    break;
    case "PlaytimeMode":
-     editorActions_ = world_.getEditorActions();
+     editorActions_ = world_.getPlaytimeEditorActions();
    break;
    default:
      throw "editor setup() called with editorMode==='" + editorMode + "' which isn't supported.";
