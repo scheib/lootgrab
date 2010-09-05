@@ -33,6 +33,10 @@ function getLevelData(level) {
           { actor_def: "actorTrapdoor",
             position : { x : 12, y : 5 },
           },
+          {
+            actor_def: "actorMeat",
+            position : {x : 11, y: 4},
+          },
           { actor_def: "actorKey", position : { x : 8, y : 2 } },
           { actor_def: "actorKey", position : { x : 9, y : 6 } },
           { actor_def: "actorExit",position : { x : 15, y : 4 } },
