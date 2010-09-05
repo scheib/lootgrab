@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>lootiegrabber</title>
+<title>lufthansagrabber</title>
 <link type="text/css" href="lootgrab.css" rel="stylesheet" />
 <link type="text/css" href="editor.css" rel="stylesheet" />
 <link type="text/css" href="../jquery-ui-1.8.2.custom/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
@@ -38,9 +38,11 @@ function initialize() {
   var drawIntervalID = setInterval(gameloop, 32);
   function gameloop() {
     tick = tick + 1;
-    g.update(tick,1)
+    if (editor.isRunning()) {
+      g.update(tick, 1)
+    }
     if (DEBUG) {
-      g.debug_draw(gfx.entityCtx,32);
+      g.debug_draw(gfx.entityCtx, 32);
     }
     r.draw();
     editor.render();
