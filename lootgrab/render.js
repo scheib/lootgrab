@@ -27,15 +27,15 @@ ImageEntity.prototype.draw = function(ctx, x,y,w,h) {
 
 //////////////////////////////////////////////////
 function TileEntity(world, tile_def) {
+  window.console.log(tile_def);
   var that = this;
   if(tile_def === undefined)
     throw "Tile def could not be found!"
 
-  this.passable = ('passable' in tile_def) ? tile_def.passable : true;
-
   var tileset_def = world.getDef(tile_def.tileset)
   if(tileset_def === undefined)
     throw "Tileset could not be found"
+
   this.tileset_def = tileset_def;
   this.tile_def = tile_def
   var img = g_imageDB[tileset_def.image];
