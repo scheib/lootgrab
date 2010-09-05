@@ -38,7 +38,7 @@ Game.prototype.update = function(tick, elapsed) {
 
   this.resolveCollisions();
   for (var i = 0, actor; actor = this.world.actors[i]; i++) {
-    if (actor.dying == false) {
+    if (actor.deathState == Actor.DYING) {
       freshlyDead.push(actor);
     }
   }
