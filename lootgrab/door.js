@@ -16,7 +16,7 @@ Door.prototype.canPass = function(other) {
       && other.hasKey()) {
     return true;
   } else {
-    return Actor.canPass();
+    return Actor.prototype.canPass.call(this, other);
   }
 }
 

@@ -91,6 +91,5 @@ Hero.prototype.onCollide = function(other) {
     lootgrab.audio.play_sound("treasure");
     other.loot = false;
     this.inventory.push(other);
-    other.kill();    
   }
 }

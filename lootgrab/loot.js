@@ -10,7 +10,11 @@ function Loot(w, def) {
 tdl.base.inherit(Loot, Actor);
 
 Loot.prototype.onCollide = function(other) {
-  
+  // get "picked up"
+  if (other == this.world.hero) {
+    this.loot = false;
+    this.kill();
+  }
 };
 
 function Key(w, def) {
