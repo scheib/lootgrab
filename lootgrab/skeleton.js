@@ -1,5 +1,6 @@
 tdl.provide('skeleton');
 tdl.require('lootgrab.actor');
+tdl.require('lootgrab.audio');
 
 function Skeleton(w, def) {
   this.world = w;
@@ -9,6 +10,11 @@ tdl.base.inherit(Skeleton, Actor);
 
 Skeleton.prototype.onCollide = function(other) {
   if (this.world.hero == other) {
-    other.kill();
+    if (other.hasItem("sword")) {
+      lootgrab.audio.play_sound("kill");
+      this.kill();
+    } else {
+      other.kill();
+    }
   }
 }
