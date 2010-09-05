@@ -35,7 +35,7 @@ function getLevelData(level) {
           },
           {
             actor_def: "actorMeat",
-            position : {x : 11, y: 4},
+            position : {x : 9, y: 4},
           },
           { actor_def: "actorKey", position : { x : 8, y : 2 } },
           { actor_def: "actorKey", position : { x : 9, y : 6 } },
