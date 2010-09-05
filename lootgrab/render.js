@@ -28,7 +28,7 @@ ImageEntity.prototype.draw = function(ctx, x,y,w,h) {
 //////////////////////////////////////////////////
 function Sprite(world, tile_def) {
   world.renderEnts.push(this)
-  
+
   var that = this;
   if(tile_def === undefined)
     throw "Tile def could not be found!"
@@ -75,7 +75,7 @@ Sprite.prototype.draw = function(ctx, x,y,w,h) {
     ctx.fillString("Error", x+3,y+3);
     return;
   }
-  
+
   var tileWidth = 32;
   var tileHeight = 32;
   var tx = tileWidth * this.tile_def.start_x;
@@ -89,8 +89,11 @@ Sprite.prototype.draw = function(ctx, x,y,w,h) {
                   x,y,w,h);
   } catch(e) {
     if(this.error_printed===undefined) {
-      tdl.log("problem with image " + this.entDefID);
+      tdl.log("problem with image " + this.entDefID);     
       this.error_printed = true;
+      tdl.log("img.src = ", this.img.src);
+      tdl.log("srcx, srcy = ", tx, ty);
+      tdl.log("img.width, img.height ", this.img.width, this.img.height);
     }
   }
 }
@@ -130,7 +133,7 @@ Render.prototype.draw = function() {
     if (!actor.isDead() && actor.renderBackground)
       actor.draw(ctx, cellWidth, cellHeight);
   }
-  
+
   // draw the hero's path
   w.hero.drawPath(ctx, cellWidth, cellHeight);
   
@@ -139,8 +142,6 @@ Render.prototype.draw = function() {
     if (!actor.isDead() && !actor.renderBackground)
       actor.draw(ctx, cellWidth, cellHeight);
   }
-
-
   
   if(DEBUG)
     w.draw_dbg(ctx);
