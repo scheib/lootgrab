@@ -31,6 +31,8 @@ function TileEntity(world, tile_def) {
   if(tile_def === undefined)
     throw "Tile def could not be found!"
 
+  this.passable = ('passable' in tile_def) ? tile_def.passable : true;
+
   var tileset_def = world.getDef(tile_def.tileset)
   if(tileset_def === undefined)
     throw "Tileset could not be found"
