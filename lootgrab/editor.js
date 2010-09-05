@@ -342,7 +342,7 @@ var editorHTML = '' +
      });
    editor.find("#reset").click(function() {
      world_.reset();
-     for (int i=0; i < editorActions_.lenth; ++i) {
+     for (var i=0; i < editorActions_.length; ++i) {
        editorActions_[i].disabled = false;
      }
    });
