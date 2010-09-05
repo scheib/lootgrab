@@ -42,7 +42,8 @@ Actor.prototype.draw = function(ctx, cw, ch) {
  * @param elapsed
  */
 Actor.prototype.update = function(tick, elapsed) {
-  if (this.world.isBlocking(this.position.x, this.position.y)) {
+  var nextpos = this.position.add(this.heading.mul(0.5))
+  if (this.world.isBlocking(nextpos.x, nextpos.y)) {
     this.heading = this.heading.negate();
   }
   this.updatePosition();
