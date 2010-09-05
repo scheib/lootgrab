@@ -113,6 +113,7 @@ World.prototype.setLevelCellAt = function(defName, x, y) {
 };
 
 World.prototype.serializeLevel = function() {
+  return JSON.stringify(this.levelData_);
 }
 
 World.prototype.addActor = function(defName, x, y) {
