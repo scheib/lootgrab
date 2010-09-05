@@ -68,7 +68,7 @@ World.prototype.getDef = function(entDefID) {
  */
 World.prototype.cellAt = function(x,y) {
   idx = x * this.width + y;
-  return this.cells[Math.Floor(idx)];
+  return this.cells[Math.floor(idx)];
 }
 
 World.prototype.defAt = function(x, y) {
