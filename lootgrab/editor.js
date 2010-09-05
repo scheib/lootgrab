@@ -1,8 +1,6 @@
 
 tdl.provide('lootgrab.editor');
 
-var W;
-
 lootgrab.editor = (function() {
 
 var editorHTML = '' +
@@ -178,7 +176,6 @@ var editorHTML = '' +
 
  // Grabs all the tile types from the world.
  function setup(_world) {
-W = _world;
    world_ = _world;
 
    currenTileEntity = null;
