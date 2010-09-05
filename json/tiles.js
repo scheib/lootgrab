@@ -6,7 +6,11 @@ var getEntityDefs = function() {
       type : "Hero",
       sprite : "spriteHero",
     },
-   
+    "SkeletonActor" : {
+      type : "Skeleton",
+      sprite : "spriteSkeletonWarrior",
+    },
+    
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
     "cellFloorB"          : { type: "Cell", sprite: "spriteFloorB"         , passable : true },

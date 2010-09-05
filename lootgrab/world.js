@@ -25,6 +25,7 @@ Cell.prototype.draw = function(ctx,x,y,w,h) {
 function World(entityDefs, level) {
   this.width = level.width;
   this.height = level.height;
+  this.hero = null;
 
   // entity defs are demand-initalized so that
   // entity defs can reference other entity defs during load
@@ -164,3 +165,10 @@ World.prototype.canSetActor = function(x, y, actor) {
 World.prototype.setActor = function(x, y, actor) {
   tdl.log("setActor: ", x, y, ": ", actor);
 };
+
+/**
+ * Sets a hero
+ */
+World.prototype.setHero = function(actor) {
+  this.hero = actor;
+}

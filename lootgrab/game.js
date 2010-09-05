@@ -1,6 +1,7 @@
 tdl.provide("game");
 tdl.require("lootgrab.actor");
 tdl.require("lootgrab.hero");
+tdl.require("lootgrab.skeleton");
 tdl.require("lootgrab.world");
 
 /**
@@ -9,8 +10,6 @@ tdl.require("lootgrab.world");
  */
 function Game(w) {
   this.world = w;
-
-  this.hero = null;
 }
 
 Game.WIN = "win";
@@ -24,7 +23,10 @@ Game.prototype.status = Game.RUNNING;
  * @param tick
  */
 Game.prototype.update = function(tick, elapsed) {
-  var dead = {};
+  if (this.status == Game.LOSS)
+    return;
+
+  var freshlyDead = [];
 
   for (var aIdx in this.world.actors) {
     var a = this.world.actors[aIdx];
@@ -32,12 +34,18 @@ Game.prototype.update = function(tick, elapsed) {
   }
 
   this.resolveCollisions();
+  for (var i = 0, actor; actor = this.world.actors[i]; i++) {
+    if (actor.isAlive == false) {
+      freshlyDead.push(actor);
+    }
+  }
 
-  for (var corpseId in dead) {
-    if (this.world.actors[dead[corpseId]] == this.hero) {
+  for (var i = 0, corpse; corpse = freshlyDead[i]; i++) {
+    if (corpse == this.world.hero) {
+      alert("You died.");
       this.status = Game.LOSS;
     }
-    delete this.world.actors[dead[corpseId]];
+    delete corpse;
   }
 }
 
@@ -47,8 +55,7 @@ Game.prototype.resolveCollisions = function() {
       var a = this.world.actors[i];
       var b = this.world.actors[j];
       var minContact = a.radius + b.radius;
-
-      if ((a.position - b.position).len() < minContact) {
+      if (a.position.sub(b.position).len() < minContact) {
         a.onCollide(b);
         b.onCollide(a);
       }
