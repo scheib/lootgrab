@@ -59,6 +59,9 @@ function getLevelData(level) {
           "actorKey", 
           "actorDoor",
           "actorTimedWall",
+          "actorTrapdoor",
+          "actorGoldChest",
+          "actorGoldBars",          
         ],
     }
 }
