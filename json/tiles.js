@@ -20,7 +20,7 @@ var getEntityDefs = function() {
     "actorSkull"          : { type : "Skull",     sprite : "spriteSkull",           loot : true },
     "actorGrate"          : { type : "Grate",     sprite : "spriteGrate",           loot : true },
     "actorCircle"         : { type : "Circle",    sprite : "spriteCircle",          loot : true },
-    "actorExit"           : { type : "Exit",      sprite : "spriteStairsUp",        loot : true },
+    "actorExit"           : { type : "Exit",      sprite : "spriteStairsUp",        loot : true,      renderBackground: true },
     "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            loot : false, passable : false },
     "actorTrapdoor"       : { type : "Trapdoor",  sprite : "spriteTrapdoorClosed",  loot : false,     renderBackground: true,   openSprite: "spriteTrapdoorOpen" },
     "actorHole"           : { type : "Hole",      sprite : "spriteHole",            loot : false,     renderBackground: true },
