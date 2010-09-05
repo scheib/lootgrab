@@ -180,6 +180,16 @@ lootgrab.editor = (function() {
    if (cellDefs.length) {
      setCurrentTile(0);
    }
+
+   var worldPixelWidth = world.tileVisualWidth() * world.width;
+   var worldPixelHeight = world.tileVisualHeight() * world.height;
+   for (var ctxName in gfx) {
+     var ctx = gfx[ctxName];
+     ctx.canvas.width = worldPixelWidth;
+     ctx.canvas.height = worldPixelHeight;
+   }
+   selector.style.width = worldPixelWidth;
+   selector.style.height = worldPixelHeight;
  }
 
  function render() {

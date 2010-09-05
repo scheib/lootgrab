@@ -95,8 +95,8 @@ World.prototype.isDesirable = function(x, y) {
 }
 
 World.prototype.draw_dbg = function (ctx) {
-  cell_width = ctx.canvas.width / this.width;
-  cell_height = ctx.canvas.height / this.height;
+  cell_width = this.tileVisualWidth();
+  cell_height = tile.tileVisualHeight();
   for(var i = 0; i < this.cells.length; ++i) {
     var cell =this.cells[i];
     ctx.strokeStyle = "rgb(255,255,0)";
@@ -109,11 +109,11 @@ World.prototype.draw_dbg = function (ctx) {
 World.prototype.actors = [];
 
 World.prototype.tileVisualWidth = function(ctx) {
-  return ctx.canvas.clientWidth / this.width;
+  return 32; //ctx.canvas.clientWidth / this.width;
 };
 
 World.prototype.tileVisualHeight = function(ctx) {
-  return ctx.canvas.clientHeight / this.width;
+  return 32; //ctx.canvas.clientHeight / this.width;
 };
 
 /**

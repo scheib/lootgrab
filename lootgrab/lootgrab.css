@@ -56,7 +56,6 @@ CANVAS {
   z-index: 30;
   width: 230;
   height: 352;
-  border: 1px solid blue;
   background-color: rgba(0,0,0,0);
   cursor: pointer;
 }

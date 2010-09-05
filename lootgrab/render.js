@@ -53,12 +53,14 @@ function Sprite(world, tile_def) {
 
 }
 Sprite.prototype.draw = function(ctx, x,y,w,h) {
-  var tx = this.tileset_def.tile_width * this.tile_def.start_x;
-  var ty = this.tileset_def.tile_height * this.tile_def.start_y;
-  ctx.drawImage(this.img, 
-    tx, ty, 
-    this.tileset_def.tile_width,
-    this.tileset_def.tile_height,
+  var tileWidth = 32;
+  var tileHeight = 32;
+  var tx = tileWidth * this.tile_def.start_x;
+  var ty = tileHeight * this.tile_def.start_y;
+  ctx.drawImage(this.img,
+    tx, ty,
+    tileWidth,
+    tileHeight,
     x,y,w,h);
 }
 
@@ -75,19 +77,19 @@ Render.prototype.draw = function() {
   var w = this.world;
   ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
 
-  cell_width = ctx.canvas.width / w.width;
-  cell_height = ctx.canvas.height / w.height;
+  cellWidth = 32;
+  cellHeight = 32;
 
   for(var i = 0; i < w.cells.length; ++i) {
     var cell = w.cells[i];
-    x = cell.x_ * cell_width;
-    y = cell.y_ * cell_height;
-    w.cells[i].draw(ctx,x,y,cell_width,cell_height);
+    x = cell.x_ * cellWidth;
+    y = cell.y_ * cellHeight;
+    w.cells[i].draw(ctx, x, y, cellWidth, cellHeight);
   }
 
   // Actors - fork into new canvas.
   for(var i = 0, actor; actor = w.actors[i]; ++i) {
-    actor.draw(ctx, cell_width, cell_height);
+    actor.draw(ctx, cellWidth, cellHeight);
   }
 
   if(DEBUG)
