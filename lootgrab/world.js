@@ -40,6 +40,7 @@ function World(entityDefs, level) {
 
 World.prototype.reset = function() {
   this.clearMessage();
+  delete this.hero;
   this.init_(this.levelData_);
   if (this.game) {
     this.game.reset();
