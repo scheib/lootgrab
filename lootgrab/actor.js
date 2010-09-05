@@ -18,7 +18,7 @@ function Actor(w, entDef) {
 
   this.isAlive = true;
 
-  this.sprite = this.world.newEntity(entDef.render_tile);
+  this.sprite = this.world.newEntity(entDef.sprite);
 }
 
 

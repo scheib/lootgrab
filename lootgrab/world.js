@@ -10,7 +10,7 @@ function Cell(world,def,x,y) {
 }
 
 Cell.prototype.setType = function(def) {
-  this.ground_ent = this.world.newEntity(def.render_tile)
+  this.ground_ent = this.world.newEntity(def.sprite)
   if(this.ground_ent === undefined)
     throw "Could not instantiate " + json.ground_id
 }
