@@ -21,6 +21,22 @@ tdl.base.inherit(Hero, Actor);
 Hero.prototype.update = function(world, tick, elapsed) {
   if (this.tempSpeedTicksLeft > 0) this.tempSpeedTicksLeft--;
 
+  var pos = null;
+  if (this.nextCell != null) {
+    pos = [
+      Math.floor(this.nextCell.x),
+      Math.floor(this.nextCell.y)
+    ];
+  } else {
+    pos = [
+      Math.floor(this.position.x - this.heading.x * 0.5),
+      Math.floor(this.position.y - this.heading.y * 0.5)
+    ];
+  }
+
+  var path = lootgrab.route.findRoute(world, pos);
+  this.currentPath = path;
+
   var updateRoute = false;
   if (this.nextCell == null) {
     updateRoute = true;
@@ -31,20 +47,6 @@ Hero.prototype.update = function(world, tick, elapsed) {
   if (updateRoute) {
     this.lastCell = this.nextCell;
 
-    var pos = null;
-    if (this.lastCell != null) {
-      pos = [
-        Math.floor(this.lastCell.x),
-        Math.floor(this.lastCell.y)
-      ];
-    } else {
-      pos = [
-        Math.floor(this.position.x - this.heading.x * 0.5),
-        Math.floor(this.position.y - this.heading.y * 0.5)
-      ];
-    }
-
-    var path = lootgrab.route.findRoute(world, pos);
     if (path.length) {
       this.nextCell = new Vec2(path[0][0] + 0.5, path[0][1] + 0.5);
 
@@ -97,9 +99,12 @@ Hero.prototype.onCollide = function(other) {
 }
 
 Hero.prototype.drawPath = function(ctx, cw, ch) {
+  if (this.isDead()) return;
   if(this.currentPath.length) {
     ctx.beginPath();
     ctx.moveTo(this.position.x * cw, this.position.y * ch);
+    if (this.nextCell)
+      ctx.lineTo(this.nextCell.x * cw, this.nextCell.y * ch);
     for(var i = 0; i < this.currentPath.length; ++i) {
       ctx.lineTo((this.currentPath[i][0]+0.5) * cw, (this.currentPath[i][1]+0.5)* ch);
     }

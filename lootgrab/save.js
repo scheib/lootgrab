@@ -8,9 +8,9 @@ lootgrab.save = (function() {
   var saveDialog_;
   var world_;
 
-  function show(world) {
+  function show(world, gfx) {
     world_ = world;
-    saveDialog_.find("textarea").get()[0].value = world.serializeLevel();
+    saveDialog_.find("textarea").get()[0].value = world.serializeLevel(gfx);
     saveDialog_.dialog('open');
   }
 
