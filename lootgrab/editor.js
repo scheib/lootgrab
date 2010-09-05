@@ -271,13 +271,7 @@ lootgrab.editor = (function() {
    editor.find(".button").button();
    playButton_ = editor.find("#play").click(togglePause);
 
-   var loadDialog = $('<div></div>')
-       .html('<div>Load!</div>')
-       .dialog({
-         autoOpen: false,
-         title: 'Load a Level',
-         modal: true,
-       });
+   var loadDialog = lootgrab.load.init();
    editor.find("#load").click(function(){
        if (running_) {
          togglePause();
