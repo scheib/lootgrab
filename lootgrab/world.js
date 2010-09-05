@@ -33,7 +33,6 @@ function World(entityDefs, level) {
   var i = 0;
   for(var i = 0; i < level.cells.length; ++i) {
     var cellEntDefID = level.cells[i]
-    window.console.log(cellEntDefID);
     cx = i % this.width
     cy = Math.floor(i / this.width);
     var cell = new Cell(this, cellEntDefID, cx, cy)
