@@ -2,17 +2,17 @@ tdl.provide("tiles");
 
 var getEntityDefs = function() {
   return {
-    "actorHero"      : { type : "Hero",     sprite : "spriteHero",            },
-    "actorSkeleton"  : { type : "Skeleton", sprite : "spriteSkeletonWarrior", },
-    "actorKey"       : { type : "Key",      sprite : "spriteKey",             },
-    "actorShield"    : { type : "Shield",   sprite : "spriteShield",          },
-    "actorFire"      : { type : "Fire",     sprite : "spriteFire",            },
-    "actorWand"      : { type : "Wand",     sprite : "spriteWand",            },
-    "actorCross"     : { type : "Cross",    sprite : "spriteCross",           },
-    "actorSword"     : { type : "Sword",    sprite : "spriteSword",           },
-    "actorMeat"      : { type : "Meat",     sprite : "spriteMeat",            },
-    "actorGoldChest" : { type : "Gold",     sprite : "spriteGoldChest",       },
-    "actorGoldBars"  : { type : "Gold",     sprite : "spriteGoldBars",        },
+    "actorHero"      : { type : "Hero",      sprite : "spriteHero",            },
+    "actorSkeleton"  : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", },
+    "actorKey"       : { type : "Key",       sprite : "spriteKey",             },
+    "actorShield"    : { type : "Shield",    sprite : "spriteShield",          },
+    "actorFire"      : { type : "Fire",      sprite : "spriteFire",            },
+    "actorWand"      : { type : "Wand",      sprite : "spriteWand",            },
+    "actorCross"     : { type : "Cross",     sprite : "spriteCross",           },
+    "actorSword"     : { type : "Sword",     sprite : "spriteSword",           },
+    "actorMeat"      : { type : "Meat",      sprite : "spriteMeat",            },
+    "actorGoldChest" : { type : "GoldChest", sprite : "spriteGoldChest",       },
+    "actorGoldBars"  : { type : "GoldBars",  sprite : "spriteGoldBars",        },
     
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
@@ -46,7 +46,7 @@ var getEntityDefs = function() {
     "CrossCell"           : { type : "Cell", sprite: "spriteCross"          },
     "SwordCell"           : { type : "Cell", sprite: "spriteSword"          },
     "MeatCell"            : { type : "Cell", sprite: "spriteMeat"           },
-    "GoldCell"            : { type : "Cell", sprite: "spriteGold"           },
+    "GoldChestCell"       : { type : "Cell", sprite: "spriteGoldChest"      },
 
     "actorGoldBars"        : { type : "GoldBars", sprite: "spriteGoldBars"       },
     "actorSkull"           : { type : "Skull"   , sprite: "spriteSkull"          },
