@@ -44,7 +44,7 @@ function getLevelData(level) {
           },
           {
             actor_def: "actorMeat",
-            position : {x : 9, y: 4},
+            position : {x :6, y: 2},
           },
           { actor_def: "actorFlameSkull",
             position : { x : 8, y : 3 },
