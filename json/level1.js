@@ -14,7 +14,7 @@ var getData = function() {
             "baddie" : {
                 type : "image",
                 img : "images/previewenv.png",
-            },
+            }
         },
 
         cells : {
