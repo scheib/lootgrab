@@ -77,6 +77,18 @@ World.prototype.defAt = function(x, y) {
   return this.getDef(this.cellAt(x, y).id);
 }
 
+// Convenience function for whether or not a given cell is not passable.
+World.prototype.isBlocking = function(x, y) {
+  var cell = this.cellAt(x, y);
+  return cell ? cell.passable : true;
+}
+
+// Convenience function for whether or not a given cell has something the
+// player wants to run towards.
+World.prototype.isDesirable = function(x, y) {
+  return false;
+}
+
 World.prototype.draw_dbg = function (ctx) {
   cell_width = ctx.canvas.width / this.width;
   cell_height = ctx.canvas.height / this.height;
