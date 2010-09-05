@@ -54,11 +54,9 @@
           { actor_def: "actorDoor",position : { x : 4, y : 6 } },
         ],
         placeables : [
-          "actorKey",
-          "actorDoor",
-          "actorTimedWall",
-          "actorTrapdoor",
-          "actorGoldChest",
+          "actorGoldBars",
+          "actorGoldBars",
+          "actorGoldBars",
           "actorGoldBars",
         ],
     }
