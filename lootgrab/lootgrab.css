@@ -19,7 +19,7 @@ CANVAS {
 #gamelayer1 { z-index: 10; background-color: gray; }
 #gamelayer2 { z-index: 11; }
 #gamelayer3 { z-index: 12; }
-#selector { z-index: 13; }
+#selector { z-index: 13; cursor: pointer;}
 #tileScrollbar {
   position: absolute;
   left: 0;
@@ -58,6 +58,7 @@ CANVAS {
   height: 352;
   border: 1px solid blue;
   background-color: rgba(0,0,0,0);
+  cursor: pointer;
 }
 
 #editor {
