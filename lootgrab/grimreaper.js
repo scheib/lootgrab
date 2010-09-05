@@ -37,7 +37,8 @@ GrimReaper.prototype.update = function(world, tick, elapsed) {
   if (updateRoute) {
     // Dumb routing.
     var dir = this.world.hero.position.sub(this.position);
-    var horizontal = (Math.abs(dir.y) - Math.abs(dir.x) < 0);
+    var vdir = Math.abs(dir.y) - Math.abs(dir.x);
+    var horizontal = (vdir < 0);
 
     if (dir.x < 0 && horizontal) {
       this.heading = Vec2.LEFT;
@@ -49,11 +50,19 @@ GrimReaper.prototype.update = function(world, tick, elapsed) {
       this.heading = Vec2.UP;
     }
 
-    // Stop trying to run into walls.
+    // If there's a wall in that direction, try another one.
     var nextpos = this.position.add(this.heading.mul(1));
-
     if (this.world.isBlocking(nextpos.x, nextpos.y)) {
-      this.heading = Vec2.CENTER;
+      if (this.heading == Vec2.LEFT || this.heading == Vec2.RIGHT) {
+        this.heading = (vdir > 0) ? Vec2.DOWN : Vec2.UP;
+      } else {
+        this.heading = (dir.x > 0) ? Vec2.RIGHT : Vec2.LEFT;
+      }
+    }
+
+    // else give up.
+    var nextpos = this.position.add(this.heading.mul(1));
+    if (this.world.isBlocking(nextpos.x, nextpos.y)) {
       nextpos = new Vec2(
         this.position.x,
         this.position.y
