@@ -3,8 +3,8 @@ tdl.provide('world')
 //////////////////////////////////////////////////
 function Cell(world,def,x,y) {
   this.world = world;
-  this.x = x;
-  this.y = y;
+  this.x_ = x;
+  this.y_ = y;
   this.setType(def);
   this.passable = 'passable' in def ? def.passable : true;
 }
@@ -43,12 +43,10 @@ function World(entityDefs, level) {
 
   this.actors = [];
   for(var actorID in level.actors) {
-    adef = level.actors[actorID];
-    var a = this.newEntity(adef.actor_def);
-    if ('position' in adef) {
-      var pos = new Vec2(adef.position.x + 0.5, adef.position.y + 0.5);
-      a.position = pos;
-    }
+    instanceDef = level.actors[actorID];
+    var a = this.newEntity(instanceDef.actor_def);
+    a.init(instanceDef);
+
     this.actors.push(a);
   }
 }
@@ -101,8 +99,8 @@ World.prototype.draw_dbg = function (ctx) {
   for(var i = 0; i < this.cells.length; ++i) {
     var cell =this.cells[i];
     ctx.strokeStyle = "rgb(255,255,0)";
-    ctx.strokeRect(cell_width * cell.x,
-                   cell_height * cell.y,
+    ctx.strokeRect(cell_width * cell.x_,
+                   cell_height * cell.y_,
                    cell_width, cell_height);
   }
 }
