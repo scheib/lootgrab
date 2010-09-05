@@ -21,7 +21,7 @@ function Actor(w, entDef) {
     this.speed = ('speed' in entDef) ? entDef.speed : 0;
     this.radius = ('radius' in entDef) ? entDef.radius : Math.sqrt(2) / 4;
 
-    this.isAlive = Actor.ALIVE;
+    this.deathState = Actor.ALIVE;
     this.sprite = this.world.newEntity(entDef.sprite);
 
     this.loot = 'loot' in entDef ? entDef.loot : false;
@@ -100,7 +100,7 @@ Actor.prototype.killed = function() {
   this.deathState = Actor.DEAD;
   this.speed = 0;
   this.heading = Vec2.CENTER;
-  this.sprite.img = new Image();
+  // FIX this.sprite.img = new Image();
 }
 
 Actor.prototype.updatePosition = function(elapsed) {
