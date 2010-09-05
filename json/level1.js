@@ -9,7 +9,7 @@ function getLevelData(level) {
         width : 8,
         height : 8,
         cells : ["wallCell", "wallCell", "wallCell", "wallCell", "wallCell", "wallCell", "wallCell", "wallCell",
-                 "wallCell", "dirtCell", "dirtCell", "rugCell",  "dirtCell", "dirtCell", "dirtCell", "wallCell",
+                 "wallCell", "dirtCell", "dirtCell", "rugCell",  "wallCell", "dirtCell", "dirtCell", "wallCell",
                  "wallCell", "rugCell",  "rugCell",  "rugCell",  "dirtCell", "dirtCell", "dirtCell", "wallCell",
                  "wallCell", "rugCell",  "dirtCell", "wallCell", "dirtCell", "dirtCell", "dirtCell", "wallCell",
                  "wallCell", "rugCell",  "wallCell", "rugCell",  "dirtCell", "dirtCell", "dirtCell", "wallCell",
