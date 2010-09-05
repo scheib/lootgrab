@@ -132,16 +132,16 @@ World.prototype.setCellDef = function(x, y, type) {
     throw type + "is not a cell!";
   this.cellAt(x,y).setType(type);
 };
- 
+
 /**
  * Gets the possible typs of cell defs
  */
-World.prototype.getCellDefs = function(x, y, type) {
+World.prototype.getCellDefs = function() {
   var cellDefs = []
   for(var defName in this._entity_defs) {
     var def = this._entity_defs[defName];;
     if(def.type == "Cell")
-      cellDefs.add(def);
+      cellDefs.push(def);
   }
   return cellDefs;
 }
