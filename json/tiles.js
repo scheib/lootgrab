@@ -35,10 +35,10 @@ var getEntityDefs = function() {
     "cellFloorRug4"       : { type: "Cell", sprite: "spriteFloorRug4"      , uiName: "Rug 4",            passable : true },
     "cellStairsDown"      : { type: "Cell", sprite: "spriteStairsDown"     , uiName: "Stairs down",      passable : true },
     "cellStairsUp"        : { type: "Cell", sprite: "spriteStairsUp"       , uiName: "Stairs up",        passable : true },
-    "cellWallH"           : { type: "Cell", sprite: "spriteWallH"          , uiName: "Wall H",           passable : false },
-    "cellWallHCrumbled"   : { type: "Cell", sprite: "spriteWallHCrumbled"  , uiName: "Wall H Crumbled",  passable : false },
-    "cellWallHTorch"      : { type: "Cell", sprite: "spriteWallHTorch"     , uiName: "Wall H Torch",     passable : false },
-    "cellWallV"           : { type: "Cell", sprite: "spriteWallV"          , uiName: "Wall V",           passable : false },
+    "cellWallH"           : { type: "Cell", sprite: "smartWall"            , uiName: "Wall H",           passable : false },
+    "cellWallHCrumbled"   : { type: "Cell", sprite: "smartWall"            , uiName: "Wall H Crumbled",  passable : false },
+    "cellWallHTorch"      : { type: "Cell", sprite: "smartWall"            , uiName: "Wall H Torch",     passable : false },
+    "cellWallV"           : { type: "Cell", sprite: "smartWall"            , uiName: "Wall V",           passable : false },
     "cellWater"           : { type: "Cell", sprite: "spriteWater"          , uiName: "Water",            passable : true },
     "cellLava"            : { type: "Cell", sprite: "spriteLava"           , uiName: "Lava",             passable : true },
 
@@ -50,6 +50,7 @@ var getEntityDefs = function() {
       tile_width: 32,
       tile_height: 32,
     },
+
     "spriteWallH"           : { type : "Sprite", tileset : "tileset_env", start_x:  0, start_y: 0, frames: 1 },
     "spriteWallHTorch"      : { type : "Sprite", tileset : "tileset_env", start_x:  1, start_y: 0, frames: 2 },
     "spriteWallHCrumbled"   : { type : "Sprite", tileset : "tileset_env", start_x:  3, start_y: 0, frames: 1 },
@@ -115,5 +116,23 @@ var getEntityDefs = function() {
     "spriteSkull"    : { type : "Sprite", tileset : "tileset_features", start_x:  0, start_y:  6, frames: 1 },
     "spriteGrate"    : { type : "Sprite", tileset : "tileset_features", start_x:  0, start_y:  1, frames: 1 },
     "spriteCircle"   : { type : "Sprite", tileset : "tileset_features", start_x: 11, start_y:  3, frames: 1 },
+
+    "tileset_smart" : {
+      type : "tileset",
+      image: "images/smart_env.png",
+      tile_width: 8,
+      tile_height: 8,
+    },
+    "smartWall"             : { type : "SmartSprite", 
+                                tileset : "tileset_smart", 
+                                cases : [
+                                  { x: 0, y: 0},//0
+                                  { x: 1, y: 0},//1
+                                  { x: 2, y: 0},//2
+                                  { x: 3, y: 0},//3
+                                  { x: 0, y: 1},//4
+                                  { x: 5, y: 0},//5
+                                ]
+                              }
   };
 }

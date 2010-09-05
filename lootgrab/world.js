@@ -233,15 +233,6 @@ World.prototype.lineOfSight = function(x,y,heading) {
 }
 
 World.prototype.draw_dbg = function (ctx) {
-  cell_width = this.tileVisualWidth();
-  cell_height = tile.tileVisualHeight();
-  for(var i = 0; i < this.cells.length; ++i) {
-    var cell =this.cells[i];
-    ctx.strokeStyle = "rgb(255,255,0)";
-    ctx.strokeRect(cell_width * cell.x_,
-                   cell_height * cell.y_,
-                   cell_width, cell_height);
-  }
 }
 
 World.prototype.actors = [];
