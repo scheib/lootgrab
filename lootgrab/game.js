@@ -1,5 +1,6 @@
 tdl.provide("game");
 tdl.require("lootgrab.actor");
+tdl.require("lootgrab.exit");
 tdl.require("lootgrab.hero");
 tdl.require("lootgrab.loot");
 tdl.require("lootgrab.skeleton");

@@ -35,6 +35,7 @@ function getLevelData(level) {
             heading : "UP",
           },
           { actor_def: "actorKey", position : { x : 2, y : 6 } },
+          { actor_def: "actorExit",position : { x : 7, y : 4 } },
         ],
     }
 }
