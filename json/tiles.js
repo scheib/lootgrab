@@ -7,7 +7,7 @@ var getEntityDefs = function() {
     "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", speed : .015 },
     "actorFlameSkull"     : { type : "FSkull",    sprite : "spriteFlamingSkull",    speed : .01, speed2 : .04 },
     "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper",    speed : .025 },
-    "actorKey"            : { type : "Key",       sprite : "spriteKey",             loot : true },
+    "actorKey"            : { type : "Key",       sprite : "spriteKey",             loot : true, key : true },
     "actorShield"         : { type : "Shield",    sprite : "spriteShield",          loot : true },
     "actorFire"           : { type : "Fire",      sprite : "spriteFire",            loot : true },
     "actorWand"           : { type : "Wand",      sprite : "spriteWand",            loot : true },
