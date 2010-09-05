@@ -1,14 +1,16 @@
 tdl.provide('world')
 
 //////////////////////////////////////////////////
-function Cell(world,entDefID,x,y) {
-  this.id = entDefID;
+function Cell(world,def,x,y) {
+  this.world = world;
   this.x = x;
   this.y = y;
-  var def = world.getDef(entDefID);
+  this.setType(def);
   this.passable = 'passable' in def ? def.passable : true;
+}
 
-  this.ground_ent = world.newEntity(def.render_tile)
+Cell.prototype.setType = function(def) {
+  this.ground_ent = this.world.newEntity(def.render_tile)
   if(this.ground_ent === undefined)
     throw "Could not instantiate " + json.ground_id
 }
@@ -32,10 +34,10 @@ function World(entityDefs, level) {
   this.cells = []
   var i = 0;
   for(var i = 0; i < level.cells.length; ++i) {
-    var cellEntDefID = level.cells[i]
+    var cellType = level.cells[i]
     cx = i % this.width
     cy = Math.floor(i / this.width);
-    var cell = new Cell(this, cellEntDefID, cx, cy)
+    var cell = new Cell(this, this.getDef(cellType), cx, cy)
     this.cells.push(cell)
   }
 
@@ -96,18 +98,35 @@ World.prototype.tileVisualHeight = function(ctx) {
 };
 
 /**
- * Returns true if cell x,y can be set to tile.
+ * Returns true if cell x,y can be set to a particular cell def.
  */
-World.prototype.canSetCell = function(x, y, tile) {
+World.prototype.canSetCellDef = function(x, y, type) {
   return true;
 };
 
 /**
- * Sets cell x,y to tile.
+ * Sets cell x,y to particular cell def
  */
-World.prototype.setCell = function(x, y, tile) {
-  tdl.log("setCell: ", x, y, ": ", tile);
+World.prototype.setCellDef = function(x, y, type) {
+  tdl.log("setCell: ", x, y, ": ", type);
+  var def = this.getDef(type);
+  if(def.type != "Cell")
+    throw type + "is not a cell!";
+  this.cellAt(x,y).setType(type);
 };
+ 
+/**
+ * Gets the possible typs of cell defs
+ */
+World.prototype.getCellDefs = function(x, y, type) {
+  var cellDefs = []
+  for(var defName in this._entity_defs) {
+    var def = this._entity_defs[defName];;
+    if(def.type == "Cell")
+      cellDefs.add(def);
+  }
+  return cellDefs;
+}
 
 /**
  * Returns true of can set an actor in cell x,y
