@@ -46,7 +46,7 @@ function World(entityDefs, level) {
     adef = level.actors[actorID];
     var a = this.newEntity(adef.actor_def);
     if ('position' in adef) {
-      var pos = new Vec2(adef.position.x, adef.position.y);
+      var pos = new Vec2(adef.position.x + 0.5, adef.position.y + 0.5);
       a.position = pos;
     }
     this.actors.push(a);
