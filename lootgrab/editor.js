@@ -45,11 +45,25 @@ lootgrab.editor = (function() {
  var tileCursor;
 
  // The tile the user will draw with.
- var currentTile;
+ var currentTileDef;
+ var currentTileEntity;
 
- // The cell names
- var cellNames = [];
+ // The cell defs
+ var cellDefs = [];
  var cellEntities = [];
+
+ function getTileListInfo() {
+   var tileWidth = world.tileVisualWidth(gfx.tileCtx);
+   var tileHeight = world.tileVisualHeight(gfx.tileCtx);
+   var tilesAcross = Math.floor(tileListCtx.canvas.width / tileWidth);
+   var tilesDown = Math.floor(tileListCtx.canvas.height / tileHeight);
+   return {
+     tileWidth: tileWidth,
+     tileHeight: tileHeight,
+     tilesAcross: tilesAcross,
+     tilesDown: tilesDown
+   }
+ }
 
  function computeTileCoords(e, elem) {
    var tileWidth = world.tileVisualWidth(gfx.tileCtx);
@@ -71,10 +85,19 @@ lootgrab.editor = (function() {
    $(tileCursor).hide();
  }
 
+ function setCurrentTile(index) {
+   if (index < cellDefs.length) {
+     currentTileDef = cellDefs[index];
+     currentTileEntity = cellEntities[index];
+   }
+ }
+
  // select the tile under the tile cusor
  function tileClick(e) {
+   var ti = getTileListInfo();
    var pos = computeTileCoords(e, this);
-   tdl.log("select tile:", pos.x, pos.y);
+   var index = pos.y * ti.tilesAcross + pos.x;
+   setCurrentTile(index);
    return false;
  }
 
@@ -132,7 +155,11 @@ lootgrab.editor = (function() {
  function setup(_world) {
    world = _world;
 
+   currenTileEntity = null;
    cellEntities = [];
+
+   currentTileCtx.fillStyle = "gray";
+   currentTileCtx.fillRect(0, 0, 32, 32);
 
    cellDefs = world.getCellDefs();
    for (var ii = 0; ii < cellDefs.length; ++ii) {
@@ -144,22 +171,23 @@ lootgrab.editor = (function() {
  }
 
  function render() {
-   var tileWidth = world.tileVisualWidth(gfx.tileCtx);
-   var tileHeight = world.tileVisualHeight(gfx.tileCtx);
-   var tilesAcross = Math.floor(tileListCtx.canvas.width / tileWidth);
-   var tilesDown = Math.floor(tileListCtx.canvas.height / tileHeight);
+   var ti = getTileListInfo();
 
    // TODO(gman): compute first tile and last instead of drawing all tiles.
    for (var ii = 0; ii < cellEntities.length; ++ii) {
      var ent = cellEntities[ii];
-     var tx = ii % tilesAcross;
-     var ty = Math.floor(ii / tilesAcross);
+     var tx = ii % ti.tilesAcross;
+     var ty = Math.floor(ii / ti.tilesAcross);
      ent.draw(
          tileListCtx,
-         tx * tileWidth,
-         ty * tileHeight,
-         tileWidth,
-         tileHeight);
+         tx * ti.tileWidth,
+         ty * ti.tileHeight,
+         ti.tileWidth,
+         ti.tileHeight);
+   }
+
+   if (currentTileEntity) {
+     currentTileEntity.draw(currentTileCtx, 0, 0, 32, 32);
    }
  }
 
@@ -201,6 +229,7 @@ lootgrab.editor = (function() {
    ctx.fillRect(0, 30, 32, 2);
 
    tileListCtx = editor.find("#tileList").get()[0].getContext("2d");
+   currentTileCtx = editor.find("#currentTile").get()[0].getContext("2d");
 
    gfx = {
      tileCtx: canvases.get()[0].getContext("2d"),
