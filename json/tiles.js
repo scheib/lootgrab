@@ -20,9 +20,10 @@ var getEntityDefs = function() {
     "actorGrate"          : { type : "Grate",     sprite : "spriteGrate",           uiName: "Grate",             loot : true },
     "actorCircle"         : { type : "Circle",    sprite : "spriteCircle",          uiName: "Circle",            loot : true },
     "actorExit"           : { type : "Exit",      sprite : "spriteStairsUp",        uiName: "Stairs Up",         loot : true,      renderBackground: true },
-    "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            uiName: "Door",              loot : false,     passable : false },
-    "actorTrapdoor"       : { type : "Trapdoor",  sprite : "spriteTrapdoorClosed",  uiName: "Trapdoor Closed",   loot : false,     renderBackground: true,   openSprite: "spriteTrapdoorOpen" },
+    "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            uiName: "Door",              loot : false, passable : false },
+    "actorTrapdoor"       : { type : "Trapdoor",  sprite : "spriteTrapdoorClosed",  uiName: "Closed Trapdoor",   loot : false,     renderBackground: true,   openSprite: "spriteTrapdoorOpen" },
     "actorHole"           : { type : "Hole",      sprite : "spriteHole",            uiName: "Hole",              loot : false,     renderBackground: true },
+    "actorTimedWall"      : { type : "TimedWall", sprite : "spriteTimedWall",       uiName: "Timed wall",        loot : false, passable : false },
 
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , uiName: "Floor A",          passable : true },
@@ -101,6 +102,7 @@ var getEntityDefs = function() {
     "spriteSword"     : { type : "Sprite", tileset : "tileset_obj", start_x:  6, start_y:  3, frames: 1 },
     "spriteMeat"      : { type : "Sprite", tileset : "tileset_obj", start_x: 13, start_y:  1, frames: 1 },
     "spriteGoldChest" : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  0, frames: 1 },
+    "spriteTimedWall" : { type : "Sprite", tileset : "tileset_obj", start_x: 11, start_y:  7, frames: 2 },
 
     "tileset_features" : {
       type : "tileset",

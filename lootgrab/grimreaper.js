@@ -40,7 +40,7 @@ GrimReaper.prototype.update = function(world, tick, elapsed) {
 
     // If there's a wall in that direction, try another one.
     var nextpos = this.position.add(this.heading.mul(1));
-    if (this.world.isBlocking(nextpos.x, nextpos.y)) {
+    if (this.world.isBlocking(nextpos.x, nextpos.y, this)) {
       if (this.heading == Vec2.LEFT || this.heading == Vec2.RIGHT) {
         this.heading = (vdir > 0) ? Vec2.DOWN : Vec2.UP;
       } else {
@@ -50,7 +50,7 @@ GrimReaper.prototype.update = function(world, tick, elapsed) {
 
     // else give up.
     var nextpos = this.position.add(this.heading.mul(1));
-    if (this.world.isBlocking(nextpos.x, nextpos.y)) {
+    if (this.world.isBlocking(nextpos.x, nextpos.y, this)) {
       nextpos = new Vec2(
         this.position.x,
         this.position.y

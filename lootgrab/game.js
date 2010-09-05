@@ -8,6 +8,7 @@ tdl.require("lootgrab.loot");
 tdl.require("lootgrab.skeleton");
 tdl.require("lootgrab.grimreaper");
 tdl.require("lootgrab.trap");
+tdl.require("lootgrab.wall");
 tdl.require("lootgrab.world");
 
 /**
@@ -47,16 +48,19 @@ Game.prototype.update = function(tick, elapsed) {
   this.resolveCollisions();
   for (var i = 0, actor; actor = this.world.actors[i]; i++) {
     if (actor.deathState == Actor.DYING) {
-      freshlyDead.push(actor);
+      freshlyDead.push(i);
     }
   }
 
-  for (var i = 0, corpse; corpse = freshlyDead[i]; i++) {
+  for (var i = 0, corpse; corpse = this.world.actors[freshlyDead[i]]; i++) {
     if (corpse == this.world.hero) {
       this.lose();
     }
     corpse.killed();
+    this.world.actors.splice(freshlyDead[i], 1); 
   }
+
+  
 }
 
 Game.prototype.resolveCollisions = function() {
