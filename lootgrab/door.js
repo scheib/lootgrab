@@ -26,7 +26,6 @@ Door.prototype.canPass = function(other) {
  */
 Door.prototype.onCollide = function(other) {
   if (other == this.world.hero) {
-    other.useKey();
     this.kill();
   }
 }

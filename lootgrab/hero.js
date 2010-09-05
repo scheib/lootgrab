@@ -9,6 +9,7 @@ function Hero(w, def) {
   this.nextCell = null;
   this.lastCell = null;
   this.ticks = 0;
+  this.inventory = [];
 }
 tdl.base.inherit(Hero, Actor);
 
@@ -33,6 +34,7 @@ Hero.prototype.draw = function(ctx, cw, ch) {
       (this.position.y) * ch,
       cw/1.5, ch/1.5);
   }
+
 }
 
 /**
@@ -97,8 +99,6 @@ Hero.prototype.update = function(world, tick, elapsed) {
   this.updatePosition();
 }
 
-Hero.prototype.inventory = [];
-
 Hero.prototype.hasItem = function(name) {
   for (var i = 0; i < this.inventory.length; ++i) {
     if (this.inventory[i][name]) return true;
@@ -106,9 +106,9 @@ Hero.prototype.hasItem = function(name) {
   return false;
 }
 
-Hero.prototype.useKey = function() {
+Hero.prototype.useItem = function(itemName) {
   for (var i = 0; i < this.inventory.length; ++i) {
-    if (this.inventory[i]["key"]) {
+    if (this.inventory[i][itemName]) {
       this.inventory.splice(i, 1);
       return;
     }
