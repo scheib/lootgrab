@@ -75,7 +75,7 @@ World.prototype.getDef = function(entDefID) {
  * @return {Cell}
  */
 World.prototype.cellAt = function(x,y) {
-  idx = Math.floor(x) * this.width + Math.floor(y);
+  idx = Math.floor(y) * this.width + Math.floor(x);
   return this.cells[idx];
 }
 
@@ -127,12 +127,11 @@ World.prototype.canSetCellDef = function(x, y, type) {
 /**
  * Sets cell x,y to particular cell def
  */
-World.prototype.setCellDef = function(x, y, type) {
-  tdl.log("setCell: ", x, y, ": ", type);
-  var def = this.getDef(type);
+World.prototype.setCellDef = function(x, y, def) {
+  tdl.log("setCell: ", x, y, ": ", def.type);
   if(def.type != "Cell")
-    throw "World.setCellDef(" + x + ", " + y + ", " + type + ") could not getDef with type:" + type;
-  this.cellAt(x,y).setType(type);
+    throw def.type + "is not a cell!";
+  this.cellAt(x,y).setType(def);
 };
 
 /**
