@@ -21,8 +21,7 @@ function Actor(w, entDef) {
     this.speed = ('speed' in entDef) ? entDef.speed : .025;
     this.radius = ('radius' in entDef) ? entDef.radius : Math.sqrt(2) / 4;
 
-    this.isAlive = true;
-
+    this.isAlive = Actor.ALIVE;
     this.sprite = this.world.newEntity(entDef.sprite);
 
     this.loot = 'loot' in entDef ? entDef.loot : false;
@@ -31,6 +30,10 @@ function Actor(w, entDef) {
     alert("Couldn't create Actor: " + err.toString());
   }
 }
+
+Actor.ALIVE = 0;
+Actor.DYING = 1;
+Actor.DEAD = 2;
 
 Actor.prototype.init = function(instanceDef) {
   try {
@@ -46,9 +49,13 @@ Actor.prototype.init = function(instanceDef) {
   }
 }
 
+Actor.prototype.getWorld = function() {
+  return this.world;
+}
+
 Actor.prototype.draw = function(ctx, cw, ch) {
   // Actor position is center of cell, so subtract
-  // 0.5 so that we draw it in the right position
+  // 0.5 so that we draw it in the right position.
   this.sprite.draw(ctx, 
       (this.position.x - 0.5) * cw, 
       (this.position.y - 0.5) * ch,
@@ -62,7 +69,10 @@ Actor.prototype.draw = function(ctx, cw, ch) {
  * @param tick
  * @param elapsed
  */
+Actor.prototype.update = function(tick, elapsed) {
 Actor.prototype.update = function(world, tick, elapsed) {
+  if (this.isDead()) return;
+  
   var nextpos = this.position.add(this.heading.mul(0.5))
   if (this.world.isBlocking(nextpos.x, nextpos.y)) {
     this.heading = this.heading.negate();
@@ -77,6 +87,21 @@ Actor.prototype.update = function(world, tick, elapsed) {
  */
 Actor.prototype.onCollide = function(other) {
   
+}
+
+Actor.prototype.isDead = function() {
+  return (this.deathState == Actor.DEAD);
+}
+
+Actor.prototype.kill = function() {
+  this.deathState = Actor.DYING;
+}
+
+Actor.prototype.killed = function() {
+  this.deathState = Actor.DEAD;
+  this.speed = 0;
+  this.heading = Vec2.CENTER;
+  this.sprite.img = new Image();
 }
 
 Actor.prototype.updatePosition = function(elapsed) {
