@@ -22,7 +22,7 @@ var getEntityDefs = function() {
     "actorCircle"         : { type : "Circle",    sprite : "spriteCircle",          loot : true },
     "actorExit"           : { type : "Exit",      sprite : "spriteStairsUp",        loot : true },
     "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            loot : false },
-    "actorTrapdoor"       : { type : "Trapdoor",  sprite : "spriteTrapdoorClosed",  loot : false },
+    "actorTrapdoor"       : { type : "Trapdoor",  sprite : "spriteTrapdoorClosed",  loot : false,     openSprite: "spriteTrapdoorOpen" },
 
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },

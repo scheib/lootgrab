@@ -8,11 +8,14 @@ function Trap(w, def) {
 };
 tdl.base.inherit(Trap, Actor);
 
-Loot.prototype.onCollide = function(other) {
-  
-};
-
 function Trapdoor(w, def) {
   Trap.call(this, w, def);
+  this.open = false;
+  this.openSprite = def.openSprite;
 };
 tdl.base.inherit(Trapdoor, Trap);
+
+Trapdoor.prototype.onCollide = function(other) {
+  this.open = true;
+  this.sprite = this.world.newEntity(this.openSprite);
+};
