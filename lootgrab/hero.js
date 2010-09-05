@@ -19,6 +19,7 @@ tdl.base.inherit(Hero, Actor);
  * @param elapsed
  */
 Hero.prototype.update = function(world, tick, elapsed) {
+  if (this.tempSpeedTicksLeft > 0) this.tempSpeedTicksLeft--;
 
   var updateRoute = false;
   if (this.nextCell == null) {
