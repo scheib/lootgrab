@@ -17,7 +17,7 @@ function getLevelData(level) {
                  "wallCell", "dirtCell", "dirtCell", "rugCell",  "dirtCell", "dirtCell", "dirtCell", "wallCell",
                  "HeroCell", "SkeletonCell", "SkeletonWarriorCell", "BatCell", "FlamingSkullCell", "MummyCell", "MummyKingCell", "DeathCell"],
         actors : [
-            "Hero",
+          { actor_def: "HeroActor", position : { x : 2, y : 2 } },
         ],
     }
 }

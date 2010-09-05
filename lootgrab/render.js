@@ -27,7 +27,6 @@ ImageEntity.prototype.draw = function(ctx, x,y,w,h) {
 
 //////////////////////////////////////////////////
 function Sprite(world, tile_def) {
-  window.console.log(tile_def);
   var that = this;
   if(tile_def === undefined)
     throw "Tile def could not be found!"
@@ -85,7 +84,12 @@ Render.prototype.draw = function() {
     y = cell.y * cell_height;
     w.cells[i].draw(ctx,x,y,cell_width,cell_height);
   }
+
+  // Actors - fork into new canvas.
+  for(var i = 0, actor; actor = w.actors[i]; ++i) {
+    actor.draw(ctx, cell_width, cell_height);
+  }
+
   if(DEBUG)
     w.draw_dbg(ctx);
-
 }

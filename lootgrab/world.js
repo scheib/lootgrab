@@ -42,10 +42,14 @@ function World(entityDefs, level) {
   }
 
   this.actors = [];
-  i = 0;
   for(var actorID in level.actors) {
-    var a = this.newEntity(level.actors[actorID]);
-    this.actors[i] = a;
+    adef = level.actors[actorID];
+    var a = this.newEntity(adef.actor_def);
+    if ('position' in adef) {
+      var pos = new Vec2(adef.position.x, adef.position.y);
+      a.position = pos;
+    }
+    this.actors.push(a);
   }
 }
 
@@ -75,6 +79,18 @@ World.prototype.cellAt = function(x,y) {
 
 World.prototype.defAt = function(x, y) {
   return this.getDef(this.cellAt(x, y).id);
+}
+
+// Convenience function for whether or not a given cell is not passable.
+World.prototype.isBlocking = function(x, y) {
+  var cell = this.cellAt(x, y);
+  return cell ? cell.passable : true;
+}
+
+// Convenience function for whether or not a given cell has something the
+// player wants to run towards.
+World.prototype.isDesirable = function(x, y) {
+  return false;
 }
 
 World.prototype.draw_dbg = function (ctx) {
