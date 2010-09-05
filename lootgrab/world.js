@@ -47,7 +47,7 @@ World.prototype.reset = function() {
 };
 
 World.prototype.setLevel = function(level) {
-  this.levelData_ = level; //eval(JSON.stringify(level));
+  this.levelData_ = JSON.parse(JSON.stringify(level));
   this.reset();
 };
 
