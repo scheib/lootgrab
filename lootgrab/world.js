@@ -119,56 +119,65 @@ World.prototype.tileVisualHeight = function(ctx) {
 };
 
 /**
- * Returns true if cell x,y can be set to a particular cell def.
- */
-World.prototype.canSetCellDef = function(x, y, type) {
-  return true;
-};
-
-/**
- * Sets cell x,y to particular cell def
- */
-World.prototype.setCellDef = function(x, y, def) {
-  tdl.log("setCell: ", x, y, ": ", def.type);
-  if(def.type != "Cell")
-    throw def.type + "is not a cell!";
-  this.cellAt(x,y).setType(def);
-};
-
-/**
- * Gets the possible typs of cell defs
- */
-World.prototype.getCellDefs = function() {
-  var cellDefs = []
-  for(var defName in this._entity_defs) {
-    var def = this._entity_defs[defName];;
-    if(def.type == "Cell")
-      cellDefs.push(def);
-  }
-  return cellDefs;
-}
-
-/**
- * Returns true of can set an actor in cell x,y
- * NOTE: This function should either ways return
- * false while the game is running (vs editing)
- * or else the editor should know not to place
- * actors while the game is running.
- */
-World.prototype.canSetActor = function(x, y, actor) {
-  return true;
-};
-
-/**
- * Sets a actor
- */
-World.prototype.setActor = function(x, y, actor) {
-  tdl.log("setActor: ", x, y, ": ", actor);
-};
-
-/**
  * Sets a hero
  */
 World.prototype.setHero = function(actor) {
   this.hero = actor;
 }
+
+/**
+ * Find an actor
+ */
+World.prototype.findActorIndex = function(x,y,a_radius) {
+  var a_position = new Vec2(x,y);
+  for (var j = 0; j < this.actors.length; ++j) {
+    var b = this.actors[j];
+    var minContact = a_radius + b.radius;
+    if (a_position.sub(b.position).len() < minContact) {
+      return j;
+    }
+  }
+  return undefined;
+};
+
+/**
+ * Gets the possible typs of actions within the editor
+ */
+World.prototype.getEditorActions = function() {
+  var that = this;
+  var actions = []
+
+  // Delete actor actions
+  actions.push({
+    type: "click",
+    sprite: this.newEntity("spriteGrimReaper"),
+    apply: function(x,y) {
+      var actorIdx = that.findActorIndex(x,y,0.5);
+      if(actor) {
+        // remove actor...
+        delete that.actors.splice(actorIdx,1);
+      }
+    }
+  });
+  
+  // Cell setting...
+  for(var defName in this._entity_defs) {
+    (function() {
+      var def = that._entity_defs[defName];
+      if(def.type == "Cell"){
+        actions.push({
+          type: "paint",
+          sprite: that.newEntity(def.sprite),
+          apply: function(x,y) {
+            that.cellAt(x,y).setType(def);
+          }
+        });
+      }
+    })();
+  }
+  
+  // Add actor actions
+  // TODO
+  return actions;
+}
+
