@@ -135,8 +135,8 @@ lootgrab.editor = (function() {
    cellCursor.style.top = pos.y * pos.tileHeight;
    cellCursor.style.width = pos.tileWidth.toString() + "px";
    cellCursor.style.height = pos.tileHeight.toString() + "px";
-   if (drawing) {
-     tdl.log("setCell: ", pos.x, pos.y);
+   if (drawing && currentTileDef) {
+     world.setCellDef(pos.x, pos.y, currentTileDef);
    }
  }
 
@@ -167,6 +167,10 @@ lootgrab.editor = (function() {
      var tileName = cellDef.sprite;
      var ent = world.newEntity(tileName);
      cellEntities.push(ent);
+   }
+
+   if (cellDefs.length) {
+     setCurrentTile(0);
    }
  }
 
