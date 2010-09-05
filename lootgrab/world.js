@@ -6,6 +6,8 @@ function Cell(world,entDefID,x,y) {
   this.x = x;
   this.y = y;
   var def = world.getDef(entDefID);
+  this.passable = 'passable' in def ? def.passable : true;
+
   this.ground_ent = world.newEntity(def.render_tile)
   if(this.ground_ent === undefined)
     throw "Could not instantiate " + json.ground_id
@@ -31,6 +33,7 @@ function World(entityDefs, level) {
   var i = 0;
   for(var i = 0; i < level.cells.length; ++i) {
     var cellEntDefID = level.cells[i]
+    window.console.log(cellEntDefID);
     cx = i % this.width
     cy = Math.floor(i / this.width);
     var cell = new Cell(this, cellEntDefID, cx, cy)
