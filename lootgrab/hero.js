@@ -60,12 +60,26 @@ Hero.prototype.update = function(world, tick, elapsed) {
 
 Hero.prototype.inventory = [];
 
+Hero.prototype.hasKey = function() {
+  for (var i = 0; i < this.inventory.length; ++i) {
+    if (this.inventory[i].isKey) return true;
+  }
+  return false;
+}
 
+Hero.prototype.useKey = function() {
+  for (var i = 0; i < this.inventory.length; ++i) {
+    if (this.inventory[i].isKey) {
+      delete this.inventory[i];
+      return;
+    }
+  }
+}
 
 Hero.prototype.onCollide = function(other) {
   if (other.loot) {
     other.loot = false;
-    other.kill()
-        
+    this.inventory.push(other);
+    other.kill();    
   }
 }

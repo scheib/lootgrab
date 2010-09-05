@@ -26,6 +26,7 @@ function Actor(w, entDef) {
 
     this.loot = 'loot' in entDef ? entDef.loot : false;
     this.passable = 'passable' in entDef ? entDef.passable : true;
+    this.key = 'key' in entDef ? entDef.key : false;
   } catch (err) {
     alert("Couldn't create Actor: " + err.toString());
   }
@@ -86,6 +87,16 @@ Actor.prototype.update = function(world, tick, elapsed) {
  */
 Actor.prototype.onCollide = function(other) {
 
+}
+
+/**
+ * Returns true if the other actor can pass this one
+ *
+ * @param {Actor} other
+ * @return {Boolean}
+ */
+Actor.prototype.canPass = function(other) {
+  return this.passable;
 }
 
 Actor.prototype.isDead = function() {

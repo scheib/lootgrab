@@ -1,5 +1,6 @@
 tdl.provide("game");
 tdl.require("lootgrab.actor");
+tdl.require("lootgrab.door");
 tdl.require("lootgrab.exit");
 tdl.require("lootgrab.hero");
 tdl.require("lootgrab.loot");
@@ -68,7 +69,7 @@ Game.prototype.resolveCollisions = function() {
       var minContact = a.radius + b.radius;
       if (a.position.sub(b.position).len() < minContact) {
         a.onCollide(b);
-        if (b.deathState != Actor.ALIVE) {
+        if (b.deathState == Actor.ALIVE) {
           b.onCollide(a);
         }
       }
