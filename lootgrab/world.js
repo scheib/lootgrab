@@ -318,32 +318,32 @@ World.prototype.getEditorActions = function() {
  * Gets the possible PLAYTIME typs of actions within the editor
  */
 World.prototype.getPlaytimeEditorActions = function() {
-  var that = this;
+  var world = this;
   var actions = [];
 
   // Add actor actions
   for(var i = 0; i < this.levelData_.placeables.length; ++i) {
     (function() {
-      var defName = that.levelData_.placeables[i];
-      var def = that._entity_defs[defName];
+      var defName = world.levelData_.placeables[i];
+      var def = world._entity_defs[defName];
       actions.push({
         type: "click",
         uiName: (def.uiName) ? def.uiName : ("Add uiName to: " + defName),
-        sprite: that.newEntity(def.sprite),
+        sprite: world.newEntity(def.sprite),
         apply: function(x,y) {
           // Check that we can place the item
-          
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
+          if (world.actorsInCell(x,y).length)
+            return;
+          var cell = world.cellAt(x, y);
+          if (!cell.passable)
+            return;
+
           // Place it
-          that.deleteActorsInCell(x, y);
-          that.addActor(defName, x, y);
+          world.deleteActorsInCell(x, y);
+          world.addActor(defName, x, y);
           // If we are placing the item, remove it from inventory
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
-          // Disable this click
+          // Disable this action
+          this.disabled = true;
         }
       });
     })();

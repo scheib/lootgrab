@@ -109,3 +109,12 @@ CANVAS {
   opacity:0.9;
   bottom:30px;
 }
+
+
+#levels .ui-selecting { background: #FECA40; }
+#levels .ui-selected { background: #F39814; color: white; }
+#levels .levelicon { text-align: right; }
+#levels { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#levels li { margin: 3px; padding: 0.4em; font-size: 1.4em; gheight: 18px; }
+#levels oi { overflow: auto; }
+#levellist { height: 100px; }
