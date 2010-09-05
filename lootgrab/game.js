@@ -3,6 +3,7 @@ tdl.require("lootgrab.actor");
 tdl.require("lootgrab.hero");
 tdl.require("lootgrab.loot");
 tdl.require("lootgrab.skeleton");
+tdl.require("lootgrab.grimreaper");
 tdl.require("lootgrab.world");
 
 /**
@@ -36,7 +37,7 @@ Game.prototype.update = function(tick, elapsed) {
 
   this.resolveCollisions();
   for (var i = 0, actor; actor = this.world.actors[i]; i++) {
-    if (actor.isAlive == false) {
+    if (actor.dying == false) {
       freshlyDead.push(actor);
     }
   }
@@ -46,7 +47,7 @@ Game.prototype.update = function(tick, elapsed) {
       alert("You died.");
       this.status = Game.LOSS;
     }
-    delete corpse;
+    corpse.killed();
   }
 }
 
@@ -55,6 +56,10 @@ Game.prototype.resolveCollisions = function() {
     for (j = i + 1; j < this.world.actors.length; ++j) {
       var a = this.world.actors[i];
       var b = this.world.actors[j];
+
+      if (a.isDead() || b.isDead())
+        continue;
+
       var minContact = a.radius + b.radius;
       if (a.position.sub(b.position).len() < minContact) {
         a.onCollide(b);

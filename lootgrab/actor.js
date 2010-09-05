@@ -20,13 +20,17 @@ function Actor(w, entDef) {
   this.speed = .025;
   this.radius = .25;
 
-  this.isAlive = true;
+  this.isAlive = Actor.ALIVE;
 
   this.sprite = this.world.newEntity(entDef.sprite);
 
   this.loot = 'loot' in entDef ? entDef.loot : false;
   this.passable = 'passable' in entDef ? entDef.passable : true;
 }
+
+Actor.ALIVE = 0;
+Actor.DYING = 1;
+Actor.DEAD = 2;
 
 Actor.prototype.init = function(instanceDef) {
   if ('position' in instanceDef) {
@@ -58,6 +62,8 @@ Actor.prototype.draw = function(ctx, cw, ch) {
  * @param elapsed
  */
 Actor.prototype.update = function(tick, elapsed) {
+  if (this.isDead()) return;
+
   var nextpos = this.position.add(this.heading.mul(0.5))
   if (this.world.isBlocking(nextpos.x, nextpos.y)) {
     this.heading = this.heading.negate();
@@ -72,6 +78,21 @@ Actor.prototype.update = function(tick, elapsed) {
  */
 Actor.prototype.onCollide = function(other) {
   
+}
+
+Actor.prototype.isDead = function() {
+  return (this.deathState == Actor.DEAD);
+}
+
+Actor.prototype.kill = function() {
+  this.deathState = Actor.DYING;
+}
+
+Actor.prototype.killed = function() {
+  this.deathState = Actor.DEAD;
+  this.speed = 0;
+  this.heading = Vec2.CENTER;
+  this.sprite.img = new Image();
 }
 
 Actor.prototype.updatePosition = function(elapsed) {
