@@ -46,13 +46,13 @@ function World(entityDefs, level) {
     var cell = new Cell(this, this.getDef(cellType), cx, cy)
     this.cells.push(cell)
   }
-
+  
   this.actors = [];
   for(var actorID in level.actors) {
     instanceDef = level.actors[actorID];
     var a = this.newEntity(instanceDef.actor_def);
     a.init(instanceDef);
-
+    
     this.actors.push(a);
   }
 
@@ -64,6 +64,7 @@ World.prototype.newEntity = function(entDefID) {
     throw "World.newEntity() could not instantiate from entDefID: " + entDefID;
 
   var e = eval("new "+def.type+"(this, def)");
+  e.entDefID = entDefID;
   return e;
 }
 
@@ -192,7 +193,26 @@ World.prototype.getEditorActions = function() {
   }
   
   // Add actor actions
-  // TODO
+  for(var _defName in this._entity_defs) {
+    (function() {
+      var defName = _defName;
+      var def = that._entity_defs[defName];
+      if(defName.match(/^actor/)) {
+        actions.push({
+          type: "click",
+          sprite: that.newEntity(def.sprite),
+          apply: function(x,y) {
+            var a = that.newEntity(defName);
+            a.init({
+              position: {x: x, y: y},
+              heading: "RIGHT"
+            });
+            that.actors.push(a);
+          }
+        });
+      }
+    })();
+  }
   return actions;
 }
 

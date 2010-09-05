@@ -48,6 +48,7 @@ function Sprite(world, tile_def) {
     };
     img.onerror = function() {
       tdl.log(that.img.src + " **FAILED**");
+      that.img = undefined;
     };
     g_imageDB[tileset_def.image] = img;
   }
@@ -68,16 +69,30 @@ Sprite.prototype.update = function(ts) {
 }
 
 Sprite.prototype.draw = function(ctx, x,y,w,h) {
+  if(this.img === undefined) {
+    ctx.fillStyle = "rgb(255,0,255)";
+    ctx.fillRect(x,y,w,h);
+    ctx.fillString("Error", x+3,y+3);
+    return;
+  }
+  
   var tileWidth = 32;
   var tileHeight = 32;
   var tx = tileWidth * this.tile_def.start_x;
   var ty = tileHeight * this.tile_def.start_y;
   tx += this._cur_frame * tileWidth;
-  ctx.drawImage(this.img,
-    tx, ty,
-    tileWidth,
-    tileHeight,
-    x,y,w,h);
+  try {
+    ctx.drawImage(this.img,
+                  tx, ty,
+                  tileWidth,
+                  tileHeight,
+                  x,y,w,h);
+  } catch(e) {
+    if(this.error_printed===undefined) {
+      tdl.log("problem with image " + this.entDefID);
+      this.error_printed = true;
+    }
+  }
 }
 
 
