@@ -80,7 +80,7 @@ Actor.prototype.update = function(world, tick, elapsed) {
   if (this.tempSpeedTicksLeft > 0) this.tempSpeedTicksLeft--;
 
   var nextpos = this.position.add(this.heading.mul(0.5))
-  if (this.world.isBlocking(nextpos.x, nextpos.y)) {
+  if (this.world.isBlocking(nextpos.x, nextpos.y, this)) {
     this.heading = this.heading.negate();
   }
   this.updatePosition();
