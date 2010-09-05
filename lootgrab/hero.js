@@ -73,7 +73,7 @@ Hero.prototype.inventory = [];
 
 Hero.prototype.hasKey = function() {
   for (var i = 0; i < this.inventory.length; ++i) {
-    if (this.inventory[i].isKey) return true;
+    if (this.inventory[i].key) return true;
   }
   return false;
 }
