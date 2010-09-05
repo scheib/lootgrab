@@ -19,19 +19,7 @@ GrimReaper.prototype.update = function(world, tick, elapsed) {
   if (this.nextCell == null) {
     updateRoute = true;
   } else {
-    var nextpos = this.position.add(this.heading.mul(this.speed));
-    var nextlen = this.nextCell.sub(nextpos).len();
-    var thislen = this.nextCell.sub(this.position).len();
-    if (nextlen > thislen || thislen < this.speed) {
-      // Round off position to current cell.
-      // TODO: correct for elapsed so that motion is smooth across
-      // multiple cells.
-      this.position = new Vec2(
-        this.nextCell.x,
-        this.nextCell.y
-      );
-      updateRoute = true;
-    }
+    updateRoute = this.moveToClampedCell(tick, elapsed, this.nextCell);
   }
 
   if (updateRoute) {
