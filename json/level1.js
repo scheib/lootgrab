@@ -15,9 +15,10 @@ function getLevelData(level) {
                  "wallCell", "rugCell",  "wallCell", "rugCell",  "dirtCell", "dirtCell", "dirtCell", "wallCell",
                  "wallCell", "dirtCell", "rugCell",  "rugCell",  "dirtCell", "dirtCell", "dirtCell", "wallCell",
                  "wallCell", "dirtCell", "dirtCell", "rugCell",  "dirtCell", "dirtCell", "dirtCell", "wallCell",
-                 "HeroCell", "SkeletonCell", "SkeletonWarriorCell", "BatCell", "FlamingSkullCell", "MummyCell", "MummyKingCell", "DeathCell"],
+                 "HeroCell", "SkeletonCell", "SkeletonWarriorCell", "BatCell", "FlamingSkullCell", "MummyCell", "wallCell", "DeathCell"],
         actors : [
           { actor_def: "HeroActor", position : { x : 2, y : 2 } },
+          { actor_def: "SkeletonActor", position : { x : 6, y : 2 } }
         ],
     }
 }
