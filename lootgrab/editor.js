@@ -182,9 +182,6 @@ W = _world;
    currenTileEntity = null;
    editorActions_ = [];
 
-   currentTileCtx.fillStyle = "gray";
-   currentTileCtx.fillRect(0, 0, 32, 32);
-
    editorActions_ = world_.getEditorActions();
    if (editorActions_.length) {
      setCurrentAction(0);
@@ -205,6 +202,8 @@ W = _world;
    renderCount_++;
    var ti = getTileListInfo();
 
+   tileListCtx_.clearRect(0,0, tileListCtx_.canvas.width, tileListCtx_.canvas.height);
+
    // TODO(gman): compute first tile and last instead of drawing all tiles.
    for (var ii = 0; ii < editorActions_.length; ++ii) {
      var action = editorActions_[ii];
@@ -219,8 +218,10 @@ W = _world;
    }
 
    if (currentEditorAction_) {
+     currentTileCtx.clearRect(0,0, currentTileCtx.canvas.width, currentTileCtx.canvas.height);
      currentEditorAction_.sprite.draw(currentTileCtx, 0, 0, 32, 32);
-     cellCursorCtx_.clearRect(0, 0, 32, 32);
+
+     cellCursorCtx_.clearRect(0,0, cellCursorCtx_.canvas.width, cellCursorCtx_.canvas.height);
      cellCursorCtx_.globalAlpha = (renderCount_ % 8) / 16 + 0.25;
      currentEditorAction_.sprite.draw(cellCursorCtx_, 0, 0, 32, 32);
    }
