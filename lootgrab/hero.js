@@ -16,9 +16,10 @@ tdl.base.inherit(Hero, Actor);
  * @param elapsed
  */
 Hero.prototype.update = function(world, tick, elapsed) {
+
   var pos = [
-    Math.floor(this.position.x + 0.5),
-    Math.floor(this.position.y - 0.5)
+    Math.floor(this.position.x - this.heading.x * 0.5),
+    Math.floor(this.position.y - this.heading.y * 0.5)
   ];
   var path = lootgrab.route.findRoute(world, pos);
   if (path.length) {
