@@ -8,6 +8,7 @@
 <script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-ui-1.8.2.custom.min.js"></script>
 <script type="text/javascript" src="../tdl/base.js"></script>
 <script type="text/javascript">
+tdl.require('json.tiles');
 tdl.require('json.level1');
 tdl.require('lootgrab.audio');
 tdl.require('lootgrab.editor');
@@ -25,8 +26,9 @@ function initialize() {
   gfx.entityCtx.fillStyle = "rgb(255,0,0)";
   gfx.entityCtx.fillRect(10,10,30,10);
 
-  var json = getData();
-  var w = new World(json);
+  var entityDefs = getEntityDefs("level1");
+  var world = getLevelData("level1");
+  var w = new World(entityDefs, world);
   var r = new Render(w,gfx.tileCtx);
   tdl.log("World created: ", w.width, w.height)
 
