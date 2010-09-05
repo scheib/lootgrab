@@ -164,7 +164,7 @@ lootgrab.editor = (function() {
    cellDefs = world.getCellDefs();
    for (var ii = 0; ii < cellDefs.length; ++ii) {
      var cellDef = cellDefs[ii];
-     var tileName = cellDef.render_tile;
+     var tileName = cellDef.sprite;
      var ent = world.newEntity(tileName);
      cellEntities.push(ent);
    }
