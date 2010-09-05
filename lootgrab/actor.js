@@ -1,18 +1,18 @@
 tdl.provide("actor")
 
-tdl.require("math")
+tdl.require("lootgrab.math")
 
-function Actor(entDef) {
+function Actor(w, entDef) {
   this.entityDef = entDef;
 
+  this.position = new Vec2();
+  this.heading = Vec2.CENTER;
+  this.speed = .1;
+  this.radius = .25;
+
+  this.isAlive = true;
 }
 
-Actor.prototype.position = new Vec2();
-Actor.prototype.heading = Vec2.CENTER;
-Actor.prototype.speed = .1;
-Actor.prototype.radius = .25;
-
-Actor.prototype.isAlive = true;
 
 /**
  * Update the actor at the beginning of the frame
@@ -21,7 +21,7 @@ Actor.prototype.isAlive = true;
  * @param elapsed
  */
 Actor.prototype.update = function(tick, elapsed) {
-  
+  updatePosition();
 }
 
 /**
@@ -33,5 +33,8 @@ Actor.prototype.onCollide = function(other) {
   
 }
 
-
+Actor.prototype.updatePosition = function(elapsed) {
+  this.position = this.position.add (
+      this.heading.mul(this.speed));
+}
 

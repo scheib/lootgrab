@@ -12,6 +12,7 @@ tdl.require('json.tiles');
 tdl.require('json.level1');
 tdl.require('lootgrab.audio');
 tdl.require('lootgrab.editor');
+tdl.require('lootgrab.game');
 tdl.require('lootgrab.render');
 tdl.require('lootgrab.route');
 tdl.require('lootgrab.world');
@@ -30,13 +31,18 @@ function initialize() {
   var world = getLevelData("level1");
   var w = new World(entityDefs, world);
   var r = new Render(w,gfx.tileCtx);
+  var g = new Game(w);
   tdl.log("World created: ", w.width, w.height)
 
   editor.setup(w);
 
-  var drawIntervalID = setInterval(draw, 32);
-  function draw() {
-      r.draw();
+  var tick = 0;
+
+  var drawIntervalID = setInterval(gameloop, 32);
+  function gameloop() {
+    tick = tick + 1;
+    g.update(tick,1)
+    r.draw();
   }
 
   window.onkeydown = function(evt) {

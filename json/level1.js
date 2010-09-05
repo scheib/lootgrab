@@ -13,7 +13,7 @@ function getLevelData(level) {
                  "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
                  "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
                  "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
-                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "dirtCell", "dirt§Cell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
                  "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
                  "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell"],
         
