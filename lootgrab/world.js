@@ -332,14 +332,13 @@ World.prototype.getPlaytimeEditorActions = function() {
           // OTODODODOTOTODO
           // OTODODODOTOTODO
           // OTODODODOTOTODO
+
           // Place it
           that.deleteActorsInCell(x, y);
           that.addActor(defName, x, y);
           // If we are placing the item, remove it from inventory
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
-          // Disable this click
+          // Disable this action
+          this.disabled = true;
         }
       });
     })();
