@@ -1,5 +1,6 @@
 tdl.provide("game");
 tdl.require("lootgrab.actor");
+tdl.require("lootgrab.audio");
 tdl.require("lootgrab.door");
 tdl.require("lootgrab.exit");
 tdl.require("lootgrab.hero");
@@ -84,6 +85,7 @@ Game.prototype.lose = function() {
 }
 
 Game.prototype.win = function() {
+  lootgrab.audio.play_sound("escape");
   this.world.showMessage("You won", "winmessage");
   this.status = Game.WIN;
 }
