@@ -42,5 +42,9 @@ function getLevelData(level) {
           { actor_def: "actorExit",position : { x : 15, y : 4 } },
           { actor_def: "actorDoor",position : { x : 6, y : 2 } },
         ],
+        placeables : [
+          "actorKey", 
+          "actorDoor",
+        ],
     }
 }
