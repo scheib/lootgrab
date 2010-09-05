@@ -27,21 +27,21 @@ var getEntityDefs = function() {
     "actorTimedWall"      : { type : "TimedWall", sprite : "spriteTimedWall",       loot : false, passable : false },
 
     // Level pieces
-    "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
-    "cellFloorB"          : { type: "Cell", sprite: "spriteFloorB"         , passable : true },
-    "cellFloorC"          : { type: "Cell", sprite: "spriteFloorC"         , passable : true },
-    "cellFloorRug"        : { type: "Cell", sprite: "spriteFloorRug"       , passable : true },
-    "cellFloorRug2"       : { type: "Cell", sprite: "spriteFloorRug2"      , passable : true },
-    "cellFloorRug3"       : { type: "Cell", sprite: "spriteFloorRug3"      , passable : true },
-    "cellFloorRug4"       : { type: "Cell", sprite: "spriteFloorRug4"      , passable : true },
-    "cellStairsDown"      : { type: "Cell", sprite: "spriteStairsDown"     , passable : true },
-    "cellStairsUp"        : { type: "Cell", sprite: "spriteStairsUp"       , passable : true },
-    "cellWallH"           : { type: "Cell", sprite: "spriteWallH"          , passable : false },
-    "cellWallHCrumbled"   : { type: "Cell", sprite: "spriteWallHCrumbled"  , passable : false },
-    "cellWallHTorch"      : { type: "Cell", sprite: "spriteWallHTorch"     , passable : false },
-    "cellWallV"           : { type: "Cell", sprite: "spriteWallV"          , passable : false },
-    "cellWater"           : { type: "Cell", sprite: "spriteWater"          , passable : true },
-    "cellLava"            : { type: "Cell", sprite: "spriteLava"           , passable : true },
+    "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , uiName: "Floor A",          passable : true },
+    "cellFloorB"          : { type: "Cell", sprite: "spriteFloorB"         , uiName: "Floor B",          passable : true },
+    "cellFloorC"          : { type: "Cell", sprite: "spriteFloorC"         , uiName: "Floor C",          passable : true },
+    "cellFloorRug"        : { type: "Cell", sprite: "spriteFloorRug"       , uiName: "Rug",              passable : true },
+    "cellFloorRug2"       : { type: "Cell", sprite: "spriteFloorRug2"      , uiName: "Rug 2",            passable : true },
+    "cellFloorRug3"       : { type: "Cell", sprite: "spriteFloorRug3"      , uiName: "Rug 3",            passable : true },
+    "cellFloorRug4"       : { type: "Cell", sprite: "spriteFloorRug4"      , uiName: "Rug 4",            passable : true },
+    "cellStairsDown"      : { type: "Cell", sprite: "spriteStairsDown"     , uiName: "Stairs down",      passable : true },
+    "cellStairsUp"        : { type: "Cell", sprite: "spriteStairsUp"       , uiName: "Stairs up",        passable : true },
+    "cellWallH"           : { type: "Cell", sprite: "spriteWallH"          , uiName: "Wall H",           passable : false },
+    "cellWallHCrumbled"   : { type: "Cell", sprite: "spriteWallHCrumbled"  , uiName: "Wall H Crumbled",  passable : false },
+    "cellWallHTorch"      : { type: "Cell", sprite: "spriteWallHTorch"     , uiName: "Wall H Torch",     passable : false },
+    "cellWallV"           : { type: "Cell", sprite: "spriteWallV"          , uiName: "Wall V",           passable : false },
+    "cellWater"           : { type: "Cell", sprite: "spriteWater"          , uiName: "Water",            passable : true },
+    "cellLava"            : { type: "Cell", sprite: "spriteLava"           , uiName: "Lava",             passable : true },
 
     // Sprite Definitions --------------------------------
 
@@ -112,9 +112,9 @@ var getEntityDefs = function() {
       tile_width: 32,
       tile_height: 32,
     },
-    "spriteGoldBars" : { type : "Sprite", tileset : "tileset_features", start_x: 12, start_y:  1, frames: 1 },
+    "spriteGoldBars" : { type : "Sprite", tileset : "tileset_features", start_x: 11, start_y:  1, frames: 1 },
     "spriteSkull"    : { type : "Sprite", tileset : "tileset_features", start_x:  0, start_y:  6, frames: 1 },
     "spriteGrate"    : { type : "Sprite", tileset : "tileset_features", start_x:  0, start_y:  1, frames: 1 },
-    "spriteCircle"   : { type : "Sprite", tileset : "tileset_features", start_x: 12, start_y:  3, frames: 1 },
+    "spriteCircle"   : { type : "Sprite", tileset : "tileset_features", start_x: 11, start_y:  3, frames: 1 },
   };
 }

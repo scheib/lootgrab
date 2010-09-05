@@ -7,6 +7,7 @@ tdl.require("lootgrab.fire");
 tdl.require("lootgrab.hero");
 tdl.require("lootgrab.loot");
 tdl.require("lootgrab.skeleton");
+tdl.require("lootgrab.skull");
 tdl.require("lootgrab.grimreaper");
 tdl.require("lootgrab.trap");
 tdl.require("lootgrab.wall");

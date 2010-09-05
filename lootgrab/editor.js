@@ -25,7 +25,7 @@ var editorHTML = '' +
 '</div>' +
 '</div>' +
 '<div id="tiles">' +
- '<canvas id="currentTile" width="32" height="32"></canvas>' +
+ '<canvas id="currentTile" width="230" height="32"></canvas>' +
  '<div id="tileListContainer">' +
   '<canvas id="tileList" width="230" height="352"></canvas>' +
   '<canvas id="tileCursor" width="32" height="32"></canvas>' +
@@ -232,10 +232,20 @@ var editorHTML = '' +
 
    if (currentEditorAction_) {
      currentTileCtx.clearRect(0,0, currentTileCtx.canvas.width, currentTileCtx.canvas.height);
+
+
+     // disable icon on the editor action
      if (!currentEditorAction_.disabled) {
        currentEditorAction_.sprite.draw(currentTileCtx, 0, 0, 32, 32);
+
+       // text for the editor action
+       currentTileCtx.fillStyle = "rgba(0,0,0,1)";
+       currentTileCtx.textAlign = "left";
+       currentTileCtx.textBaseline = "middle";
+       currentTileCtx.fillText(currentEditorAction_.uiName, 34, 16);
      }
 
+     // editor action on the map
      cellCursorCtx_.clearRect(0,0, cellCursorCtx_.canvas.width, cellCursorCtx_.canvas.height);
      if (!currentEditorAction_.disabled) {
        cellCursorCtx_.globalAlpha = (renderCount_ % 8) / 16 + 0.25;
@@ -314,7 +324,7 @@ var editorHTML = '' +
        if (running_) {
          togglePause();
        }
-       saveDialog.show(world_);
+       saveDialog.show(world_, gfx_);
        if (oldRunning) {
          togglePause();
        }

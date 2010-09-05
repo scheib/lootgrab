@@ -6,6 +6,7 @@ function getLevelData(level) {
 
     return {
         name : "world name",
+        img: "",
         width : 16,
         height : 12,
         cells : ["cellWallV", "cellWallHTorch", "cellWallV",         "cellWallHTorch", "cellWallV", "cellWallH", "cellWallH", "cellWallV","cellWallV", "cellWallHTorch", "cellWallHCrumbled", "cellWallHTorch", "cellWallV", "cellWallH", "cellWallH", "cellWallV",
@@ -45,6 +46,9 @@ function getLevelData(level) {
             actor_def: "actorMeat",
             position : {x : 9, y: 4},
           },
+          { actor_def: "actorFlameSkull",
+            position : { x : 8, y : 3 },
+          },
           //{ actor_def: "actorKey", position : { x : 1, y : 1 } },
           { actor_def: "actorKey", position : { x : 2, y : 1 } },
           { actor_def: "actorSword", position : { x : 1, y : 1 } },
@@ -58,9 +62,12 @@ function getLevelData(level) {
           { actor_def: "actorFire",position : { x : 15, y : 8 } },
         ],
         placeables : [
-          "actorKey", 
+          "actorKey",
           "actorDoor",
           "actorTimedWall",
+          "actorTrapdoor",
+          "actorGoldChest",
+          "actorGoldBars",          
         ],
     }
 }

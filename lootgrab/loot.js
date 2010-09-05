@@ -63,4 +63,4 @@ tdl.base.inherit(GoldChest, Loot);
 function GoldBars(w, def) {
   Loot.call(this, w, def);
 };
-tdl.base.inherit(GoldChest, Loot);
+tdl.base.inherit(GoldBars, Loot);
