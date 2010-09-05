@@ -15,7 +15,7 @@ function getLevelData(level) {
                  "cellWallV", "cellFloorRug",  "cellWallV", "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV",
                  "cellWallV", "cellFloorC", "cellFloorRug",  "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV",
                  "cellWallV", "cellFloorC", "cellFloorC", "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV",
-                 "HeroCell", "SkeletonCell", "SkeletonWarriorCell", "BatCell", "FlamingSkullCell", "MummyCell", "cellWallV", "DeathCell"],
+                 "HeroCell", "SkeletonCell", "SkeletonWarriorCell", "BatCell", "FlamingSkullCell", "MummyCell", "cellWallV", "cellWallV"],
         actors : [
           {
             actor_def: "actorHero",
@@ -23,6 +23,14 @@ function getLevelData(level) {
             heading : "RIGHT",
           },
           { actor_def: "actorSkeleton",
+            position : { x : 6, y : 2 },
+            heading : "UP",
+          },
+          { actor_def: "actorSkeleton",
+            position : { x : 3, y : 5 },
+            heading : "CENTER",
+          },
+          { actor_def: "actorGrimReaper",
             position : { x : 2, y : 6 },
             heading : "UP",
           },
