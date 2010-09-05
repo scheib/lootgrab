@@ -40,6 +40,7 @@ function World(entityDefs, level) {
 }
 
 World.prototype.reset = function() {
+  this.clearMessage();
   this.init_(this.levelData_);
   this.game.reset();
 }
@@ -225,3 +226,20 @@ World.prototype.getEditorActions = function() {
   return actions;
 }
 
+World.prototype.clearMessage = function() {
+  if (this.message_node_) {
+    document.body.removeChild(this.message_node_);
+    delete this.message_node_;
+  }
+}
+
+World.prototype.showMessage = function(text, className) {
+  this.clearMessage();
+
+  var msg_node = document.createElement('div');
+  this.message_node_ = msg_node;
+  this.message_node_.className = className;
+  this.message_node_.appendChild(document.createTextNode(text));
+  document.body.appendChild(this.message_node_);
+  setTimeout(function() {msg_node.className = className + ' done';}, 1);
+}
