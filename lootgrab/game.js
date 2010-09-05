@@ -106,7 +106,7 @@ Game.prototype.debug_draw = function(ctx) {
   var xscale = this.world.tileVisualWidth(ctx);
   var yscale = this.world.tileVisualHeight(ctx);
 
-  for (var cIdx in this.world.cells) {
+/*  for (var cIdx in this.world.cells) {
     var c = this.world.cells[cIdx];
     ctx.strokeRect(
         c.x_ * xscale,
@@ -115,7 +115,7 @@ Game.prototype.debug_draw = function(ctx) {
         yscale);x
     ctx.strokeText(c.ground_ent.id, c.x_ * xscale, (c.y_ + .5) * yscale, xscale);
 
-  }
+  }*/
 
   for(var aIdx in this.world.actors) {
     var a = this.world.actors[aIdx];

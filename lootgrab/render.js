@@ -1,5 +1,6 @@
 tdl.provide('lootgrab.render');
 tdl.require('lootgrab.world');
+tdl.require('lootgrab.smartsprite');
 
 //////////////////////////////////////////////////
 g_imageDB = {};
