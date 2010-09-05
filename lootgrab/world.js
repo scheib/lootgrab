@@ -95,16 +95,71 @@ World.prototype.cellAt = function(x,y) {
   return this.cells[idx];
 };
 
-World.prototype.setCellAt = function(x, y, defName) {
-tdl.log(defName);
+World.prototype.setCellAt = function(defName, x, y) {
   var def = this._entity_defs[defName];
   if(def.type != "Cell") {
     throw "non Cell type used in setCellAt";
   }
-
-  this.levelData_.cells[y * this.width + x] = defName;
   this.cellAt(x, y).setType(def);
 };
+
+World.prototype.setLevelCellAt = function(defName, x, y) {
+  var def = this._entity_defs[defName];
+  if(def.type != "Cell") {
+    throw "non Cell type used in setLevelCellAt";
+  }
+
+  this.levelData_.cells[y * this.width + x] = defName;
+};
+
+World.prototype.serializeLevel = function() {
+}
+
+World.prototype.addActor = function(defName, x, y) {
+  var a = this.newEntity(defName);
+  a.init({
+    position: {x: x, y: y},
+  });
+  this.actors.push(a);
+};
+
+World.prototype.removeActor = function(actor) {
+  for (var ii = 0; ii < this.actors.length; ++ii) {
+    if (this.actors[ii] === actor) {
+      this.actors.splice(ii, 1);
+      break;
+    }
+  }
+};
+
+World.prototype.deleteActorsInCell = function(x, y) {
+  var actors = this.actorsInCell(x, y);
+  for (var ii = 0; ii < actors.length; ++ii) {
+    this.removeActor(actors[ii]);
+  }
+};
+
+// Deletes the actors from the level definition.
+World.prototype.deleteActorsInLevel = function(x, y) {
+  var ii = 0;
+  while (ii < this.levelData_.actors.length) {
+    var actor = this.levelData_.actors.length;
+    if (actor.x == x && actor.y == y) {
+      this.levelData_.actors.splice(ii, 1);
+    } else {
+      ++ii;
+    }
+  }
+};
+
+// Adds an actor to the level definition
+World.prototype.addActorToLevel = function(defName, x, y) {
+  this.levelData_.actors.push({
+    actor_def: defName,
+    position: { x: x, y: y }
+  });
+};
+
 
 World.prototype.defAt = function(x, y) {
   return this.getDef(this.cellAt(x, y).id);
@@ -130,7 +185,7 @@ World.prototype.isDesirable = function(x, y) {
   for (var j = 0; j < actors.length; ++j) {
     var actor = actors[j];
     if (actor.loot)
-      return true;  
+      return true;
   }
   return false;
 }
@@ -204,11 +259,8 @@ World.prototype.getEditorActions = function() {
     type: "click",
     sprite: this.newEntity("spriteCancel"),
     apply: function(x,y) {
-      var actorIdx = that.findActorIndex(x,y,0.5);
-      if(actor) {
-        // remove actor...
-        delete that.actors.splice(actorIdx,1);
-      }
+      that.deleteActorsInCell(x, y);
+      that.deleteActorsInLevel(x, y);
     }
   });
 
@@ -222,7 +274,8 @@ World.prototype.getEditorActions = function() {
           type: "paint",
           sprite: that.newEntity(def.sprite),
           apply: function(x,y) {
-            that.setCellAt(x, y, name);
+            that.setCellAt(name, x, y);
+            that.setLevelCellAt(name, x, y);
           }
         });
       }
@@ -239,12 +292,10 @@ World.prototype.getEditorActions = function() {
           type: "click",
           sprite: that.newEntity(def.sprite),
           apply: function(x,y) {
-            var a = that.newEntity(defName);
-            a.init({
-              position: {x: x, y: y},
-              heading: "RIGHT"
-            });
-            that.actors.push(a);
+            that.deleteActorsInCell(x, y);
+            that.deleteActorsInLevel(x, y);
+            that.addActor(defName, x, y);
+            that.addActorToLevel(defName, x, y);
           }
         });
       }
