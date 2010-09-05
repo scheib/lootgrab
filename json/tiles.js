@@ -21,7 +21,8 @@ var getEntityDefs = function() {
     "actorGrate"          : { type : "Grate",     sprite : "spriteGrate",           loot : true },
     "actorCircle"         : { type : "Circle",    sprite : "spriteCircle",          loot : true },
     "actorExit"           : { type : "Exit",      sprite : "spriteStairsUp",        loot : true },
-    
+    "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            loot : false },
+
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
     "cellFloorB"          : { type: "Cell", sprite: "spriteFloorB"         , passable : true },
@@ -41,8 +42,7 @@ var getEntityDefs = function() {
     "cellWallV"           : { type: "Cell", sprite: "spriteWallV"          , passable : false },
     "cellWater"           : { type: "Cell", sprite: "spriteWater"          , passable : true },
     "cellLava"            : { type: "Cell", sprite: "spriteLava"           , passable : true },
-    "cellDoor"            : { type: "Cell", sprite: "spriteDoor"           , passable : true },
-      
+
     // Sprite Definitions --------------------------------
    
     "tileset_env" : {

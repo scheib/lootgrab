@@ -10,7 +10,7 @@ function Loot(w, def) {
 tdl.base.inherit(Loot, Actor);
 
 Loot.prototype.onCollide = function(other) {
-  // FIXME: put in inventory
+  
 };
 
 function Key(w, def) {

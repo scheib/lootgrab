@@ -68,7 +68,9 @@ Game.prototype.resolveCollisions = function() {
       var minContact = a.radius + b.radius;
       if (a.position.sub(b.position).len() < minContact) {
         a.onCollide(b);
-        b.onCollide(a);
+        if (b.deathState != Actor.ALIVE) {
+          b.onCollide(a);
+        }
       }
     }
   }

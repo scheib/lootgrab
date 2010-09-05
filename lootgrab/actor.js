@@ -1,7 +1,6 @@
 tdl.provide("actor")
 
-tdl.require("lootgrab.math");
-tdl.require('lootgrab.audio');
+tdl.require("lootgrab.math")
 
 /**
  *
@@ -57,8 +56,8 @@ Actor.prototype.getWorld = function() {
 Actor.prototype.draw = function(ctx, cw, ch) {
   // Actor position is center of cell, so subtract
   // 0.5 so that we draw it in the right position.
-  this.sprite.draw(ctx, 
-      (this.position.x - 0.5) * cw, 
+  this.sprite.draw(ctx,
+      (this.position.x - 0.5) * cw,
       (this.position.y - 0.5) * ch,
       cw, ch);
 }
@@ -72,7 +71,7 @@ Actor.prototype.draw = function(ctx, cw, ch) {
  */
 Actor.prototype.update = function(world, tick, elapsed) {
   if (this.isDead()) return;
-  
+
   var nextpos = this.position.add(this.heading.mul(0.5))
   if (this.world.isBlocking(nextpos.x, nextpos.y)) {
     this.heading = this.heading.negate();
@@ -86,7 +85,7 @@ Actor.prototype.update = function(world, tick, elapsed) {
  * @param {Actor} other
  */
 Actor.prototype.onCollide = function(other) {
-  
+
 }
 
 Actor.prototype.isDead = function() {
@@ -94,7 +93,6 @@ Actor.prototype.isDead = function() {
 }
 
 Actor.prototype.kill = function() {
-  lootgrab.audio.play_sound("death");
   this.deathState = Actor.DYING;
 }
 
@@ -102,9 +100,10 @@ Actor.prototype.killed = function() {
   this.deathState = Actor.DEAD;
   this.speed = 0;
   this.heading = Vec2.CENTER;
+  // FIX this.sprite.img = new Image();
 }
 
-Actor.prototype.updatePosition = function() {
+Actor.prototype.updatePosition = function(elapsed) {
   this.position = this.position.add(
       this.heading.mul(this.speed));
 }
