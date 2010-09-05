@@ -167,13 +167,13 @@ World.prototype.defAt = function(x, y) {
 };
 
 // Convenience function for whether or not a given cell is not passable.
-World.prototype.isBlocking = function(x, y) {
+World.prototype.isBlocking = function(x, y, testActor) {
   var cell = this.cellAt(x, y);
   var actors = this.actorsInCell(x,y);
   var result = cell.passable;
 
   for (var i = 0; result && ( i < actors.length); ++i) {
-    result = result && actors[i].canPass(this.hero);
+    result = result && actors[i].canPass(testActor);
   }
 
   return !result;
@@ -193,6 +193,8 @@ World.prototype.isDesirable = function(x, y) {
 
 World.prototype.actorsInCell = function(x, y) {
   var result = [];
+  x = Math.floor(x);
+  y = Math.floor(y);
   for (var j = 0; j < this.actors.length; ++j) {
     var actor = this.actors[j];
     if (Math.floor(actor.position.x) != x ||
