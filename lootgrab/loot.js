@@ -48,7 +48,12 @@ function Meat(w, def) {
 };
 tdl.base.inherit(Meat, Loot);
 
-function Gold(w, def) {
+function GoldChest(w, def) {
   Loot.call(this, w, def);
 };
-tdl.base.inherit(Gold, Loot);
+tdl.base.inherit(GoldChest, Loot);
+
+function GoldBars(w, def) {
+  Loot.call(this, w, def);
+};
+tdl.base.inherit(GoldChest, Loot);
