@@ -65,13 +65,13 @@ CANVAS {
   float:left;
   width:532px;
   height:404px;
-  background:#9c9;
+  background:#777;
 }
 #tiles {
   float:right;
   width:230px;
   padding:10px;
-  background:#99c;
+  background:#555;
 }
 .message {
   font-family: 'IM Fell English SC', arial, serif;

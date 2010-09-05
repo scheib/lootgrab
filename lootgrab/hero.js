@@ -64,6 +64,7 @@ Hero.prototype.update = function(world, tick, elapsed) {
         this.heading = this.nextCell.sub(this.lastCell);
       }
     }
+    this.currentPath = path;
   }
 
   this.updatePosition();
@@ -80,8 +81,8 @@ Hero.prototype.hasItem = function(name) {
 
 Hero.prototype.useKey = function() {
   for (var i = 0; i < this.inventory.length; ++i) {
-    if (this.inventory[i].isKey) {
-      delete this.inventory[i];
+    if (this.inventory[i]["key"]) {
+      this.inventory.splice(i, 1);
       return;
     }
   }
@@ -92,5 +93,18 @@ Hero.prototype.onCollide = function(other) {
     lootgrab.audio.play_sound("treasure");
     other.loot = false;
     this.inventory.push(other);
+  }
+}
+
+Hero.prototype.drawPath = function(ctx, cw, ch) {
+  if(this.currentPath.length) {
+    ctx.beginPath();
+    ctx.moveTo(this.position.x * cw, this.position.y * ch);
+    for(var i = 0; i < this.currentPath.length; ++i) {
+      ctx.lineTo((this.currentPath[i][0]+0.5) * cw, (this.currentPath[i][1]+0.5)* ch);
+    }
+    ctx.strokeStyle = "rgba(127,127,127,0.5)";
+    ctx.lineWidth = 4;
+    ctx.stroke();
   }
 }

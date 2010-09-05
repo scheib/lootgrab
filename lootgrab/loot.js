@@ -45,6 +45,7 @@ tdl.base.inherit(Cross, Loot);
 
 function Sword(w, def) {
   Loot.call(this, w, def);
+  this.sword = true;
 };
 tdl.base.inherit(Sword, Loot);
 

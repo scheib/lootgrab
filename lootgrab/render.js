@@ -125,8 +125,6 @@ Render.prototype.draw = function() {
     w.cells[i].draw(ctx, x, y, cellWidth, cellHeight);
   }
 
-  // Actors - fork into new canvas.
-
   // Render background actors first.
   for(var i = 0, actor; actor = w.actors[i]; ++i) {
     if (!actor.isDead() && actor.renderBackground)
@@ -138,6 +136,8 @@ Render.prototype.draw = function() {
       actor.draw(ctx, cellWidth, cellHeight);
   }
 
+  w.hero.drawPath(ctx, cellWidth, cellHeight);
+  
   if(DEBUG)
     w.draw_dbg(ctx);
 }

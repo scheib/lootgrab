@@ -1,11 +1,9 @@
 #editor {
   width: 782px;
   margin:0 auto;
-  background: #99c;
 }
 #toolbar {
   padding: 0px 0px 5px 0px;
-  background: #222;
 }
 #toolbar h1 {
   font-family: 'IM Fell English SC', arial, serif;

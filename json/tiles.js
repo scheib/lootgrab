@@ -24,6 +24,7 @@ var getEntityDefs = function() {
     "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            loot : false, passable : false },
     "actorTrapdoor"       : { type : "Trapdoor",  sprite : "spriteTrapdoorClosed",  loot : false,     renderBackground: true,   openSprite: "spriteTrapdoorOpen" },
     "actorHole"           : { type : "Hole",      sprite : "spriteHole",            loot : false,     renderBackground: true },
+    "actorTimedWall"      : { type : "TimedWall", sprite : "spriteTimedWall",       loot : false, passable : false },
 
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
@@ -102,6 +103,7 @@ var getEntityDefs = function() {
     "spriteSword"     : { type : "Sprite", tileset : "tileset_obj", start_x:  6, start_y:  3, frames: 1 },
     "spriteMeat"      : { type : "Sprite", tileset : "tileset_obj", start_x: 13, start_y:  1, frames: 1 },
     "spriteGoldChest" : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  0, frames: 1 },
+    "spriteTimedWall" : { type : "Sprite", tileset : "tileset_obj", start_x: 11, start_y:  7, frames: 2 },
 
     "tileset_features" : {
       type : "tileset",
