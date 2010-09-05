@@ -91,6 +91,7 @@ Game.prototype.lose = function() {
 }
 
 Game.prototype.win = function() {
+  this.hero.inventory.splice(0,this.hero.inventory.length);
   lootgrab.audio.play_sound("escape");
   this.world.showMessage("You won", "winmessage");
   this.status = Game.WIN;
