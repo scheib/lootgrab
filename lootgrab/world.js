@@ -150,7 +150,7 @@ World.prototype.getEditorActions = function() {
   // Delete actor actions
   actions.push({
     type: "click",
-    sprite: this.newEntity("spriteGrimReaper"),
+    sprite: this.newEntity("spriteCancel"),
     apply: function(x,y) {
       var actorIdx = that.findActorIndex(x,y,0.5);
       if(actor) {
