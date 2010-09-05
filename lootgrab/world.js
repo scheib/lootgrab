@@ -82,7 +82,7 @@ World.prototype.draw_dbg = function (ctx) {
   }
 }
 
-World.prototype.actors = {};
+World.prototype.actors = [];
 
 World.prototype.tileVisualWidth = function(ctx) {
   return ctx.canvas.clientWidth / this.width;
@@ -96,11 +96,30 @@ World.prototype.tileVisualHeight = function(ctx) {
  * Returns true if cell x,y can be set to tile.
  */
 World.prototype.canSetCell = function(x, y, tile) {
+  return true;
 };
 
 /**
  * Sets cell x,y to tile.
  */
 World.prototype.setCell = function(x, y, tile) {
-  tdl.log("setcell: ", x, y, ": ", tile);
+  tdl.log("setCell: ", x, y, ": ", tile);
+};
+
+/**
+ * Returns true of can set an actor in cell x,y
+ * NOTE: This function should either ways return
+ * false while the game is running (vs editing)
+ * or else the editor should know not to place
+ * actors while the game is running.
+ */
+World.prototype.canSetActor = function(x, y, actor) {
+  return true;
+};
+
+/**
+ * Sets a actor
+ */
+World.prototype.setActor = function(x, y, actor) {
+  tdl.log("setActor: ", x, y, ": ", actor);
 };
