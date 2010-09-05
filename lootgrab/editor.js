@@ -136,6 +136,12 @@ lootgrab.editor = (function() {
    $(cellCursor).hide();
  }
 
+ function setCell(pos) {
+   if (drawing && currentTileDef) {
+     world.setCellDef(pos.x, pos.y, currentTileDef);
+   }
+ }
+
  // move the cursor in the level.
  function cellMousemove(e) {
    var pos = computeTileCoords(e, this);
@@ -143,9 +149,7 @@ lootgrab.editor = (function() {
    cellCursor.style.top = pos.y * pos.tileHeight;
    cellCursor.style.width = pos.tileWidth.toString() + "px";
    cellCursor.style.height = pos.tileHeight.toString() + "px";
-   if (drawing && currentTileDef) {
-     world.setCellDef(pos.x, pos.y, currentTileDef);
-   }
+   setCell(pos);
  }
 
  function cellMouseup(e) {
@@ -153,8 +157,10 @@ lootgrab.editor = (function() {
  }
 
  function cellMousedown(e) {
+   var pos = computeTileCoords(e, this);
    drawing = true;
    $(selector).bind('mouseup', cellMouseup);
+   setCell(pos);
    return false;
  }
 
