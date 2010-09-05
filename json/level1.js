@@ -18,14 +18,15 @@ function getLevelData(level) {
                  "HeroCell", "SkeletonCell", "SkeletonWarriorCell", "BatCell", "FlamingSkullCell", "MummyCell", "cellWallV", "DeathCell"],
         actors : [
           {
-            actor_def: "HeroActor",
+            actor_def: "actorHero",
             position : { x : 2, y : 2 },
             heading : "RIGHT",
           },
-          { actor_def: "SkeletonActor",
+          { actor_def: "actorSkeleton",
             position : { x : 6, y : 2 },
             heading : "UP",
           },
+          { actor_def: "actorKey", position : { x : 2, y : 6 } },
         ],
     }
 }

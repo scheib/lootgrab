@@ -2,14 +2,16 @@ tdl.provide("tiles");
 
 var getEntityDefs = function() {
   return {
-    "HeroActor" : {
-      type : "Hero",
-      sprite : "spriteHero",
-    },
-    "SkeletonActor" : {
-      type : "Skeleton",
-      sprite : "spriteSkeletonWarrior",
-    },
+    "actorHero" : { type : "Hero", sprite : "spriteHero", },
+    "actorSkeleton" : { type : "Skeleton", sprite : "spriteSkeletonWarrior", },
+    "actorKey" : { type : "Key", sprite : "spriteKey", },
+    "actorShield" : { type : "Shield", sprite : "spriteShield", },
+    "actorFire" : { type : "Fire", sprite : "spriteFire", },
+    "actorWand" : { type : "Wand", sprite : "spriteWand", },
+    "actorCross" : { type : "Cross", sprite : "spriteCross", },
+    "actorSword" : { type : "Sword", sprite : "spriteSword", },
+    "actorMeat" : { type : "Meat", sprite : "spriteMeat", },
+    "actorGold" : { type : "Gold", sprite : "spriteGold", },
     
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
