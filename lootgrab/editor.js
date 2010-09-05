@@ -67,6 +67,7 @@ var editorHTML = '' +
 
  // buttons
  var playButton_;
+ var editButton_;
 
  function getTileListInfo() {
    var tileWidth = world_.tileVisualWidth(gfx_.tileCtx);
@@ -176,6 +177,22 @@ var editorHTML = '' +
    return false;
  }
 
+ function setEditorMode(mode) {
+   this.editMode_ = mode;
+
+   switch(mode) {
+   case "LevelEditMode":
+     editorActions_ = world_.getEditorActions();
+     editButton_.button( "option", "label", "game" );
+   break;
+   case "PlaytimeMode":
+     editorActions_ = world_.getPlaytimeEditorActions();
+     editButton_.button( "option", "label", "edit" );
+   break;
+   default:
+     throw "editor setup() called with editorMode==='" + editorMode + "' which isn't supported.";
+   }
+ }
 
  // Grabs all the tile types from the world.
  function setup(_world, editorMode) {
@@ -184,20 +201,11 @@ var editorHTML = '' +
    currenTileEntity = null;
    editorActions_ = [];
 
-   switch(editorMode) {
-   case "LevelEditMode":
-     editorActions_ = world_.getEditorActions();
-   break;
-   case "PlaytimeMode":
-     editorActions_ = world_.getPlaytimeEditorActions();
-   break;
-   default:
-     throw "editor setup() called with editorMode==='" + editorMode + "' which isn't supported.";
-   }
-
    if (editorActions_.length) {
      setCurrentAction(0);
    }
+
+   setEditorMode(editorMode);
 
    var worldPixelWidth = world_.tileVisualWidth() * world_.width;
    var worldPixelHeight = world_.tileVisualHeight() * world_.height;
@@ -257,10 +265,14 @@ var editorHTML = '' +
    }
  }
 
- function togglePause() {
-   running_ = !running_;
+ function setPause(paused) {
+   running_ = !paused;
    playButton_.button( "option", "label",
                       running_ ? "pause" : "play");
+ }
+
+ function togglePause() {
+   setPause(running_);
  };
 
  function init(element) {
@@ -305,6 +317,7 @@ var editorHTML = '' +
 
    editor.find(".button").button();
    playButton_ = editor.find("#play").click(togglePause);
+   editButton_ = editor.find("#edit").click();
 
    var loadDialog = lootgrab.load.init();
    editor.find("#load").click(function(){
@@ -328,6 +341,11 @@ var editorHTML = '' +
        return false;
      });
    editor.find("#reset").click(function() {
+     world_.reset();
+   });
+   editor.find("#edit").click(function() {
+     togglePause();
+     setEditorMode(editMode_ == "LevelEditMode" ? "PlaytimeMode" : "LevelEditMode");
      world_.reset();
    });
 
