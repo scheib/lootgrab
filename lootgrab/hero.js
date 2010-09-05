@@ -8,8 +8,32 @@ function Hero(w, def) {
   w.setHero(this);
   this.nextCell = null;
   this.lastCell = null;
+  this.ticks = 0;
 }
 tdl.base.inherit(Hero, Actor);
+
+/**
+ *
+ * @param {CanvasContext} ctx
+ * @param {Number} cw
+ * @param {Number} ch
+ */
+Hero.prototype.draw = function(ctx, cw, ch) {
+  // Actor position is center of cell, so subtract
+  // 0.5 so that we draw it in the right position.
+  this.sprite.draw(ctx,
+      (this.position.x - 0.5) * cw,
+      (this.position.y - 0.5) * ch,
+      cw, ch);
+
+  if (this.inventory.length > 0) {
+    var idx = Math.floor(this.ticks / 20) % this.inventory.length;
+    this.inventory[idx].sprite.draw(ctx,
+      (this.position.x) * cw,
+      (this.position.y) * ch,
+      cw/1.5, ch/1.5);
+  }
+}
 
 /**
  * Update the actor at the beginning of the frame
@@ -19,6 +43,7 @@ tdl.base.inherit(Hero, Actor);
  * @param elapsed
  */
 Hero.prototype.update = function(world, tick, elapsed) {
+  this.ticks = tick;
   if (this.tempSpeedTicksLeft > 0) this.tempSpeedTicksLeft--;
 
   var pos = null;

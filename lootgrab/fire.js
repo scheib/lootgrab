@@ -26,6 +26,7 @@ Fire.prototype.update = function(tick, elapsed) {
   }
 }
 
+
 Fire.prototype.onCollide = function(other) {
   if (other.killable) {
     other.kill();
