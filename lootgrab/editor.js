@@ -11,6 +11,7 @@ lootgrab.editor = (function() {
 '<canvas class="gamelayer" id="gamelayer2" width="512" height="384"></canvas>' +
 '<canvas class="gamelayer" id="gamelayer3" width="512" height="384"></canvas>' +
 '<div class="gamelayer" id="selector" style="width: 512px; height: 384px">' +
+'<canvas id="cellCursor" width="32" height="32"></canvas>' +
 '</div>' +
 '</div>' +
 '<div id="tiles">' +
@@ -27,6 +28,12 @@ lootgrab.editor = (function() {
  var world;
  var gfx;
 
+ // The element that is the cursor in the world.
+ var cellCursor;
+
+ // The 2d context for the cell cursor.
+ var cellCursorCtx;
+
  // The element that is the cursor in the tile list.
  var tileCursor;
 
@@ -35,15 +42,6 @@ lootgrab.editor = (function() {
 
  function setup(_world) {
    world = _world;
- };
-
- function levelMousemove(e) {
-   var tileWidth = world.tileVisualWidth(gfx.tileCtx);
-   var tileHeight = world.tileVisualHeight(gfx.tileCtx);
-
-   var off = $(this).offset();
-   var x = Math.floor((e.pageX - off.left) / tileWidth);
-   var y = Math.floor((e.pageY - off.top) / tileHeight);
  };
 
  function computeTileCoords(e, elem) {
@@ -81,14 +79,49 @@ lootgrab.editor = (function() {
    tileCursor.style.height = pos.tileHeight.toString() + "px";
  };
 
+ // show the cell cursor
+ function cellMouseenter() {
+   $(cellCursor).show();
+ }
+
+ // hide the cell cursor
+ function cellMouseleave() {
+   $(cellCursor).hide();
+ }
+
+ // move the cursor in the level.
+ function cellMousemove(e) {
+   var pos = computeTileCoords(e, this);
+   cellCursor.style.left = pos.x * pos.tileWidth;
+   cellCursor.style.top = pos.y * pos.tileHeight;
+   cellCursor.style.width = pos.tileWidth.toString() + "px";
+   cellCursor.style.height = pos.tileHeight.toString() + "px";
+ }
+
+ function cellMousedown(e) {
+ }
+
  function init(element) {
    var editor = $('<div></div>').html(editorHTML);
    var canvases = editor.find('CANVAS');
 
    element.appendChild(editor.get()[0]);
 
+   // setup level/world stuff.
    editor.find("#selector")
-       .mousemove(levelMousemove);
+       .mousemove(cellMousemove)
+       .mouseenter(cellMouseenter)
+       .mouseleave(cellMouseleave)
+       .mousedown(cellMousedown);
+   cellCursor = editor.find("#cellCursor").get()[0];
+   $(cellCursor).hide();
+   cellCursorCtx = cellCursor.getContext("2d");
+
+   cellCursorCtx.globalAlpha = 0.3;
+   cellCursorCtx.fillStyle = "rgb(0,255,0)";
+   cellCursorCtx.fillRect(0, 0, 32, 32);
+
+   // setup tile list stuff.
    editor.find("#tileSelect")
        .mousemove(tileMousemove)
        .mouseenter(tileMouseenter)
