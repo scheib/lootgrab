@@ -26,7 +26,7 @@ ImageEntity.prototype.draw = function(ctx, x,y,w,h) {
 }
 
 //////////////////////////////////////////////////
-function TileEntity(world, tile_def) {
+function Sprite(world, tile_def) {
   window.console.log(tile_def);
   var that = this;
   if(tile_def === undefined)
@@ -53,7 +53,7 @@ function TileEntity(world, tile_def) {
   this.img = img;
 
 }
-TileEntity.prototype.draw = function(ctx, x,y,w,h) {
+Sprite.prototype.draw = function(ctx, x,y,w,h) {
   var tx = this.tileset_def.tile_width * this.tile_def.start_x;
   var ty = this.tileset_def.tile_height * this.tile_def.start_y;
   ctx.drawImage(this.img, 
