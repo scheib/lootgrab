@@ -26,7 +26,12 @@ lootgrab.editor = (function() {
 
  var world;
  var gfx;
+
+ // The element that is the cursor in the tile list.
  var tileCursor;
+
+ // The tile the user will draw with.
+ var currentTile;
 
  function setup(_world) {
    world = _world;
@@ -41,17 +46,39 @@ lootgrab.editor = (function() {
    var y = Math.floor((e.pageY - off.top) / tileHeight);
  };
 
- function tileMousemove(e) {
+ function computeTileCoords(e, elem) {
    var tileWidth = world.tileVisualWidth(gfx.tileCtx);
    var tileHeight = world.tileVisualHeight(gfx.tileCtx);
 
-   var off = $(this).offset();
+   var off = $(elem).offset();
    var x = Math.floor((e.pageX - off.left) / tileWidth);
    var y = Math.floor((e.pageY - off.top) / tileHeight);
+   return {x: x, y: y, tileWidth: tileWidth, tileHeight: tileHeight};
+ }
 
-   tileCursor.style.left = x * tileWidth;
-   tileCursor.style.top = y * tileHeight;
-//   tdl.log("tile: ", x, y);
+ // show the tile cursor
+ function tileMouseenter() {
+   $(tileCursor).show();
+ }
+
+ // hide the tile cursor
+ function tileMouseleave() {
+   $(tileCursor).hide();
+ }
+
+ // select the tile under the tile cusor
+ function tileClick() {
+   var pos = computeTileCoords(e, this);
+   tdl.log("select tile:", pos.x, pos.y);
+ }
+
+ // move the tile cursor in the tile list
+ function tileMousemove(e) {
+   var pos = computeTileCoords(e, this);
+   tileCursor.style.left = pos.x * pos.tileWidth;
+   tileCursor.style.top = pos.y * pos.tileHeight;
+   tileCursor.style.width = pos.tileWidth.toString() + "px";
+   tileCursor.style.height = pos.tileHeight.toString() + "px";
  };
 
  function init(element) {
@@ -60,9 +87,15 @@ lootgrab.editor = (function() {
 
    element.appendChild(editor.get()[0]);
 
-   editor.find("#selector").mousemove(levelMousemove);
-   editor.find("#tileSelect").mousemove(tileMousemove);
+   editor.find("#selector")
+       .mousemove(levelMousemove);
+   editor.find("#tileSelect")
+       .mousemove(tileMousemove)
+       .mouseenter(tileMouseenter)
+       .mouseleave(tileMouseleave)
+       .click(tileClick);
    tileCursor = editor.find("#tileCursor").get()[0];
+   $(tileCursor).hide();
 
    var ctx = tileCursor.getContext("2d");
    ctx.fillStyle = "rgb(255,255,0)";
