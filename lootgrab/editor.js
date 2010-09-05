@@ -276,6 +276,41 @@ lootgrab.editor = (function() {
    editor.find(".button").button();
    playButton = editor.find("#play").click(togglePause);
 
+   var loadDialog = $('<div></div>')
+       .html('<div>Load!</div>')
+       .dialog({
+         autoOpen: false,
+         title: 'Load a Level',
+         modal: true,
+       });
+   editor.find("#load").click(function(){
+       if (running) {
+         togglePause();
+       }
+       loadDialog.dialog('open');
+       return false;
+     });
+
+   var saveDialog = $('<div></div>')
+       .html('<div>Save!</div>')
+       .dialog({
+         autoOpen: false,
+         title: 'Save a Level',
+         modal: true,
+       });
+   editor.find("#save").click(function(){
+       var oldRunning = running;
+       if (running) {
+         togglePause();
+       }
+       saveDialog.dialog('open');
+       if (oldRunning) {
+         togglePause();
+       }
+       return false;
+     });
+
+
    togglePause();
 
    gfx = {
