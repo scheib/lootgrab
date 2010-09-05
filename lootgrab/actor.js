@@ -45,9 +45,6 @@ Actor.prototype.init = function(instanceDef) {
       var pos = new Vec2(instanceDef.position.x + .5, instanceDef.position.y + .5);
       this.position = pos;
     }
-    if ('heading' in instanceDef) {
-      this.heading = eval("Vec2." + instanceDef.heading)
-    }
   } catch (err) {
     alert("Couldn't initialize Actor: " + err.toString());
   }

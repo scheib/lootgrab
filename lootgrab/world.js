@@ -112,11 +112,13 @@ World.prototype.setLevelCellAt = function(defName, x, y) {
   this.levelData_.cells[y * this.width + x] = defName;
 };
 
+World.prototype.serializeLevel = function() {
+}
+
 World.prototype.addActor = function(defName, x, y) {
   var a = this.newEntity(defName);
   a.init({
     position: {x: x, y: y},
-    heading: "RIGHT"
   });
   this.actors.push(a);
 };
