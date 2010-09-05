@@ -7,7 +7,7 @@ function getLevelData(level) {
     return {
         name : "world name",
         width : 16,
-        height : 8,
+        height : 12,
         cells : ["cellWallV", "cellWallHTorch", "cellWallV",         "cellWallHTorch", "cellWallV", "cellWallH", "cellWallH", "cellWallV","cellWallV", "cellWallHTorch", "cellWallHCrumbled", "cellWallHTorch", "cellWallV", "cellWallH", "cellWallH", "cellWallV",
                  "cellWallV", "cellFloorC",     "cellFloorC",        "cellWallV",  "cellWallV", "cellFloorC", "cellFloorC", "cellFloorC","cellFloorC", "cellFloorC", "cellFloorC", "cellFloorRug",  "cellWallV", "cellFloorC", "cellFloorC", "cellWallV",
                  "cellWallV", "cellFloorRug",   "cellFloorRug",      "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellFloorC","cellFloorC", "cellFloorRug",  "cellFloorRug",  "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV",
@@ -15,6 +15,10 @@ function getLevelData(level) {
                  "cellWallV", "cellWallV",      "cellWallV",         "cellWallV",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV","cellWallV", "cellFloorRug",  "cellWallV", "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellFloorC",
                  "cellWallV", "cellFloorC",     "cellFloorRug",      "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellFloorC","cellFloorC", "cellFloorC", "cellFloorRug",  "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV",
                  "cellWallV", "cellFloorC",     "cellFloorC",        "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellFloorC","cellFloorC", "cellFloorC", "cellFloorC", "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV",
+                 "cellWallV", "cellWallV",      "cellWallV",         "cellWallV",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV","cellWallV", "cellFloorRug",  "cellWallV", "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellFloorC",
+                 "cellWallV", "cellFloorC",     "cellFloorRug",      "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellFloorC","cellFloorC", "cellFloorC", "cellFloorRug",  "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV",
+                 "cellWallV", "cellFloorC",     "cellFloorC",        "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellFloorC","cellFloorC", "cellFloorC", "cellFloorC", "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV",
+                 "cellWallV", "cellWallV",      "cellWallV",         "cellWallV",  "cellFloorC", "cellFloorC", "cellFloorC", "cellWallV","cellWallV", "cellFloorRug",  "cellWallV", "cellFloorRug",  "cellFloorC", "cellFloorC", "cellFloorC", "cellFloorC",
                  "cellWallV", "cellWallHTorch", "cellWallHCrumbled", "cellWallHTorch", "cellWallV", "cellWallH", "cellWallH", "cellWallV","cellWallV", "cellWallHTorch", "cellWallHCrumbled", "cellWallHTorch", "cellWallV", "cellWallH", "cellWallH", "cellWallV",],
         actors : [
           {
