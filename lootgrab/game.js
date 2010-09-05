@@ -27,7 +27,7 @@ Game.prototype.status = Game.RUNNING;
  * @param tick
  */
 Game.prototype.update = function(tick, elapsed) {
-  if (this.status == Game.LOSS)
+  if (this.status == Game.LOSS || this.status == Game.WIN)
     return;
 
   var freshlyDead = [];
@@ -51,7 +51,7 @@ Game.prototype.update = function(tick, elapsed) {
       death_message.appendChild(document.createTextNode("You died"));
       document.body.appendChild(death_message);
       setTimeout(function() {death_message.className = 'deathmessage done';}, 1);
-      
+
       this.status = Game.LOSS;
     }
     corpse.killed();
