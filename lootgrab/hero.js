@@ -1,6 +1,7 @@
 tdl.provide('hero');
 tdl.require('lootgrab.actor');
 tdl.require('lootgrab.route');
+tdl.require('lootgrab.audio');
 
 function Hero(w, def) {
   Actor.call(this, w, def);
@@ -73,8 +74,8 @@ Hero.prototype.inventory = [];
 
 Hero.prototype.onCollide = function(other) {
   if (other.loot) {
+    lootgrab.audio.play_sound("treasure");
     other.loot = false;
-    other.kill()
-        
+    other.kill();
   }
 }
