@@ -1,1 +1,20 @@
-
+#editor {
+  width: 782px;
+  margin:0 auto;
+  background: #99c;
+}
+#toolbar {
+  padding: 0px 0px 5px 0px;
+  background: #222;
+}
+#toolbar h1 {
+  font-family: 'IM Fell English SC', arial, serif;
+  font-size: 36px;
+  margin:0px;
+  color:#eee;
+  float:left;
+}
+#menu {
+  padding-top:12px;
+  float:right;
+}
