@@ -18,7 +18,7 @@ function Actor(w, entDef) {
         ? new Vec2(entDef.position.x + .5,  entDef.position.y + .5)
         : new Vec2(1.5,1.5);
     this.heading = Vec2.CENTER;
-    this.speed = ('speed' in entDef) ? entDef.speed : .025;
+    this.speed = ('speed' in entDef) ? entDef.speed : 0;
     this.radius = ('radius' in entDef) ? entDef.radius : Math.sqrt(2) / 4;
 
     this.isAlive = Actor.ALIVE;
