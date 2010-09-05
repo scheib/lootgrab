@@ -32,7 +32,7 @@ Game.prototype.update = function(tick, elapsed) {
 
   for (var aIdx in this.world.actors) {
     var a = this.world.actors[aIdx];
-    a.update(tick, elapsed);
+    a.update(this.world, tick, elapsed);
   }
 
   this.resolveCollisions();

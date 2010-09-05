@@ -58,10 +58,11 @@ Actor.prototype.draw = function(ctx, cw, ch) {
 /**
  * Update the actor at the beginning of the frame
  *
+ * @param world
  * @param tick
  * @param elapsed
  */
-Actor.prototype.update = function(tick, elapsed) {
+Actor.prototype.update = function(world, tick, elapsed) {
   var nextpos = this.position.add(this.heading.mul(0.5))
   if (this.world.isBlocking(nextpos.x, nextpos.y)) {
     this.heading = this.heading.negate();
