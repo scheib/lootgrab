@@ -28,11 +28,8 @@ lootgrab.editor = (function() {
    var tileHeight = world.tileVisualHeight(gfx.tileCtx);
 
    var off = $(this).offset();
-   tdl.log("off", off.left, off.top);
    var x = Math.floor((e.pageX - off.left) / tileWidth);
    var y = Math.floor((e.pageY - off.top) / tileHeight);
-
-   tdl.log(x +', '+ y);
  };
 
  function init(element) {

@@ -63,7 +63,7 @@ World.prototype.getDef = function(entDefID) {
   return this._entity_defs[entDefID];
 }
 
- /**
+/**
  *
  * @param x {Number}
  * @param y {Number}
@@ -100,4 +100,15 @@ World.prototype.tileVisualHeight = function(ctx) {
   return ctx.canvas.clientHeight / this.width;
 };
 
+/**
+ * Returns true if cell x,y can be set to tile.
+ */
+World.prototype.canSetCell = function(x, y, tile) {
+};
 
+/**
+ * Sets cell x,y to tile.
+ */
+World.prototype.setCell = function(x, y, tile) {
+  tdl.log("setcell: ", x, y, ": ", tile);
+};
