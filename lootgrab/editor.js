@@ -342,6 +342,9 @@ var editorHTML = '' +
      });
    editor.find("#reset").click(function() {
      world_.reset();
+     for (int i=0; i < editorActions_.lenth; ++i) {
+       editorActions_[i].disabled = false;
+     }
    });
    editor.find("#edit").click(function() {
      togglePause();
