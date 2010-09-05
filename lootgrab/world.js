@@ -35,8 +35,17 @@ function World(entityDefs, level) {
   // entity defs are demand-initalized so that
   // entity defs can reference other entity defs during load
   this._entity_defs = entityDefs;
-  
+  this.levelData_ = level;
+  this.init_();
+}
+
+World.prototype.reset = function() {
+  this.init_();
+}
+
+World.prototype.init_ = function() {
   // init the cell grid
+  var level = this.levelData_;
   this.cells = []
   var i = 0;
   for(var i = 0; i < level.cells.length; ++i) {
@@ -55,7 +64,6 @@ function World(entityDefs, level) {
     
     this.actors.push(a);
   }
-
 }
 
 World.prototype.newEntity = function(entDefID) {
