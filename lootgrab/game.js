@@ -12,6 +12,7 @@ tdl.require("lootgrab.world");
  */
 function Game(w) {
   this.world = w;
+  this.world.game = this;
 }
 
 Game.WIN = "win";

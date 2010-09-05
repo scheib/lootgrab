@@ -6,12 +6,12 @@ lootgrab.editor = (function() {
  var editorHTML = '' +
 '<div id="editor">' +
 '<div id="toolbar">' +
- '<h1>lutefiskgrabber</h1>' +
- '<div class="button">play</div>' +
- '<div class="button">reset</div>' +
- '<div class="button">edit</div>' +
- '<div class="button">load</div>' +
- '<div class="button">save</div>' +
+ '<h1>lufthansagrabber</h1>' +
+ '<div id="play" class="button">play</div>' +
+ '<div id="reset" class="button">reset</div>' +
+ '<div id="edit" class="button">edit</div>' +
+ '<div id="load" class="button">load</div>' +
+ '<div id="save" class="button">save</div>' +
 '</div>' +
 '<div id="level">' +
 '<canvas class="gamelayer" id="gamelayer1" width="512" height="384"></canvas>' +
@@ -34,6 +34,7 @@ lootgrab.editor = (function() {
 
  var world;
  var gfx;
+ var running = false;
  var drawing = false;
  var renderCount = 0;
 
@@ -59,6 +60,9 @@ lootgrab.editor = (function() {
  // The cell defs
  var cellDefs = [];
  var cellEntities = [];
+
+ // buttons
+ var playButton;
 
  function getTileListInfo() {
    var tileWidth = world.tileVisualWidth(gfx.tileCtx);
@@ -223,6 +227,12 @@ lootgrab.editor = (function() {
    }
  }
 
+ function togglePause() {
+   running = !running;
+   playButton.button( "option", "label",
+                      running ? "pause" : "play");
+ };
+
  function init(element) {
    var editor = $('<div></div>').html(editorHTML);
    var canvases = editor.find('CANVAS');
@@ -264,6 +274,44 @@ lootgrab.editor = (function() {
    currentTileCtx = editor.find("#currentTile").get()[0].getContext("2d");
 
    editor.find(".button").button();
+   playButton = editor.find("#play").click(togglePause);
+
+   var loadDialog = $('<div></div>')
+       .html('<div>Load!</div>')
+       .dialog({
+         autoOpen: false,
+         title: 'Load a Level',
+         modal: true,
+       });
+   editor.find("#load").click(function(){
+       if (running) {
+         togglePause();
+       }
+       loadDialog.dialog('open');
+       return false;
+     });
+
+   var saveDialog = $('<div></div>')
+       .html('<div>Save!</div>')
+       .dialog({
+         autoOpen: false,
+         title: 'Save a Level',
+         modal: true,
+       });
+   editor.find("#save").click(function(){
+       var oldRunning = running;
+       if (running) {
+         togglePause();
+       }
+       saveDialog.dialog('open');
+       if (oldRunning) {
+         togglePause();
+       }
+       return false;
+     });
+
+
+   togglePause();
 
    gfx = {
      tileCtx: canvases.get()[0].getContext("2d"),
@@ -272,10 +320,15 @@ lootgrab.editor = (function() {
    };
 
    return {
+     isRunning: isRunning,
      setup: setup,
      render: render,
      gfx: gfx
    };
+ }
+
+ function isRunning() {
+   return running;
  }
 
 // function init(editorButtonId) {
