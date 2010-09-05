@@ -11,7 +11,9 @@ function Actor(w, entDef) {
   this.world = w;
   this.entityDef = entDef;
 
-  this.position = ('position' in entDef) ? new Vec2(entDef.position.x,  entDef.position.y) : new Vec2(0,0);
+  this.position = ('position' in entDef)
+      ? new Vec2(entDef.position.x + .5,  entDef.position.y + .5)
+      : new Vec2(1.5,1.5);
   this.heading = Vec2.CENTER;
   this.speed = .1;
   this.radius = .25;

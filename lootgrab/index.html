@@ -42,7 +42,9 @@ function initialize() {
   function gameloop() {
     tick = tick + 1;
     g.update(tick,1)
-    g.debug_draw(gfx.entityCtx,32);
+    if (DEBUG) {
+      g.debug_draw(gfx.entityCtx,32);
+    }
     r.draw();
   }
 

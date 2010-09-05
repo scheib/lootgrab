@@ -47,6 +47,12 @@ var getEntityDefs = function() {
       tile_width: 32,
       tile_height: 32,
     },
+    "HeroTile"         : { type : "TileEntity", tileset : "tileset_char", start_x:  0, start_y: 0, frames: 1 },
+
+    "Hero" : {
+      type : "Hero",
+      render_tile : "HeroTile",
+    },
     "HeroTile"        : { type : "Sprite", tileset : "tileset_char", start_x: 12, start_y: 30, frames: 4 },
     "Skeleton"        : { type : "Sprite", tileset : "tileset_char", start_x:  0, start_y:  6, frames: 1 },
     "SkeletonWarrior" : { type : "Sprite", tileset : "tileset_char", start_x:  1, start_y:  6, frames: 1 },
