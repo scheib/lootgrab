@@ -21,13 +21,15 @@ function Actor(w, entDef) {
         ? eval("Vec2." + entDef.heading)
         : Vec2.CENTER;
     this.speed = entDef.speed || 0;
-    this.radius = entDef.radius || Math.sqrt(2) / 4;
+    this.radius = (entDef.radius !== undefined)
+        ? entDef.radius
+        : Math.sqrt(2) / 4;
 
     this.deathState = Actor.ALIVE;
     this.sprite = this.world.newEntity(entDef.sprite);
 
     this.loot = entDef.loot || false;
-    this.passable = entDef.passable || true;
+    this.passable = (entDef.passable !== undefined) ? entDef.passable : true;
     this.key = entDef.key || false;
     this.killable = entDef.killable || false;
     this.renderBackground = entDef.renderBackground || false;

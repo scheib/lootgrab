@@ -4,8 +4,9 @@ tdl.provide('lootgrab.save');
 
 lootgrab.save = (function() {
 
-
+  // TODO(gman): fix the shitty design!
   var saveDialog_;
+  var world_;
 
   function init(element) {
     saveDialog_ = $('<div></div>')

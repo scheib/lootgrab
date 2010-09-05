@@ -290,6 +290,7 @@ var editorHTML = '' +
        if (running_) {
          togglePause();
        }
+       saveDialog.setWorld(world_);
        saveDialog.dialog('open');
        if (oldRunning) {
          togglePause();
