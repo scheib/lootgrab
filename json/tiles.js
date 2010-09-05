@@ -104,7 +104,7 @@ var getEntityDefs = function() {
     "spriteCross"    : { type : "Sprite", tileset : "tileset_obj", start_x:  4, start_y:  1, frames: 1 },
     "spriteSword"    : { type : "Sprite", tileset : "tileset_obj", start_x:  6, start_y:  3, frames: 1 },
     "spriteMeat"     : { type : "Sprite", tileset : "tileset_obj", start_x: 13, start_y:  1, frames: 1 },
-    "spriteGold      : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  0, frames: 1 },
+    "spriteGold"     : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  0, frames: 1 },
 
     "tileset_obj" : {
       type : "tileset",
