@@ -69,7 +69,6 @@ Actor.prototype.draw = function(ctx, cw, ch) {
  * @param tick
  * @param elapsed
  */
-Actor.prototype.update = function(tick, elapsed) {
 Actor.prototype.update = function(world, tick, elapsed) {
   if (this.isDead()) return;
   
