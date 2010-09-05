@@ -273,6 +273,7 @@ World.prototype.getEditorActions = function() {
       if(def.type == "Cell"){
         actions.push({
           type: "paint",
+          uiName: (def.uiName) ? def.uiName : ("Add uiName to: " + defName),
           sprite: that.newEntity(def.sprite),
           apply: function(x,y) {
             that.setCellAt(name, x, y);
@@ -291,6 +292,7 @@ World.prototype.getEditorActions = function() {
       if(defName.match(/^actor/)) {
         actions.push({
           type: "click",
+          uiName: (def.uiName) ? def.uiName : ("Add uiName to: " + defName),
           sprite: that.newEntity(def.sprite),
           apply: function(x,y) {
             that.deleteActorsInCell(x, y);
