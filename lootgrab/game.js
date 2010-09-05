@@ -2,7 +2,6 @@ tdl.provide("game");
 tdl.require("lootgrab.actor");
 tdl.require("lootgrab.hero");
 tdl.require("lootgrab.world");
-tdl.require("lootgrab.goblin");
 
 /**
  *
