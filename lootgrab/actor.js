@@ -23,6 +23,9 @@ function Actor(w, entDef) {
   this.sprite = this.world.newEntity(entDef.render_tile);
 }
 
+Actor.prototype.draw = function(ctx, cw, ch) {
+  this.sprite.draw(ctx, this.position.x * cw, this.position.y * ch, cw, ch);
+}
 
 /**
  * Update the actor at the beginning of the frame
