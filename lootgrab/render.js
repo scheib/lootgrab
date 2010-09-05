@@ -22,7 +22,7 @@ function ImageEntity(world, def) {
 }
 
 ImageEntity.prototype.draw = function(ctx, x,y,w,h) {
-  ctx.drawImage(this.img, x,y,w,h);
+  ctx.drawImage(this.img, x, y, w, h);
 }
 
 //////////////////////////////////////////////////
@@ -51,6 +51,7 @@ function Sprite(world, tile_def) {
   }
   this.img = img;
 }
+
 Sprite.prototype.draw = function(ctx, x,y,w,h) {
   var tileWidth = 32;
   var tileHeight = 32;

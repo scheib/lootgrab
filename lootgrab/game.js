@@ -46,7 +46,10 @@ Game.prototype.update = function(tick, elapsed) {
 
   for (var i = 0, corpse; corpse = freshlyDead[i]; i++) {
     if (corpse == this.world.hero) {
-      alert("You died.");
+      var death_message = document.createElement('div');
+      death_message.style.backgroundColor = 'red';
+      death_message.appendChild(document.createTextNode("You died"));
+      document.getElementById('toolbar').appendChild(death_message);
       this.status = Game.LOSS;
     }
     corpse.killed();
@@ -59,7 +62,7 @@ Game.prototype.resolveCollisions = function() {
       var a = this.world.actors[i];
       var b = this.world.actors[j];
 
-      if (a.isDead() || b.isDead())
+      if (a.isDead() || b.isDead() || j == i)
         continue;
 
       var minContact = a.radius + b.radius;

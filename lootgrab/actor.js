@@ -100,7 +100,7 @@ Actor.prototype.killed = function() {
   this.deathState = Actor.DEAD;
   this.speed = 0;
   this.heading = Vec2.CENTER;
-  // FIX this.sprite.img = new Image();
+  //this.sprite.img = new Image();
 }
 
 Actor.prototype.updatePosition = function(elapsed) {
