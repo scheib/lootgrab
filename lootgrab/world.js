@@ -10,9 +10,9 @@ function Cell(world,def,x,y) {
 }
 
 Cell.prototype.setType = function(def) {
-  this.ground_ent = this.world.newEntity(def.render_tile)
+  this.ground_ent = this.world.newEntity(def.sprite)
   if(this.ground_ent === undefined)
-    throw "Could not instantiate " + json.ground_id
+    throw "Cell.setType() could instantiate a ground_ent by using:" + def.sprite
 }
 
 Cell.prototype.draw = function(ctx,x,y,w,h) {
@@ -56,13 +56,15 @@ function World(entityDefs, level) {
 World.prototype.newEntity = function(entDefID) {
   def = this.getDef(entDefID);
   if(def === undefined)
-    throw "No entity def found for " + entDefID;
+    throw "World.newEntity() could not instantiate from entDefID: " + entDefID;
 
   var e = eval("new "+def.type+"(this, def)");
   return e;
 }
 
 World.prototype.getDef = function(entDefID) {
+  if(this._entity_defs[entDefID] === undefined)
+    tdl.log("World.getDef(" + entDefID + ") is returning 'undefined'!")
   return this._entity_defs[entDefID];
 }
 
@@ -129,7 +131,7 @@ World.prototype.setCellDef = function(x, y, type) {
   tdl.log("setCell: ", x, y, ": ", type);
   var def = this.getDef(type);
   if(def.type != "Cell")
-    throw type + "is not a cell!";
+    throw "World.setCellDef(" + x + ", " + y + ", " + type + ") could not getDef with type:" + type;
   this.cellAt(x,y).setType(type);
 };
 
