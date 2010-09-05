@@ -100,7 +100,7 @@ Hero.prototype.onCollide = function(other) {
 
 Hero.prototype.drawPath = function(ctx, cw, ch) {
   if (this.isDead()) return;
-  if(this.currentPath.length) {
+  if (this.currentPath && this.currentPath.length) {
     ctx.beginPath();
     ctx.moveTo(this.position.x * cw, this.position.y * ch);
     if (this.nextCell)
