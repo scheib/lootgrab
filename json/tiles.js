@@ -3,10 +3,10 @@ tdl.provide("tiles");
 var getEntityDefs = function() {
   return {
     // Actors
-    "actorHero"           : { type : "Hero",      sprite : "spriteHero",            speed : .025 },
-    "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", speed : .015 },
-    "actorFlameSkull"     : { type : "FSkull",    sprite : "spriteFlamingSkull",    speed : .01, speed2 : .04 },
-    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper",    speed : .025 },
+    "actorHero"           : { type : "Hero",      sprite : "spriteHero",            heading: "RIGHT", speed : .025 },
+    "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", heading: "UP", speed : .015 },
+    "actorFlameSkull"     : { type : "FSkull",    sprite : "spriteFlamingSkull",    heading: "UP", speed : .01, speed2 : .04 },
+    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper",    heading: "UP", speed : .025 },
     "actorKey"            : { type : "Key",       sprite : "spriteKey",             loot : true, key : true },
     "actorShield"         : { type : "Shield",    sprite : "spriteShield",          loot : true },
     "actorFire"           : { type : "Fire",      sprite : "spriteFire",            loot : true },
@@ -44,7 +44,7 @@ var getEntityDefs = function() {
     "cellLava"            : { type: "Cell", sprite: "spriteLava"           , passable : true },
 
     // Sprite Definitions --------------------------------
-   
+
     "tileset_env" : {
       type : "tileset",
       image: "images/lofi_environment_a_4x.png",
