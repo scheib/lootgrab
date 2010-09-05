@@ -27,6 +27,10 @@ lootgrab.editor = (function() {
 
  var world;
  var gfx;
+ var drawing = false;
+
+ // The element that covers the world to capture mouse events.
+ var selector;
 
  // The element that is the cursor in the world.
  var cellCursor;
@@ -65,9 +69,10 @@ lootgrab.editor = (function() {
  }
 
  // select the tile under the tile cusor
- function tileClick() {
+ function tileClick(e) {
    var pos = computeTileCoords(e, this);
    tdl.log("select tile:", pos.x, pos.y);
+   return false;
  }
 
  // move the tile cursor in the tile list
@@ -79,13 +84,21 @@ lootgrab.editor = (function() {
    tileCursor.style.height = pos.tileHeight.toString() + "px";
  };
 
+ function cellUnbindShit() {
+   drawing = false;
+   $(selector).unbind('mouseup', cellMouseup);
+ };
+
  // show the cell cursor
  function cellMouseenter() {
    $(cellCursor).show();
+   $(selector).bind('mousemove', cellMousemove)
  }
 
  // hide the cell cursor
  function cellMouseleave() {
+   cellUnbindShit();
+   $(selector).unbind('mousemove', cellMousemove)
    $(cellCursor).hide();
  }
 
@@ -96,9 +109,19 @@ lootgrab.editor = (function() {
    cellCursor.style.top = pos.y * pos.tileHeight;
    cellCursor.style.width = pos.tileWidth.toString() + "px";
    cellCursor.style.height = pos.tileHeight.toString() + "px";
+   if (drawing) {
+     tdl.log("setCell: ", pos.x, pos.y);
+   }
+ }
+
+ function cellMouseup(e) {
+   cellUnbindShit();
  }
 
  function cellMousedown(e) {
+   drawing = true;
+   $(selector).bind('mouseup', cellMouseup);
+   return false;
  }
 
  function init(element) {
@@ -108,11 +131,11 @@ lootgrab.editor = (function() {
    element.appendChild(editor.get()[0]);
 
    // setup level/world stuff.
-   editor.find("#selector")
-       .mousemove(cellMousemove)
-       .mouseenter(cellMouseenter)
-       .mouseleave(cellMouseleave)
-       .mousedown(cellMousedown);
+   selector = editor.find("#selector").get()[0];
+   $(selector)
+       .bind('mouseenter', cellMouseenter)
+       .bind('mouseleave', cellMouseleave)
+       .bind('mousedown', cellMousedown);
    cellCursor = editor.find("#cellCursor").get()[0];
    $(cellCursor).hide();
    cellCursorCtx = cellCursor.getContext("2d");
@@ -123,10 +146,11 @@ lootgrab.editor = (function() {
 
    // setup tile list stuff.
    editor.find("#tileSelect")
-       .mousemove(tileMousemove)
-       .mouseenter(tileMouseenter)
-       .mouseleave(tileMouseleave)
-       .click(tileClick);
+       .bind('mousedown', function() { return false; })
+       .bind('mousemove', tileMousemove)
+       .bind('mouseenter', tileMouseenter)
+       .bind('mouseleave', tileMouseleave)
+       .bind('click', tileClick);
    tileCursor = editor.find("#tileCursor").get()[0];
    $(tileCursor).hide();
 
