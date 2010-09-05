@@ -9,17 +9,17 @@ tdl.require("lootgrab.math")
  */
 function Actor(w, entDef) {
   try {
-  if (entDef === undefined)
-    console.error("Undefined entity def.");
-  this.world = w;
-  this.entityDef = entDef;
+    if (entDef === undefined)
+      console.error("Undefined entity def.");
+    this.world = w;
+    this.entityDef = entDef;
 
     this.position = ('position' in entDef)
         ? new Vec2(entDef.position.x + .5,  entDef.position.y + .5)
         : new Vec2(1.5,1.5);
     this.heading = Vec2.CENTER;
-    this.speed = .025;
-    this.radius = .25;
+    this.speed = ('speed' in entDef) ? entDef.speed : .025;
+    this.radius = ('radius' in entDef) ? entDef.radius : Math.sqrt(2) / 4;
 
     this.isAlive = true;
 
