@@ -248,7 +248,7 @@ World.prototype.findActorIndex = function(x,y,a_radius) {
 };
 
 /**
- * Gets the possible typs of actions within the editor
+ * Gets the possible LEVEL EDITING typs of actions within the editor
  */
 World.prototype.getEditorActions = function() {
   var that = this;
@@ -305,61 +305,30 @@ World.prototype.getEditorActions = function() {
 }
 
 /**
- * Gets the possible typs of actions within the editor
+ * Gets the possible PLAYTIME typs of actions within the editor
  */
 World.prototype.getPlaytimeEditorActions = function() {
   var that = this;
   var actions = [];
 
-  // Delete actor actions
-  actions.push({
-    type: "click",
-    sprite: this.newEntity("spriteCancel"),
-    apply: function(x,y) {
-      var actorIdx = that.findActorIndex(x,y,0.5);
-      if(actor) {
-        // remove actor...
-        delete that.actors.splice(actorIdx,1);
-      }
-    }
-  });
-
-  // Cell setting...
-  for(var defName in this._entity_defs) {
-    (function() {
-      var def = that._entity_defs[defName];
-      var name = defName;
-      if(def.type == "Cell"){
-        actions.push({
-          type: "paint",
-          sprite: that.newEntity(def.sprite),
-          apply: function(x,y) {
-            that.setCellAt(x, y, name);
-          }
-        });
-      }
-    })();
-  }
-
+  
   // Add actor actions
-  for(var _defName in this._entity_defs) {
+  for(var _placeableStr in this.levelData_.placeables) {
     (function() {
-      var defName = _defName;
+      var defName = _placeableStr;
       var def = that._entity_defs[defName];
-      if(defName.match(/^actor/)) {
-        actions.push({
-          type: "click",
-          sprite: that.newEntity(def.sprite),
-          apply: function(x,y) {
-            var a = that.newEntity(defName);
-            a.init({
-              position: {x: x, y: y},
-              heading: "RIGHT"
-            });
-            that.actors.push(a);
-          }
-        });
-      }
+      actions.push({
+        type: "click",
+        sprite: that.newEntity(def.sprite),
+        apply: function(x,y) {
+          var a = that.newEntity(defName);
+          a.init({
+            position: {x: x, y: y},
+            heading: "RIGHT"
+          });
+          that.actors.push(a);
+        }
+      });
     })();
   }
   return actions;
