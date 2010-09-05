@@ -114,7 +114,8 @@ Actor.prototype.kill = function() {
 }
 
 Actor.prototype.killed = function() {
-  lootgrab.audio.play_sound("death");
+  if (this.killable)
+    lootgrab.audio.play_sound("death");
   this.deathState = Actor.DEAD;
   this.baseSpeed = 0;
   this.tempSpeed = 0;
