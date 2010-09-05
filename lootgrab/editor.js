@@ -175,13 +175,23 @@ var editorHTML = '' +
 
 
  // Grabs all the tile types from the world.
- function setup(_world) {
+ function setup(_world, editorMode) {
    world_ = _world;
 
    currenTileEntity = null;
    editorActions_ = [];
 
-   editorActions_ = world_.getEditorActions();
+   switch(editorMode) {
+   case "LevelEditMode":
+     editorActions_ = world_.getPlaytimeEditorActions();
+   break;
+   case "PlaytimeMode":
+     editorActions_ = world_.getEditorActions();
+   break;
+   default:
+     throw "editor setup() called with editorMode==='" + editorMode + "' which isn't supported.";
+   }
+   
    if (editorActions_.length) {
      setCurrentAction(0);
    }

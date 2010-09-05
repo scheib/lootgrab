@@ -304,6 +304,68 @@ World.prototype.getEditorActions = function() {
   return actions;
 }
 
+/**
+ * Gets the possible typs of actions within the editor
+ */
+World.prototype.getPlaytimeEditorActions = function() {
+  var that = this;
+  var actions = [];
+
+  // Delete actor actions
+  actions.push({
+    type: "click",
+    sprite: this.newEntity("spriteCancel"),
+    apply: function(x,y) {
+      var actorIdx = that.findActorIndex(x,y,0.5);
+      if(actor) {
+        // remove actor...
+        delete that.actors.splice(actorIdx,1);
+      }
+    }
+  });
+
+  // Cell setting...
+  for(var defName in this._entity_defs) {
+    (function() {
+      var def = that._entity_defs[defName];
+      var name = defName;
+      if(def.type == "Cell"){
+        actions.push({
+          type: "paint",
+          sprite: that.newEntity(def.sprite),
+          apply: function(x,y) {
+            that.setCellAt(x, y, name);
+          }
+        });
+      }
+    })();
+  }
+
+  // Add actor actions
+  for(var _defName in this._entity_defs) {
+    (function() {
+      var defName = _defName;
+      var def = that._entity_defs[defName];
+      if(defName.match(/^actor/)) {
+        actions.push({
+          type: "click",
+          sprite: that.newEntity(def.sprite),
+          apply: function(x,y) {
+            var a = that.newEntity(defName);
+            a.init({
+              position: {x: x, y: y},
+              heading: "RIGHT"
+            });
+            that.actors.push(a);
+          }
+        });
+      }
+    })();
+  }
+  return actions;
+}
+
+
 World.prototype.clearMessage = function() {
   if (this.message_node_) {
     document.body.removeChild(this.message_node_);
