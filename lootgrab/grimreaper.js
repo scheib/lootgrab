@@ -23,6 +23,12 @@ GrimReaper.prototype.update = function() {
     this.heading = Vec2.UP;
   }
   
+  // Stop trying to run into walls.
+  var nextpos = this.position.add(this.heading.mul(0.5))
+  if (this.world.isBlocking(nextpos.x, nextpos.y)) {
+    this.heading = Vec2.CENTER;
+  }
+  
   Actor.prototype.update.call(this);
 }
 
