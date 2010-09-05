@@ -39,7 +39,7 @@ Hero.prototype.update = function(world, tick, elapsed) {
     this.heading = Vec2.CENTER;
   }
 
-  this.updatePosition(elapsed);
+  this.updatePosition();
 }
 
 Hero.prototype.onCollide = function(other) {
