@@ -258,6 +258,7 @@ World.prototype.getEditorActions = function() {
   // Delete actor actions
   actions.push({
     type: "click",
+    uiName: "Delete actor",
     sprite: this.newEntity("spriteCancel"),
     apply: function(x,y) {
       that.deleteActorsInCell(x, y);
