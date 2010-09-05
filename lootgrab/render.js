@@ -89,7 +89,8 @@ Render.prototype.draw = function() {
 
   // Actors - fork into new canvas.
   for(var i = 0, actor; actor = w.actors[i]; ++i) {
-    actor.draw(ctx, cellWidth, cellHeight);
+    if (!actor.isDead())
+      actor.draw(ctx, cellWidth, cellHeight);
   }
 
   if(DEBUG)
