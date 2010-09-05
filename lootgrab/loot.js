@@ -19,6 +19,7 @@ Loot.prototype.onCollide = function(other) {
 
 function Key(w, def) {
   Loot.call(this, w, def);
+  this.key = true;
 };
 tdl.base.inherit(Key, Loot);
 
