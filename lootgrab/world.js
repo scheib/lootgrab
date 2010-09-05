@@ -13,7 +13,7 @@ Cell.prototype.setType = function(def) {
   if(this.ground_ent === undefined)
     throw "Cell.setType() could instantiate a ground_ent by using:" + def.sprite
   this.passable = 'passable' in def ? def.passable : true;
-}
+Ç}
 
 Cell.prototype.draw = function(ctx, x, y, w, h) {
   this.ground_ent.draw(ctx,x,y,w,h);
@@ -108,18 +108,26 @@ World.prototype.isBlocking = function(x, y) {
 // Convenience function for whether or not a given cell has something the
 // player wants to run towards.
 World.prototype.isDesirable = function(x, y) {
+  var actors = this.actorsInCell(x, y);
+  for (var j = 0; j < actors.length; ++j) {
+    var actor = actors[j];
+    if (actor.loot)
+      return true;  
+  }
+  return false;
+}
+
+World.prototype.actorsInCell = function(x, y) {
+  var result = [];
   for (var j = 0; j < this.actors.length; ++j) {
     var actor = this.actors[j];
-    if (actor.loot && 0)
-    console.log(x + "," + y + ":" + Math.floor(actor.position.x) + "," + Math.floor(actor.position.y));
     if (Math.floor(actor.position.x) != x ||
         Math.floor(actor.position.y) != y) {
       continue;
     }
-    if (actor.loot)
-      return true;
+    result.push(actor);
   }
-  return false;
+  return result;
 }
 
 World.prototype.draw_dbg = function (ctx) {
