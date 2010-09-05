@@ -104,17 +104,17 @@ var getEntityDefs = function() {
     "spriteCross"    : { type : "Sprite", tileset : "tileset_obj", start_x:  4, start_y:  1, frames: 1 },
     "spriteSword"    : { type : "Sprite", tileset : "tileset_obj", start_x:  6, start_y:  3, frames: 1 },
     "spriteMeat"     : { type : "Sprite", tileset : "tileset_obj", start_x: 13, start_y:  1, frames: 1 },
-    "spriteGold"      : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  0, frames: 1 },
+    "spriteGold"     : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  0, frames: 1 },
 
-    "tileset_obj" : {
+    "tileset_features" : {
       type : "tileset",
       image: "images/lofi_dungeon_features_a_4x.png",
       tile_width: 32,
       tile_height: 32,
     },
-    "spriteGoldBars" : { type : "Sprite", tileset : "tileset_obj", start_x: 12, start_y:  1, frames: 1 },
-    "spriteSkull"    : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  6, frames: 1 },
-    "spriteGrate"    : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  1, frames: 1 },
-    "spriteCircle"   : { type : "Sprite", tileset : "tileset_obj", start_x: 12, start_y:  3, frames: 1 },
+    "spriteGoldBars" : { type : "Sprite", tileset : "tileset_features", start_x: 12, start_y:  1, frames: 1 },
+    "spriteSkull"    : { type : "Sprite", tileset : "tileset_features", start_x:  0, start_y:  6, frames: 1 },
+    "spriteGrate"    : { type : "Sprite", tileset : "tileset_features", start_x:  0, start_y:  1, frames: 1 },
+    "spriteCircle"   : { type : "Sprite", tileset : "tileset_features", start_x: 12, start_y:  3, frames: 1 },
   };
 }
