@@ -9,12 +9,14 @@ var editorHTML = '' +
 '<div id="editor">' +
 '<div id="toolbar">' +
  '<h1>lufthansagrabber</h1>' +
- '<div id="play" class="button">play</div>' +
- '<div id="reset" class="button">reset</div>' +
- '<div id="edit" class="button">edit</div>' +
- '<div id="undo" class="button">undo</div>' +
- '<div id="load" class="button">load</div>' +
- '<div id="save" class="button">save</div>' +
+ '<div id="menu">' +
+  '<div id="play" class="button">play</div>' +
+  '<div id="reset" class="button">reset</div>' +
+  '<div id="edit" class="button">edit</div>' +
+  '<div id="undo" class="button">undo</div>' +
+  '<div id="load" class="button">load</div>' +
+  '<div id="save" class="button">save</div>' +
+ '</div>' +
 '</div>' +
 '<div id="level">' +
 '<canvas class="gamelayer" id="gamelayer1" width="512" height="384"></canvas>' +
