@@ -24,7 +24,7 @@ function Actor(w, entDef) {
 }
 
 Actor.prototype.draw = function(ctx, cw, ch) {
-  this.sprite.draw(ctx, this.position.x * cw, this.position.y * ch, cw, ch);
+  this.sprite.draw(ctx, (this.position.x - 0.5) * cw, (this.position.y - 0.5) * ch, cw, ch);
 }
 
 /**
