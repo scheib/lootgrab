@@ -1,18 +1,25 @@
-tdl.provide('render');
-tdl.require('world');
+tdl.provide('lootgrab.render');
+tdl.require('lootgrab.world');
 
 //////////////////////////////////////////////////
-function ImageEntity(world, entID) {
+g_imageDB = {};
+
+function ImageEntity(world,entID) {
   var def = world.getDef(entID);
   var that = this;
-  this.img = new Image();
-  this.img.src = def.img;
-  this.img.onload = function() { 
-    tdl.log(that.img.src + " loaded");
-  };
-  this.img.onerror = function() { 
-    tdl.log(that.img.src + " **FAILED**"); 
-  };
+  var img = g_imageDB[def.img];
+  if(!img) {
+    img = new Image();
+    img.src = def.img;
+    img.onload = function() {
+      tdl.log(that.img.src + " loaded");
+    };
+    img.onerror = function() {
+      tdl.log(that.img.src + " **FAILED**");
+    };
+    g_imageDB[def.img] = img;
+  }
+  this.img = img;
 }
 
 ImageEntity.prototype.draw = function(ctx, x,y,w,h) {
@@ -24,7 +31,7 @@ function TileEntity(world, entID) {
   var tile_def = world.getDef(entID);
   if(tile_def === undefine)
     throw "Tile def could not be found!"
-  
+
   var tileset_def = world.getDef(tile_def.tileset)
   if(tilset_def === undefined)
     throw "Tileset could not be found"
@@ -57,5 +64,5 @@ Render.prototype.draw = function() {
   }
   if(DEBUG)
     w.draw_dbg(ctx);
-  
+
 }
