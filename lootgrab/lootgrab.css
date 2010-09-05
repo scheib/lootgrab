@@ -6,6 +6,7 @@ html, body {
   margin: 0px;
   font-family: sans-serif;
   font-size: small;
+  background-color: #222;
 }
 h1 {
   font-size: medium;
@@ -101,6 +102,7 @@ CANVAS {
   padding:25px;
   -webkit-transition:all 0.3s;
   z-index:5000;
+  -webkit-box-shadow:1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 .deathmessage.done {
   opacity:1;
