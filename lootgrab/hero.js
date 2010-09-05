@@ -80,8 +80,8 @@ Hero.prototype.hasKey = function() {
 
 Hero.prototype.useKey = function() {
   for (var i = 0; i < this.inventory.length; ++i) {
-    if (this.inventory[i].isKey) {
-      delete this.inventory[i];
+    if (this.inventory[i].key) {
+      this.inventory.splice(i, 1);
       return;
     }
   }
