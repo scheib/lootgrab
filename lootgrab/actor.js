@@ -13,7 +13,7 @@ function Actor(w, entDef) {
 
   this.position = ('position' in entDef)
       ? new Vec2(entDef.position.x + .5,  entDef.position.y + .5)
-      : new Vec2(1.5,1.5);
+      : new Vec2(1.5, 1.5);
   this.heading = Vec2.RIGHT;
   this.speed = .025;
   this.radius = .25;
@@ -43,6 +43,7 @@ Actor.prototype.draw = function(ctx, cw, ch) {
  */
 Actor.prototype.update = function(tick, elapsed) {
   var nextpos = this.position.add(this.heading.mul(0.5))
+  window.console.log(nextpos.y);
   if (this.world.isBlocking(nextpos.x, nextpos.y)) {
     this.heading = this.heading.negate();
   }
