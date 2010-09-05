@@ -25,12 +25,12 @@ lootgrab.levels = (function() {
 
   function saveLevel(level) {
     for (var ii = 0; ii < levels_.length; ++ii) {
-      if (levels[ii].name == level.name) {
-        levels[ii] = level;
+      if (levels_[ii].name == level.name) {
+        levels_[ii] = level;
         return;
       }
     }
-    levels.push(level);
+    levels_.push(level);
   }
 
   function getLevels() {
