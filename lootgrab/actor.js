@@ -38,9 +38,13 @@ Actor.prototype.init = function(instanceDef) {
   }
 }
 
+Actor.prototype.getWorld = function() {
+  return this.world;
+}
+
 Actor.prototype.draw = function(ctx, cw, ch) {
   // Actor position is center of cell, so subtract
-  // 0.5 so that we draw it in the right position
+  // 0.5 so that we draw it in the right position.
   this.sprite.draw(ctx, 
       (this.position.x - 0.5) * cw, 
       (this.position.y - 0.5) * ch,

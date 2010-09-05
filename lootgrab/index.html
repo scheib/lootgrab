@@ -27,7 +27,7 @@ function initialize() {
   var entityDefs = getEntityDefs("level1");
   var world = getLevelData("level1");
   var w = new World(entityDefs, world);
-  var r = new Render(w,gfx.tileCtx);
+  var r = new Render(w, gfx.tileCtx);
   var g = new Game(w);
   tdl.log("World created: ", w.width, w.height)
 

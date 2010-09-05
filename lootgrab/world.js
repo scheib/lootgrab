@@ -15,7 +15,7 @@ Cell.prototype.setType = function(def) {
   this.passable = 'passable' in def ? def.passable : true;
 }
 
-Cell.prototype.draw = function(ctx,x,y,w,h) {
+Cell.prototype.draw = function(ctx, x, y, w, h) {
   this.ground_ent.draw(ctx,x,y,w,h);
 }
 
