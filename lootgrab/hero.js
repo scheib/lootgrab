@@ -41,3 +41,10 @@ Hero.prototype.update = function(world, tick, elapsed) {
 
   this.updatePosition(elapsed);
 }
+
+Hero.prototype.onCollide = function(other) {
+  if (other.loot) {
+    other.loot = false;
+    other.kill()
+  }
+}
