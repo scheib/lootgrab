@@ -3,7 +3,7 @@ tdl.provide("actor")
 tdl.require("math")
 
 function Actor(entDef) {
-  this.def = entDef;
+  this.entityDef = entDef;
 
 }
 
@@ -24,6 +24,11 @@ Actor.prototype.update = function(tick, elapsed) {
   
 }
 
+/**
+ * Inform the actor that it has collided with another actor
+ *
+ * @param {Actor} other
+ */
 Actor.prototype.onCollide = function(other) {
   
 }
