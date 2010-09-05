@@ -38,6 +38,7 @@ var editorHTML = '' +
 '</div>' +
 '</div>';
 
+ var editorHack_;
  var world_;
  var gfx_;
  var running_ = false;
@@ -331,7 +332,7 @@ var editorHTML = '' +
        if (running_) {
          togglePause();
        }
-       loadDialog.show(world_);
+       loadDialog.show(editorHack_, world_);
        return false;
      });
 
@@ -367,13 +368,14 @@ var editorHTML = '' +
      effectCtx: canvases.get()[2].getContext("2d")
    };
 
-   return {
+   editorHack_ = {
      isRunning: isRunning,
      setup: setup,
      render: render,
      reset: reset,
      gfx: gfx_
    };
+   return editorHack_;
  }
 
  function isRunning() {
