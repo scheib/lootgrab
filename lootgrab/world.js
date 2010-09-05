@@ -312,11 +312,10 @@ World.prototype.getPlaytimeEditorActions = function() {
   var that = this;
   var actions = [];
 
-  
   // Add actor actions
-  for(var _placeableStr in this.levelData_.placeables) {
+  for(var i = 0; i < this.levelData_.placeables.length; ++i) {
     (function() {
-      var defName = _placeableStr;
+      var defName = that.levelData_.placeables[i];
       var def = that._entity_defs[defName];
       actions.push({
         type: "click",
