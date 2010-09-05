@@ -1,51 +1,23 @@
 tdl.provide("level1");
 
-var getData = function() {
+function getLevelData(level) {
+  if (level != "level1")
+    throw "Need to implement more levels!";
+
     return {
-        entities : {
-            "dirt" : {
-                type : "ImageEntity",
-                img : "images/previewenv.png",
-            },
-            "grass" : {
-                type : "ImageEntity",
-                img : "images/previewenv.png",
-            },
-            "baddie" : {
-                type : "ImageEntity",
-                img : "images/previewenv.png",
-            },
-        },
-
-        cells : {
-            "5" : {
-                ground_id : "grass",
-            },
-            "6" : {
-                ground_id : "dirt",
-            },
-            "7" : {
-                ground_id : "grass",
-            },
-            "8" : {
-                ground_id : "grass",
-            },
-
-        },
-
-        world : {
-            name : "world name",
-            width : 8,
-            height : 8,
-            cells : ["5", "6", "7", "8", "5", "6", "7", "8",
-                     "5", "6", "7", "8", "5", "6", "7", "8",
-                     "5", "6", "7", "8", "5", "6", "7", "8",
-                     "5", "6", "7", "8", "5", "6", "7", "8",
-                     "5", "6", "7", "8", "5", "6", "7", "8",
-                     "5", "6", "7", "8", "5", "6", "7", "8",
-                     "5", "6", "7", "8", "5", "6", "7", "8",
-                     "5", "6", "7", "8", "5", "6", "7", "8"]
-        }
+        name : "world name",
+        width : 8,
+        height : 8,
+        cells : ["dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell"],
+        
+        actors : {}
     }
 }
 

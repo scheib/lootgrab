@@ -1,11 +1,12 @@
 tdl.provide('world')
 
 //////////////////////////////////////////////////
-function Cell(world,id,x,y,json) {
-  this.id = id;
+function Cell(world,entDefID,x,y) {
+  this.id = entDefID;
   this.x = x;
   this.y = y;
-  this.ground_ent = world.newEntity(json.ground_id)
+  var def = world.getDef(entDefID);
+  this.ground_ent = world.newEntity(def.render_tile)
   if(this.ground_ent === undefined)
     throw "Could not instantiate " + json.ground_id
 }
@@ -17,27 +18,27 @@ Cell.prototype.draw = function(ctx,x,y,w,h) {
 
 ///////////////////////////////////////////////////////////////////////////
 
-function World(json) {
-  this.width = json.world.width;
-  this.height = json.world.height;
+function World(entityDefs, level) {
+  this.width = level.width;
+  this.height = level.height;
 
   // entity defs are demand-initalized so that
   // entity defs can reference other entity defs during load
-  this._entity_defs = json.entities;
+  this._entity_defs = entityDefs;
 
   // init the cell grid
   this.cells = []
   var i = 0;
-  for(var i = 0; i < json.world.cells.length; ++i) {
-    var cellID = json.world.cells[i]
+  for(var i = 0; i < level.cells.length; ++i) {
+    var cellEntDefID = level.cells[i]
     cx = i % this.width
     cy = Math.floor(i / this.width);
-    var cell = new Cell(this,cellID, cx, cy,json.cells[cellID])
+    var cell = new Cell(this, cellEntDefID, cx, cy)
     this.cells.push(cell)
   }
 
   this.actors = {};
-  for(var actorID in json.actors) {
+  for(var actorID in level.actors) {
 
   }
 }
