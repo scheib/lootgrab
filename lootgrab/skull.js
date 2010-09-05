@@ -19,3 +19,8 @@ FSkull.prototype.update = function(world, tick, elapsed) {
   }
   this.updatePosition();
 }
+
+FSkull.prototype.onCollide = function(other) {
+  if (this.world.hero == other)
+    other.kill();
+}

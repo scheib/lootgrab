@@ -163,8 +163,8 @@ World.prototype.deleteActorsInCell = function(x, y) {
 World.prototype.deleteActorsInLevelData = function(x, y) {
   var ii = 0;
   while (ii < this.levelData_.actors.length) {
-    var actor = this.levelData_.actors.length;
-    if (actor.x == x && actor.y == y) {
+    var actor = this.levelData_.actors[ii];
+    if (actor.position.x == x && actor.position.y == y) {
       this.levelData_.actors.splice(ii, 1);
     } else {
       ++ii;
