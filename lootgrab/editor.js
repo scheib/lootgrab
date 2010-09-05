@@ -191,7 +191,7 @@ var editorHTML = '' +
    default:
      throw "editor setup() called with editorMode==='" + editorMode + "' which isn't supported.";
    }
-   
+
    if (editorActions_.length) {
      setCurrentAction(0);
    }
@@ -285,12 +285,18 @@ var editorHTML = '' +
    editor.find(".button").button();
    playButton_ = editor.find("#play").click(togglePause);
 
+   var levels_ = [
+   { name: "foobar", img: "foo", },
+   { name: "foobar2", img: "foo1", },
+   { name: "foobar3", img: "foo2", },
+   ];
+
    var loadDialog = lootgrab.load.init();
    editor.find("#load").click(function(){
        if (running_) {
          togglePause();
        }
-       loadDialog.dialog('open');
+       loadDialog.show(world_, levels_);
        return false;
      });
 
