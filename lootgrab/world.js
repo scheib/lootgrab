@@ -167,13 +167,13 @@ World.prototype.defAt = function(x, y) {
 };
 
 // Convenience function for whether or not a given cell is not passable.
-World.prototype.isBlocking = function(x, y) {
+World.prototype.isBlocking = function(x, y, testActor) {
   var cell = this.cellAt(x, y);
   var actors = this.actorsInCell(x,y);
   var result = cell.passable;
 
   for (var i = 0; result && ( i < actors.length); ++i) {
-    result = result && actors[i].canPass(this.hero);
+    result = result && actors[i].canPass(testActor);
   }
 
   return !result;
@@ -193,6 +193,8 @@ World.prototype.isDesirable = function(x, y) {
 
 World.prototype.actorsInCell = function(x, y) {
   var result = [];
+  x = Math.floor(x);
+  y = Math.floor(y);
   for (var j = 0; j < this.actors.length; ++j) {
     var actor = this.actors[j];
     if (Math.floor(actor.position.x) != x ||
@@ -258,6 +260,7 @@ World.prototype.getEditorActions = function() {
   // Delete actor actions
   actions.push({
     type: "click",
+    uiName: "Delete actor",
     sprite: this.newEntity("spriteCancel"),
     apply: function(x,y) {
       that.deleteActorsInCell(x, y);
@@ -273,6 +276,7 @@ World.prototype.getEditorActions = function() {
       if(def.type == "Cell"){
         actions.push({
           type: "paint",
+          uiName: (def.uiName) ? def.uiName : ("Add uiName to: " + defName),
           sprite: that.newEntity(def.sprite),
           apply: function(x,y) {
             that.setCellAt(name, x, y);
@@ -291,6 +295,7 @@ World.prototype.getEditorActions = function() {
       if(defName.match(/^actor/)) {
         actions.push({
           type: "click",
+          uiName: (def.uiName) ? def.uiName : ("Add uiName to: " + defName),
           sprite: that.newEntity(def.sprite),
           apply: function(x,y) {
             that.deleteActorsInCell(x, y);
@@ -309,30 +314,32 @@ World.prototype.getEditorActions = function() {
  * Gets the possible PLAYTIME typs of actions within the editor
  */
 World.prototype.getPlaytimeEditorActions = function() {
-  var that = this;
+  var world = this;
   var actions = [];
 
-  
   // Add actor actions
-  for(var _placeableStr in this.levelData_.placeables) {
+  for(var i = 0; i < this.levelData_.placeables.length; ++i) {
     (function() {
-      var defName = _placeableStr;
-      var def = that._entity_defs[defName];
+      var defName = world.levelData_.placeables[i];
+      var def = world._entity_defs[defName];
       actions.push({
         type: "click",
-        sprite: that.newEntity(def.sprite),
+        uiName: (def.uiName) ? def.uiName : ("Add uiName to: " + defName),
+        sprite: world.newEntity(def.sprite),
         apply: function(x,y) {
           // Check that we can place the item
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
+          if (world.actorsInCell(x,y).length)
+            return;
+          var cell = world.cellAt(x, y);
+          if (!cell.passable)
+            return;
+
           // Place it
-          that.deleteActorsInCell(x, y);
-          that.addActor(defName, x, y);
+          world.deleteActorsInCell(x, y);
+          world.addActor(defName, x, y);
           // If we are placing the item, remove it from inventory
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
+          // Disable this action
+          this.disabled = true;
         }
       });
     })();

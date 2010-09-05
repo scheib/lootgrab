@@ -431,6 +431,7 @@ tdl.base.inherit = function(subClass, superClass) {
    */
   var TmpClass = function() { };
   TmpClass.prototype = superClass.prototype;
+  TmpClass.prototype.base = superClass.prototype;
   subClass.prototype = new TmpClass();
 };
 

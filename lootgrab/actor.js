@@ -80,7 +80,7 @@ Actor.prototype.update = function(world, tick, elapsed) {
   if (this.tempSpeedTicksLeft > 0) this.tempSpeedTicksLeft--;
 
   var nextpos = this.position.add(this.heading.mul(0.5))
-  if (this.world.isBlocking(nextpos.x, nextpos.y)) {
+  if (this.world.isBlocking(nextpos.x, nextpos.y, this)) {
     this.heading = this.heading.negate();
   }
   this.updatePosition();
@@ -114,7 +114,8 @@ Actor.prototype.kill = function() {
 }
 
 Actor.prototype.killed = function() {
-  lootgrab.audio.play_sound("death");
+  if (this.killable)
+    lootgrab.audio.play_sound("death");
   this.deathState = Actor.DEAD;
   this.baseSpeed = 0;
   this.tempSpeed = 0;
