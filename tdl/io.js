@@ -323,14 +323,22 @@ tdl.io.loadJSON = function(url, callback) {
       // https://developer.mozilla.org/En/Using_XMLHttpRequest
       var success = request.status == 200 || request.status == 0;
       if (success) {
-        json = eval("(" + request.responseText + ")");
+        try {
+          json = eval("(" + request.responseText + ")");
+        } catch (e) {
+          success = false;
+        }
       }
       loadInfo.finish();
       callback(json, success ? null : 'could not load: ' + url);
     }
   };
   request.onreadystatechange = finish;
-  request.send(null);
+  try {
+    request.send(null);
+  } catch (e) {
+    callback(undefined, 'could not load: ' + url);
+  }
   return loadInfo;
 };
 

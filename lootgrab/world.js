@@ -35,15 +35,21 @@ function World(entityDefs, level) {
   // entity defs are demand-initalized so that
   // entity defs can reference other entity defs during load
   this._entity_defs = entityDefs;
-  this.levelData_ = level;
-  this.init_(this.levelData_);
+  this.setLevel(level);
 }
 
 World.prototype.reset = function() {
   this.clearMessage();
   this.init_(this.levelData_);
-  this.game.reset();
-}
+  if (this.game) {
+    this.game.reset();
+  }
+};
+
+World.prototype.setLevel = function(level) {
+  this.levelData_ = level; //eval(JSON.stringify(level));
+  this.reset();
+};
 
 World.prototype.init_ = function() {
   // init the cell grid
@@ -66,7 +72,7 @@ World.prototype.init_ = function() {
 
     this.actors.push(a);
   }
-}
+};
 
 World.prototype.newEntity = function(entDefID) {
   def = this.getDef(entDefID);
@@ -220,7 +226,7 @@ World.prototype.actorsInCell = function(x, y) {
 }
 
 World.prototype.lineOfSight = function(x,y,heading) {
-  
+
 }
 
 World.prototype.draw_dbg = function (ctx) {
