@@ -257,10 +257,14 @@ var editorHTML = '' +
    }
  }
 
- function togglePause() {
-   running_ = !running_;
+ function setPause(paused) {
+   running_ = !paused;
    playButton_.button( "option", "label",
                       running_ ? "pause" : "play");
+ }
+
+ function togglePause() {
+   setPause(running_);
  };
 
  function init(element) {
@@ -329,6 +333,11 @@ var editorHTML = '' +
      });
    editor.find("#reset").click(function() {
      world_.reset();
+   });
+   editor.find("#edit").click(function() {
+     togglePause();
+     world_.reset();
+     // togglePlayMode();
    });
 
    togglePause();
