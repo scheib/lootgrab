@@ -26,6 +26,7 @@ function World(entityDefs, level) {
   this.width = level.width;
   this.height = level.height;
   this.hero = null;
+  this.game = null;
 
   // entity defs are demand-initalized so that
   // entity defs can reference other entity defs during load
@@ -51,6 +52,7 @@ function World(entityDefs, level) {
     this.actors.push(a);
   }
 }
+
 
 World.prototype.newEntity = function(entDefID) {
   def = this.getDef(entDefID);
