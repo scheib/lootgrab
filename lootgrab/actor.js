@@ -108,6 +108,7 @@ Actor.prototype.kill = function() {
 }
 
 Actor.prototype.killed = function() {
+  lootgrab.audio.play_sound("death");
   this.deathState = Actor.DEAD;
   this.speed = 0;
   this.heading = Vec2.CENTER;
