@@ -10,7 +10,11 @@ var getEntityDefs = function() {
         type : "Cell",
         render_tile: "FloorRug",
     },
-
+    "wallCell" : {
+        type : "Cell",
+        render_tile: "WallH",
+        passable : false
+    },
     "tileset_env" : {
       type : "tileset",
       image: "images/lofi_environment_a_4x.png",

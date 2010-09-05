@@ -8,14 +8,14 @@ function getLevelData(level) {
         name : "world name",
         width : 8,
         height : 8,
-        cells : ["dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
-                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
-                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
-                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
-                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
-                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
-                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
-                 "dirtCell", "dirtCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell"],
+        cells : ["dirtCell", "wallCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "wallCell", "dirtCell", "wallCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "wallCell", "dirtCell", "wallCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "dirtCell", "dirtCell", "wallCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "wallCell", "wallCell", "wallCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "wallCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "wallCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell",
+                 "dirtCell", "wallCell", "dirtCell", "rugCell", "dirtCell", "dirtCell", "dirtCell", "rugCell"],
         
         actors : {}
     }
