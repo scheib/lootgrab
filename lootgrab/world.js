@@ -6,13 +6,13 @@ function Cell(world,def,x,y) {
   this.x = x;
   this.y = y;
   this.setType(def);
-  this.passable = 'passable' in def ? def.passable : true;
 }
 
 Cell.prototype.setType = function(def) {
   this.ground_ent = this.world.newEntity(def.sprite)
   if(this.ground_ent === undefined)
     throw "Cell.setType() could instantiate a ground_ent by using:" + def.sprite
+  this.passable = 'passable' in def ? def.passable : true;
 }
 
 Cell.prototype.draw = function(ctx,x,y,w,h) {
