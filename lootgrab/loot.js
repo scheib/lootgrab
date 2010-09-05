@@ -28,11 +28,6 @@ function Shield(w, def) {
 };
 tdl.base.inherit(Shield, Loot);
 
-function Fire(w, def) {
-  Loot.call(this, w, def);
-};
-tdl.base.inherit(Fire, Loot);
-
 function Wand(w, def) {
   Loot.call(this, w, def);
 };

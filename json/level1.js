@@ -58,6 +58,8 @@ function getLevelData(level) {
           { actor_def: "actorDoor",position : { x : 4, y : 2 } },
           { actor_def: "actorDoor",position : { x : 4, y : 5 } },
           { actor_def: "actorDoor",position : { x : 4, y : 6 } },
+          { actor_def: "actorFire",position : { x : 15, y : 6 } },
+          { actor_def: "actorFire",position : { x : 15, y : 8 } },
         ],
         placeables : [
           "actorKey",

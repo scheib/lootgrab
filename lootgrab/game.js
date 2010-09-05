@@ -3,6 +3,7 @@ tdl.require("lootgrab.actor");
 tdl.require("lootgrab.audio");
 tdl.require("lootgrab.door");
 tdl.require("lootgrab.exit");
+tdl.require("lootgrab.fire");
 tdl.require("lootgrab.hero");
 tdl.require("lootgrab.loot");
 tdl.require("lootgrab.skeleton");
