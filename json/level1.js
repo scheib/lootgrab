@@ -54,6 +54,7 @@ function getLevelData(level) {
         placeables : [
           "actorKey", 
           "actorDoor",
+          "actorTimedWall",
         ],
     }
 }
