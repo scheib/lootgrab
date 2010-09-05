@@ -25,7 +25,7 @@ var editorHTML = '' +
 '</div>' +
 '</div>' +
 '<div id="tiles">' +
- '<canvas id="currentTile" width="32" height="32"></canvas>' +
+ '<canvas id="currentTile" width="230" height="32"></canvas>' +
  '<div id="tileListContainer">' +
   '<canvas id="tileList" width="230" height="352"></canvas>' +
   '<canvas id="tileCursor" width="32" height="32"></canvas>' +
@@ -229,6 +229,10 @@ var editorHTML = '' +
    if (currentEditorAction_) {
      currentTileCtx.clearRect(0,0, currentTileCtx.canvas.width, currentTileCtx.canvas.height);
      currentEditorAction_.sprite.draw(currentTileCtx, 0, 0, 32, 32);
+     currentTileCtx.fillStyle = "rgba(0,0,0,1)";
+     currentTileCtx.textAlign = "left";
+     currentTileCtx.textBaseline = "middle";
+     currentTileCtx.fillText(currentEditorAction_.uiName, 34, 16);
 
      cellCursorCtx_.clearRect(0,0, cellCursorCtx_.canvas.width, cellCursorCtx_.canvas.height);
      cellCursorCtx_.globalAlpha = (renderCount_ % 8) / 16 + 0.25;
