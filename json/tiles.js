@@ -5,6 +5,7 @@ var getEntityDefs = function() {
     // Actors
     "actorHero"           : { type : "Hero",      sprite : "spriteHero",            },
     "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", },
+    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper", },
     "actorKey"            : { type : "Key",       sprite : "spriteKey",             },
     "actorShield"         : { type : "Shield",    sprite : "spriteShield",          },
     "actorFire"           : { type : "Fire",      sprite : "spriteFire",            },
@@ -70,7 +71,7 @@ var getEntityDefs = function() {
     "spriteFlamingSkull"    : { type : "Sprite", tileset : "tileset_char", start_x:  5, start_y:  6, frames: 1 },
     "spriteMummy"           : { type : "Sprite", tileset : "tileset_char", start_x: 10, start_y:  6, frames: 1 },
     "spriteMummyKing"       : { type : "Sprite", tileset : "tileset_char", start_x: 11, start_y:  6, frames: 1 },
-    "spriteDeath"           : { type : "Sprite", tileset : "tileset_char", start_x: 13, start_y:  6, frames: 1 },
+    "spriteGrimReaper"      : { type : "Sprite", tileset : "tileset_char", start_x: 13, start_y:  6, frames: 1 },
 
 
     "tileset_obj" : {
