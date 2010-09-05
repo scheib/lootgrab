@@ -1,6 +1,7 @@
 tdl.provide("actor")
 
-tdl.require("lootgrab.math")
+tdl.require("lootgrab.math");
+tdl.require('lootgrab.audio');
 
 /**
  *
@@ -93,6 +94,7 @@ Actor.prototype.isDead = function() {
 }
 
 Actor.prototype.kill = function() {
+  lootgrab.audio.play_sound("death");
   this.deathState = Actor.DYING;
 }
 

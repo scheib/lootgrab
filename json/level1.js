@@ -28,7 +28,7 @@ function getLevelData(level) {
           },
           { actor_def: "actorSkeleton",
             position : { x : 3, y : 5 },
-            heading : "CENTER",
+            heading : "UP",
           },
           { actor_def: "actorGrimReaper",
             position : { x : 2, y : 6 },

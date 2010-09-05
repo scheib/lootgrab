@@ -1,6 +1,6 @@
 tdl.provide('lootgrab.audio');
 
-// To play a sound, simply call lootgrab.audio.playsound(id), where id is
+// To play a sound, simply call lootgrab.audio.play_sound(id), where id is
 // one of the keys of the g_sound_files array, e.g. "damage".
 
 lootgrab.audio = (function() {
