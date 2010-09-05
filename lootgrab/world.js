@@ -47,7 +47,7 @@ World.prototype.newEntity = function(entDefID) {
   if(def === undefined)
     throw "No entity def found for " + entDefID;
 
-  var e = eval("new "+def.type+"(this, entDefID)");
+  var e = eval("new "+def.type+"(this, def)");
   return e;
 }
 

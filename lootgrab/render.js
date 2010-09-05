@@ -4,8 +4,7 @@ tdl.require('lootgrab.world');
 //////////////////////////////////////////////////
 g_imageDB = {};
 
-function ImageEntity(world,entID) {
-  var def = world.getDef(entID);
+function ImageEntity(world, def) {
   var that = this;
   var img = g_imageDB[def.img];
   if(!img) {
@@ -27,8 +26,7 @@ ImageEntity.prototype.draw = function(ctx, x,y,w,h) {
 }
 
 //////////////////////////////////////////////////
-function TileEntity(world, entID) {
-  var tile_def = world.getDef(entID);
+function TileEntity(world, tile_def) {
   if(tile_def === undefine)
     throw "Tile def could not be found!"
 
