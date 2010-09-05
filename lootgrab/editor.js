@@ -347,7 +347,7 @@ var editorHTML = '' +
      }
    });
    editor.find("#edit").click(function() {
-     togglePause();
+     setPause(true);
      setEditorMode(editMode_ == "LevelEditMode" ? "PlaytimeMode" : "LevelEditMode");
      world_.reset();
    });
