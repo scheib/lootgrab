@@ -40,9 +40,12 @@ var getEntityDefs = function() {
       tile_width: 32,
       tile_height: 32,
     },
-    "grass" : {
-      img : "http://blah.com/chew.png",
-    },
+    "HeroTile"         : { type : "TileEntity", tileset : "tileset_char", start_x:  0, start_y: 0, frames: 1 },
+
+    "Hero" : {
+      type : "Hero",
+      position : { x : 2, y : 2}
+    }
   }
 }
 /*

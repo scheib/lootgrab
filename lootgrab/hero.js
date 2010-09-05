@@ -6,4 +6,3 @@ function Hero(w, def) {
 }
 
 tdl.base.inherit(Hero, Actor);
-
