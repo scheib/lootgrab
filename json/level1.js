@@ -4,17 +4,17 @@ var getData = function() {
     return {
         entities : {
             "dirt" : {
-                type : "image",
+                type : "ImageEntity",
                 img : "images/previewenv.png",
             },
             "grass" : {
-                type : "image",
+                type : "ImageEntity",
                 img : "images/previewenv.png",
             },
             "baddie" : {
-                type : "image",
+                type : "ImageEntity",
                 img : "images/previewenv.png",
-            }
+            },
         },
 
         cells : {

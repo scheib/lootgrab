@@ -2,7 +2,7 @@ tdl.provide('render');
 tdl.require('world');
 
 //////////////////////////////////////////////////
-function ImageEntity(world,entID) {
+function ImageEntity(world, entID) {
   var def = world.getDef(entID);
   var that = this;
   this.img = new Image();
@@ -20,8 +20,8 @@ ImageEntity.prototype.draw = function(ctx, x,y,w,h) {
 }
 
 //////////////////////////////////////////////////
-function TileEntity(world,entID) {
-  var tile_def = world.getDef(entID)
+function TileEntity(world, entID) {
+  var tile_def = world.getDef(entID);
   if(tile_def === undefine)
     throw "Tile def could not be found!"
   

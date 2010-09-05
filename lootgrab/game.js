@@ -7,7 +7,6 @@ function Game(w) {
 }
 
 Game.prototype.update = function(tick) {
-  for (var aIdx)
 }
 
 /**

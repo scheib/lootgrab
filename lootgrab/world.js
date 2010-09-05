@@ -43,19 +43,11 @@ function World(json) {
 }
 
 World.prototype.newEntity = function(entDefID) {
-  that = this;
   def = this.getDef(entDefID);
   if(def === undefined)
     throw "No entity def found for " + entDefID;
 
-  if(def.type == "image") {
-    e = new ImageEntity(this,entDefID)
-  } else if(def.type == "tile") {
-    e = new TileEntity(this,entDefID);
-  } else {
-    throw "Un instantiable ent type: " + def.type
-  }
-  this.id = entDefID;
+  var e = eval("new "+def.type+"(this, entDefID)");
   return e;
 }
 
