@@ -46,6 +46,11 @@ var getEntityDefs = function() {
     "SwordCell"           : { type : "Cell", sprite: "spriteSword"          },
     "MeatCell"            : { type : "Cell", sprite: "spriteMeat"           },
     "GoldCell"            : { type : "Cell", sprite: "spriteGold"           },
+
+    "actorGoldBars"        : { type : "GoldBars", sprite: "spriteGoldBars"       },
+    "actorSkull"           : { type : "Skull"   , sprite: "spriteSkull"          },
+    "actorGrate"           : { type : "Grate"   , sprite: "spriteGrate"          },
+    "actorCircle"          : { type : "Circle"  , sprite: "spriteCircle"         },
    
     // Sprite Definitions --------------------------------
    
@@ -92,13 +97,24 @@ var getEntityDefs = function() {
       tile_width: 32,
       tile_height: 32,
     },
-    "spriteKey" : { type : "Sprite", tileset : "tileset_obj", start_x: 2, start_y: 2, frames: 1 },
-    "spriteShield" : { type : "Sprite", tileset : "tileset_obj", start_x: 4, start_y: 3, frames: 1 },
-    "spriteFire" : { type : "Sprite", tileset : "tileset_obj", start_x: 9, start_y: 6, frames: 2 },
-    "spriteWand" : { type : "Sprite", tileset : "tileset_obj", start_x: 14, start_y: 3, frames: 1 },
-    "spriteCross" : { type : "Sprite", tileset : "tileset_obj", start_x: 4, start_y: 1, frames: 1 },
-    "spriteSword" : { type : "Sprite", tileset : "tileset_obj", start_x: 6, start_y: 3, frames: 1 },
-    "spriteMeat" : { type : "Sprite", tileset : "tileset_obj", start_x: 13, start_y: 1, frames: 1 },
-    "spriteGold" : { type : "Sprite", tileset : "tileset_obj", start_x: 0, start_y: 0, frames: 1 },
+    "spriteKey"      : { type : "Sprite", tileset : "tileset_obj", start_x:  2, start_y:  2, frames: 1 },
+    "spriteShield"   : { type : "Sprite", tileset : "tileset_obj", start_x:  4, start_y:  3, frames: 1 },
+    "spriteFire"     : { type : "Sprite", tileset : "tileset_obj", start_x:  9, start_y:  6, frames: 2 },
+    "spriteWand"     : { type : "Sprite", tileset : "tileset_obj", start_x: 14, start_y:  3, frames: 1 },
+    "spriteCross"    : { type : "Sprite", tileset : "tileset_obj", start_x:  4, start_y:  1, frames: 1 },
+    "spriteSword"    : { type : "Sprite", tileset : "tileset_obj", start_x:  6, start_y:  3, frames: 1 },
+    "spriteMeat"     : { type : "Sprite", tileset : "tileset_obj", start_x: 13, start_y:  1, frames: 1 },
+    "spriteGold      : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  0, frames: 1 },
+
+    "tileset_obj" : {
+      type : "tileset",
+      image: "images/lofi_dungeon_features_a_4x.png",
+      tile_width: 32,
+      tile_height: 32,
+    },
+    "spriteGoldBars" : { type : "Sprite", tileset : "tileset_obj", start_x: 12, start_y:  1, frames: 1 },
+    "spriteSkull"    : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  6, frames: 1 },
+    "spriteGrate"    : { type : "Sprite", tileset : "tileset_obj", start_x:  0, start_y:  1, frames: 1 },
+    "spriteCircle"   : { type : "Sprite", tileset : "tileset_obj", start_x: 12, start_y:  3, frames: 1 },
   };
 }
