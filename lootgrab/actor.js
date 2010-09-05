@@ -15,12 +15,15 @@ function Actor(w, entDef) {
       ? new Vec2(entDef.position.x + .5,  entDef.position.y + .5)
       : new Vec2(1.5,1.5);
   this.heading = Vec2.RIGHT;
-  this.speed = .05;
+  this.speed = .025;
   this.radius = .25;
 
   this.isAlive = true;
 
   this.sprite = this.world.newEntity(entDef.render_tile);
+
+  this.loot = 'loot' in entDef ? entDef.loot : false;
+  this.passable = 'passable' in entDef ? entDef.passable : true;
 }
 
 Actor.prototype.draw = function(ctx, cw, ch) {
