@@ -23,6 +23,7 @@ var getEntityDefs = function() {
     "actorExit"           : { type : "Exit",      sprite : "spriteStairsUp",        loot : true },
     "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            loot : false, passable : false },
     "actorTrapdoor"       : { type : "Trapdoor",  sprite : "spriteTrapdoorClosed",  loot : false,     renderBackground: true,   openSprite: "spriteTrapdoorOpen" },
+    "actorHole"           : { type : "Hole",      sprite : "spriteHole",            loot : false,     renderBackground: true },
 
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
@@ -32,7 +33,6 @@ var getEntityDefs = function() {
     "cellFloorRug2"       : { type: "Cell", sprite: "spriteFloorRug2"      , passable : true },
     "cellFloorRug3"       : { type: "Cell", sprite: "spriteFloorRug3"      , passable : true },
     "cellFloorRug4"       : { type: "Cell", sprite: "spriteFloorRug4"      , passable : true },
-    "cellHole"            : { type: "Cell", sprite: "spriteHole"           , passable : true },
     "cellStairsDown"      : { type: "Cell", sprite: "spriteStairsDown"     , passable : true },
     "cellStairsUp"        : { type: "Cell", sprite: "spriteStairsUp"       , passable : true },
     "cellWallH"           : { type: "Cell", sprite: "spriteWallH"          , passable : false },
