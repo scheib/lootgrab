@@ -28,8 +28,10 @@ Fire.prototype.update = function(tick, elapsed) {
 
 
 Fire.prototype.onCollide = function(other) {
-  other.kill();
-  this.respawn();
+  if (other.killable) {
+    other.kill();
+    this.respawn();
+  }
 }
 
 Fire.prototype.draw = function(ctx, cw, ch) {
