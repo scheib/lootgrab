@@ -5,7 +5,8 @@ tdl.require('tdl.log');
 lootgrab.route = (function() {
 
   // For the world, return the route as:
-  //   [[source.x, source.y], [x1, y1], [x2, y2], ..., [dest.x, dest.y]]
+  //   [[x1, y1], [x2, y2], ..., [dest.x, dest.y]]
+  // ...where [x1, y1] is the first square to route towards after "source".
   function findRoute(w, source) {
     // Properties used on world:
     // world.width
