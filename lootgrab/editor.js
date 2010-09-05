@@ -1,6 +1,8 @@
 
 tdl.provide('lootgrab.editor');
 
+var W;
+
 lootgrab.editor = (function() {
 
  var editorHTML = '' +
@@ -10,6 +12,7 @@ lootgrab.editor = (function() {
  '<div id="play" class="button">play</div>' +
  '<div id="reset" class="button">reset</div>' +
  '<div id="edit" class="button">edit</div>' +
+ '<div id="undo" class="button">undo</div>' +
  '<div id="load" class="button">load</div>' +
  '<div id="save" class="button">save</div>' +
 '</div>' +
@@ -173,6 +176,7 @@ lootgrab.editor = (function() {
 
  // Grabs all the tile types from the world.
  function setup(_world) {
+W = _world;
    world_ = _world;
 
    currenTileEntity = null;
@@ -217,7 +221,7 @@ lootgrab.editor = (function() {
    if (currentEditorAction_) {
      currentEditorAction_.sprite.draw(currentTileCtx, 0, 0, 32, 32);
      cellCursorCtx_.clearRect(0, 0, 32, 32);
-     cellCursorCtx_.globalAlpha = (renderCount_ % 8) / 16;
+     cellCursorCtx_.globalAlpha = (renderCount_ % 8) / 16 + 0.25;
      currentEditorAction_.sprite.draw(cellCursorCtx_, 0, 0, 32, 32);
    }
  }
@@ -280,13 +284,7 @@ lootgrab.editor = (function() {
        return false;
      });
 
-   var saveDialog = $('<div></div>')
-       .html('<div>Save!</div>')
-       .dialog({
-         autoOpen: false,
-         title: 'Save a Level',
-         modal: true,
-       });
+   var saveDialog = lootgrab.save.init();
    editor.find("#save").click(function(){
        var oldRunning = running_;
        if (running_) {

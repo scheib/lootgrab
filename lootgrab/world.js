@@ -35,7 +35,7 @@ function World(entityDefs, level) {
   // entity defs are demand-initalized so that
   // entity defs can reference other entity defs during load
   this._entity_defs = entityDefs;
-  
+
   // init the cell grid
   this.cells = []
   var i = 0;
@@ -46,13 +46,13 @@ function World(entityDefs, level) {
     var cell = new Cell(this, this.getDef(cellType), cx, cy)
     this.cells.push(cell)
   }
-  
+
   this.actors = [];
   for(var actorID in level.actors) {
     instanceDef = level.actors[actorID];
     var a = this.newEntity(instanceDef.actor_def);
     a.init(instanceDef);
-    
+
     this.actors.push(a);
   }
 
@@ -107,7 +107,7 @@ World.prototype.isDesirable = function(x, y) {
       continue;
     }
     if (actor.loot)
-      return true;  
+      return true;
   }
   return false;
 }
@@ -161,7 +161,7 @@ World.prototype.findActorIndex = function(x,y,a_radius) {
  */
 World.prototype.getEditorActions = function() {
   var that = this;
-  var actions = []
+  var actions = [];
 
   // Delete actor actions
   actions.push({
@@ -175,7 +175,7 @@ World.prototype.getEditorActions = function() {
       }
     }
   });
-  
+
   // Cell setting...
   for(var defName in this._entity_defs) {
     (function() {
@@ -191,7 +191,7 @@ World.prototype.getEditorActions = function() {
       }
     })();
   }
-  
+
   // Add actor actions
   for(var _defName in this._entity_defs) {
     (function() {
