@@ -13,17 +13,26 @@ lootgrab.editor = (function() {
 '<div class="gamelayer" id="selector" style="width: 512px; height: 384px">' +
 '</div>' +
 '</div>' +
-'<div id="tiles"><div id="tileScrollbar"></div>' +
+'<div id="tiles">' +
+ '<canvas id="currentTile" width="32" height="32"></canvas>' +
+ '<div id="tileListContainer">' +
+  '<canvas id="tileList" width="230" height="352"></canvas>' +
+  '<canvas id="tileCursor" width="32" height="32"></canvas>' +
+  '<div id="tileSelect"></div>' +
+  '<div id="tileScrollbar"></div>' +
+ '</div>' +
+'</div>' +
 '</div>';
 
  var world;
  var gfx;
+ var tileCursor;
 
  function setup(_world) {
    world = _world;
  };
 
- function mousemove(e) {
+ function levelMousemove(e) {
    var tileWidth = world.tileVisualWidth(gfx.tileCtx);
    var tileHeight = world.tileVisualHeight(gfx.tileCtx);
 
@@ -32,13 +41,35 @@ lootgrab.editor = (function() {
    var y = Math.floor((e.pageY - off.top) / tileHeight);
  };
 
+ function tileMousemove(e) {
+   var tileWidth = world.tileVisualWidth(gfx.tileCtx);
+   var tileHeight = world.tileVisualHeight(gfx.tileCtx);
+
+   var off = $(this).offset();
+   var x = Math.floor((e.pageX - off.left) / tileWidth);
+   var y = Math.floor((e.pageY - off.top) / tileHeight);
+
+   tileCursor.style.left = x * tileWidth;
+   tileCursor.style.top = y * tileHeight;
+//   tdl.log("tile: ", x, y);
+ };
+
  function init(element) {
    var editor = $('<div></div>').html(editorHTML);
    var canvases = editor.find('CANVAS');
 
    element.appendChild(editor.get()[0]);
 
-   editor.find("#selector").mousemove(mousemove);
+   editor.find("#selector").mousemove(levelMousemove);
+   editor.find("#tileSelect").mousemove(tileMousemove);
+   tileCursor = editor.find("#tileCursor").get()[0];
+
+   var ctx = tileCursor.getContext("2d");
+   ctx.fillStyle = "rgb(255,255,0)";
+   ctx.fillRect(0, 0, 32, 2);
+   ctx.fillRect(0, 0, 2, 32);
+   ctx.fillRect(30, 0, 2, 32);
+   ctx.fillRect(0, 30, 32, 2);
 
    gfx = {
      tileCtx: canvases.get()[0].getContext("2d"),

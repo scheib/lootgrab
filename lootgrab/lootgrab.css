@@ -20,7 +20,39 @@ CANVAS {
 #gamelayer2 { z-index: 11; }
 #gamelayer3 { z-index: 12; }
 #selector { z-index: 13; }
-
+#tileScrollbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#currentTile { background-color: #cc0; }
+#tileListContainer {
+  position: relative;
+  width: 230;
+  height: 352;
+}
+#tileList {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#tileCursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 20;
+  background-color: rgba(0,0,0,0);
+}
+#tileSelect {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 30;
+  width: 230;
+  height: 352;
+  border: 1px solid blue;
+  background-color: rgba(0,0,0,0);
+}
 
 #editor {
   width: 782px;
