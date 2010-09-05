@@ -120,12 +120,14 @@ World.prototype.setLevelCellAt = function(defName, x, y) {
 
 World.prototype.serializeLevel = function(gfx) {
   var canvas = document.createElement("canvas");
-  canvas.width = 128;
-  canvas.height = 96;
+  var width = 128;
+  var height = 96;
+  canvas.width = width;
+  canvas.height = height;
   var ctx = canvas.getContext("2d");
-  ctx.drawImage(gfx.tileCtx.canvas, 0, 0, canvas.width, canvas.height);
-  ctx.drawImage(gfx.entityCtx.canvas, 0, 0, canvas.width, canvas.height);
-  ctx.drawImage(gfx.effectCtx.canvas, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(gfx.tileCtx.canvas, 0, 0, width, height);
+  ctx.drawImage(gfx.entityCtx.canvas, 0, 0, width, height);
+  ctx.drawImage(gfx.effectCtx.canvas, 0, 0, width, height);
   try {
     this.levelData_.img = canvas.toDataURL();
   } catch (e) {
