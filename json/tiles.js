@@ -8,19 +8,19 @@ var getEntityDefs = function() {
     },
    
     // Level pieces
-    "dirtCell" : {
-        type: "Cell",
-        sprite: "spriteFloorA",
-    },
-    "rugCell" : {
-        type : "Cell",
-        sprite: "spriteFloorRug",
-    },
-    "wallCell" : {
-        type : "Cell",
-        sprite: "spriteWallH",
-        passable : false
-    },
+    "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
+    "cellFloorB"          : { type: "Cell", sprite: "spriteFloorB"         , passable : true },
+    "cellFloorC"          : { type: "Cell", sprite: "spriteFloorC"         , passable : true },
+    "cellFloorRug"        : { type: "Cell", sprite: "spriteFloorRug"       , passable : true },
+    "cellHole"            : { type: "Cell", sprite: "spriteHole"           , passable : true },
+    "cellStairsDown"      : { type: "Cell", sprite: "spriteStairsDown"     , passable : true },
+    "cellStairsUp"        : { type: "Cell", sprite: "spriteStairsUp"       , passable : true },
+    "cellTrapdoorClosed"  : { type: "Cell", sprite: "spriteTrapdoorClosed" , passable : true },
+    "cellTrapdoorOpen"    : { type: "Cell", sprite: "spriteTrapdoorOpen"   , passable : true },
+    "cellWallH"           : { type: "Cell", sprite: "spriteWallH"          , passable : false },
+    "cellWallHCrumbled"   : { type: "Cell", sprite: "spriteWallHCrumbled"  , passable : false },
+    "cellWallHTorch"      : { type: "Cell", sprite: "spriteWallHTorch"     , passable : false },
+    "cellWallV"           : { type: "Cell", sprite: "spriteWallV"          , passable : false },
    
     // Actors
     //  (just debuging as Cell for now?)
@@ -52,7 +52,7 @@ var getEntityDefs = function() {
     "spriteWallH"           : { type : "Sprite", tileset : "tileset_env", start_x:  0, start_y: 0, frames: 1 },
     "spriteWallHTorch"      : { type : "Sprite", tileset : "tileset_env", start_x:  1, start_y: 0, frames: 2 },
     "spriteWallHCrumbled"   : { type : "Sprite", tileset : "tileset_env", start_x:  3, start_y: 0, frames: 1 },
-    "spriteWallH"           : { type : "Sprite", tileset : "tileset_env", start_x:  4, start_y: 0, frames: 1 },
+    "spriteWallV"           : { type : "Sprite", tileset : "tileset_env", start_x:  4, start_y: 0, frames: 1 },
     "spriteFloorA"          : { type : "Sprite", tileset : "tileset_env", start_x:  5, start_y: 0, frames: 1 },
     "spriteFloorB"          : { type : "Sprite", tileset : "tileset_env", start_x:  6, start_y: 0, frames: 1 },
     "spriteStairsUp"        : { type : "Sprite", tileset : "tileset_env", start_x:  7, start_y: 0, frames: 1 },
