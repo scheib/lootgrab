@@ -300,8 +300,7 @@ var editorHTML = '' +
        if (running_) {
          togglePause();
        }
-       saveDialog.setWorld(world_);
-       saveDialog.dialog('open');
+       saveDialog.show(world_);
        if (oldRunning) {
          togglePause();
        }
