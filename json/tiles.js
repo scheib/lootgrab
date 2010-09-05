@@ -2,17 +2,22 @@ tdl.provide("tiles");
 
 var getEntityDefs = function() {
   return {
-    "actorHero"      : { type : "Hero",      sprite : "spriteHero",            },
-    "actorSkeleton"  : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", },
-    "actorKey"       : { type : "Key",       sprite : "spriteKey",             },
-    "actorShield"    : { type : "Shield",    sprite : "spriteShield",          },
-    "actorFire"      : { type : "Fire",      sprite : "spriteFire",            },
-    "actorWand"      : { type : "Wand",      sprite : "spriteWand",            },
-    "actorCross"     : { type : "Cross",     sprite : "spriteCross",           },
-    "actorSword"     : { type : "Sword",     sprite : "spriteSword",           },
-    "actorMeat"      : { type : "Meat",      sprite : "spriteMeat",            },
-    "actorGoldChest" : { type : "GoldChest", sprite : "spriteGoldChest",       },
-    "actorGoldBars"  : { type : "GoldBars",  sprite : "spriteGoldBars",        },
+    // Actors
+    "actorHero"           : { type : "Hero",      sprite : "spriteHero",            },
+    "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", },
+    "actorKey"            : { type : "Key",       sprite : "spriteKey",             },
+    "actorShield"         : { type : "Shield",    sprite : "spriteShield",          },
+    "actorFire"           : { type : "Fire",      sprite : "spriteFire",            },
+    "actorWand"           : { type : "Wand",      sprite : "spriteWand",            },
+    "actorCross"          : { type : "Cross",     sprite : "spriteCross",           },
+    "actorSword"          : { type : "Sword",     sprite : "spriteSword",           },
+    "actorMeat"           : { type : "Meat",      sprite : "spriteMeat",            },
+    "actorGoldChest"      : { type : "GoldChest", sprite : "spriteGoldChest",       },
+    "actorGoldBars"       : { type : "GoldBars",  sprite : "spriteGoldBars",        },
+    "actorGoldBars"       : { type : "GoldBars",  sprite: "spriteGoldBars",         },
+    "actorSkull"          : { type : "Skull",     sprite: "spriteSkull",            },
+    "actorGrate"          : { type : "Grate",     sprite: "spriteGrate",            },
+    "actorCircle"         : { type : "Circle",    sprite: "spriteCircle",           },
     
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
@@ -28,31 +33,7 @@ var getEntityDefs = function() {
     "cellWallHCrumbled"   : { type: "Cell", sprite: "spriteWallHCrumbled"  , passable : false },
     "cellWallHTorch"      : { type: "Cell", sprite: "spriteWallHTorch"     , passable : false },
     "cellWallV"           : { type: "Cell", sprite: "spriteWallV"          , passable : false },
-   
-    // Actors
-    //  (just debuging as Cell for now?)
-    "HeroCell"            : { type : "Cell", sprite: "spriteHero"           },
-    "SkeletonCell"        : { type : "Cell", sprite: "spriteSkeleton"       },
-    "SkeletonWarriorCell" : { type : "Cell", sprite: "spriteSkeletonWarrior"},
-    "BatCell"             : { type : "Cell", sprite: "spriteBat"            },
-    "FlamingSkullCell"    : { type : "Cell", sprite: "spriteFlamingSkull"   },
-    "MummyCell"           : { type : "Cell", sprite: "spriteMummy"          },
-    "MummyKingCell"       : { type : "Cell", sprite: "spriteMummyKing"      },
-    "DeathCell"           : { type : "Cell", sprite: "spriteDeath"          },
-    "KeyCell"             : { type : "Cell", sprite: "spriteKey"            },
-    "ShieldCell"          : { type : "Cell", sprite: "spriteShield"         },
-    "FireCell"            : { type : "Cell", sprite: "spriteFire"           },
-    "WandCell"            : { type : "Cell", sprite: "spriteWand"           },
-    "CrossCell"           : { type : "Cell", sprite: "spriteCross"          },
-    "SwordCell"           : { type : "Cell", sprite: "spriteSword"          },
-    "MeatCell"            : { type : "Cell", sprite: "spriteMeat"           },
-    "GoldChestCell"       : { type : "Cell", sprite: "spriteGoldChest"      },
-
-    "actorGoldBars"        : { type : "GoldBars", sprite: "spriteGoldBars"       },
-    "actorSkull"           : { type : "Skull"   , sprite: "spriteSkull"          },
-    "actorGrate"           : { type : "Grate"   , sprite: "spriteGrate"          },
-    "actorCircle"          : { type : "Circle"  , sprite: "spriteCircle"         },
-   
+      
     // Sprite Definitions --------------------------------
    
     "tileset_env" : {
