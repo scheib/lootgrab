@@ -27,7 +27,7 @@ function initialize() {
   var entityDefs = getEntityDefs("level1");
   var world = getLevelData("level1");
   var w = new World(entityDefs, world);
-  var r = new Render(w,gfx.tileCtx);
+  var r = new Render(w, gfx.tileCtx);
   var g = new Game(w);
   tdl.log("World created: ", w.width, w.height)
 
@@ -38,9 +38,11 @@ function initialize() {
   var drawIntervalID = setInterval(gameloop, 32);
   function gameloop() {
     tick = tick + 1;
-    g.update(tick,1)
+    if (editor.isRunning()) {
+      g.update(tick, 1)
+    }
     if (DEBUG) {
-      g.debug_draw(gfx.entityCtx,32);
+      g.debug_draw(gfx.entityCtx, 32);
     }
     r.draw();
     editor.render();
