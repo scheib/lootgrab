@@ -44,7 +44,8 @@ var getEntityDefs = function() {
 
     "Hero" : {
       type : "Hero",
-      position : { x : 2, y : 2}
+      render_tile : "HeroTile",
+      position : { x : 2, y : 2},
     }
   }
 }

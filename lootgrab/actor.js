@@ -17,6 +17,8 @@ function Actor(w, entDef) {
   this.radius = .25;
 
   this.isAlive = true;
+
+  this.sprite = this.world.newEntity(entDef.render_tile);
 }
 
 
