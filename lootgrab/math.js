@@ -24,6 +24,11 @@ Vec2.prototype.sub = function(v) {
   return result;
 }
 
+Vec2.prototype.negate = function(v) {
+  var result = new Vec2(-this.x, -this.y);
+  return result;
+}
+
 Vec2.prototype.dot = function(v) {
   var result = this.x * v.x;
   result += this.y * v.y;
@@ -38,6 +43,7 @@ Vec2.prototype.mul = function(s) {
 Vec2.prototype.len = function() {
   return Math.sqrt(this.dot(this));
 }
+
 
 Vec2.LEFT = new Vec2(-1,0);
 Vec2.RIGHT = new Vec2(1,0);

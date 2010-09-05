@@ -43,7 +43,13 @@ function World(entityDefs, level) {
 
   this.actors = [];
   for(var actorID in level.actors) {
-    this.actors.push(this.newEntity(level.actors[actorID]));
+    adef = level.actors[actorID];
+    var a = this.newEntity(adef.actor_def);
+    if ('position' in adef) {
+      var pos = new Vec2(adef.position.x, adef.position.y);
+      a.position = pos;
+    }
+    this.actors.push(a);
   }
 }
 

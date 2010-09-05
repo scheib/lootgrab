@@ -62,16 +62,18 @@ Game.prototype.resolveCollisions = function() {
  * @param {CanvasContext} ctx
  * @param {Number} scale
  */
-Game.prototype.debug_draw = function(ctx, scale) {
+Game.prototype.debug_draw = function(ctx) {
+  var xscale = this.world.tileVisualWidth(ctx);
+  var yscale = this.world.tileVisualHeight(ctx);
 
   for (var cIdx in this.world.cells) {
     var c = this.world.cells[cIdx];
     ctx.strokeRect(
-        c.x * scale,
-        c.y * scale,
-        scale,
-        scale);
-    ctx.strokeText(c.ground_ent.id, c.x * scale, (c.y + .5) * scale, scale);
+        c.x * xscale,
+        c.y * yscale,
+        xscale,
+        yscale);x
+    ctx.strokeText(c.ground_ent.id, c.x * xscale, (c.y + .5) * yscale, xscale);
 
   }
 
@@ -79,8 +81,8 @@ Game.prototype.debug_draw = function(ctx, scale) {
     var a = this.world.actors[aIdx];
     ctx.beginPath();
     ctx.arc(
-        a.position.x * scale,
-        a.position.y * scale,
+        a.position.x * xscale,
+        a.position.y * yscale,
         a.radius,
         0,
         2 * Math.PI);

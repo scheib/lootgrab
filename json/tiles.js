@@ -49,7 +49,7 @@ var getEntityDefs = function() {
     },
     "HeroTile"         : { type : "TileEntity", tileset : "tileset_char", start_x:  0, start_y: 0, frames: 1 },
 
-    "Hero" : {
+    "HeroActor" : {
       type : "Hero",
       render_tile : "HeroTile",
     },
