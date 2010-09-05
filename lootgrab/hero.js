@@ -6,6 +6,7 @@ function Hero(w, def) {
   Actor.call(this, w, def);
   w.setHero(this);
   this.nextCell = null;
+  this.lastCell = null;
 }
 tdl.base.inherit(Hero, Actor);
 
@@ -33,20 +34,24 @@ Hero.prototype.update = function(world, tick, elapsed) {
 
     var path = lootgrab.route.findRoute(world, pos);
     if (path.length) {
-      var step = new Vec2(path[0][0], path[0][1]);
+      this.lastCell = this.nextCell;
+      this.nextCell = new Vec2(path[0][0] + 0.5, path[0][1] + 0.5);
 
-      if (step.x > pos[0])
-        this.heading = Vec2.RIGHT;
-      else if (step.x < pos[0])
-        this.heading = Vec2.LEFT;
-      else if (step.y < pos[1])
-        this.heading = Vec2.UP;
-      else if (step.y > pos[1])
-        this.heading = Vec2.DOWN;
-      else
-        this.heading = Vec2.CENTER;
-
-      this.nextCell = new Vec2(step.x + 0.5, step.y + 0.5);
+      if (this.lastCell == null) {
+        var step = new Vec2(path[0][0], path[0][1]);
+        if (step.x > pos[0])
+          this.heading = Vec2.RIGHT;
+        else if (step.x < pos[0])
+          this.heading = Vec2.LEFT;
+        else if (step.y < pos[1])
+          this.heading = Vec2.UP;
+        else if (step.y > pos[1])
+          this.heading = Vec2.DOWN;
+        else
+          this.heading = Vec2.CENTER;
+      } else {
+        this.heading = this.nextCell.sub(this.lastCell);
+      }
     }
   }
 

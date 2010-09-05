@@ -31,7 +31,7 @@ function getLevelData(level) {
             heading : "UP",
           },
           { actor_def: "actorGrimReaper",
-            position : { x : 2, y : 6 },
+            position : { x : 1, y : 6 },
             heading : "UP",
           },
           { actor_def: "actorKey", position : { x : 8, y : 2 } },
