@@ -113,7 +113,14 @@ World.prototype.defAt = function(x, y) {
 // Convenience function for whether or not a given cell is not passable.
 World.prototype.isBlocking = function(x, y) {
   var cell = this.cellAt(x, y);
-  return cell ? !cell.passable : false;
+  var actors = this.actorsInCell(x,y);
+  var result = cell.passable;
+
+  for (var i = 0; result && ( i < actors.length); ++i) {
+    result = result && actors[i].canPass(this.hero);
+  }
+
+  return !result;
 };
 
 // Convenience function for whether or not a given cell has something the

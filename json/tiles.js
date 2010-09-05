@@ -21,7 +21,7 @@ var getEntityDefs = function() {
     "actorGrate"          : { type : "Grate",     sprite : "spriteGrate",           loot : true },
     "actorCircle"         : { type : "Circle",    sprite : "spriteCircle",          loot : true },
     "actorExit"           : { type : "Exit",      sprite : "spriteStairsUp",        loot : true },
-    "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            loot : false },
+    "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            loot : false, passable : false },
 
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
@@ -69,7 +69,7 @@ var getEntityDefs = function() {
     "spriteFloorRug4"       : { type : "Sprite", tileset : "tileset_env", start_x: 13, start_y: 3, frames: 1 },
     "spriteWater"           : { type : "Sprite", tileset : "tileset_env", start_x:  2, start_y: 7, frames: 2 },
     "spriteLava"            : { type : "Sprite", tileset : "tileset_env", start_x:  3, start_y: 8, frames: 2 },
-    "spriteDoor"            : { type : "Sprite", tileset : "tileset_env", start_x:  1, start_y:12, frames: 1 },
+    "spriteDoor"            : { type : "Sprite", tileset : "tileset_env", start_x:  0, start_y:13, frames: 1 },
     "spriteCancel"          : { type : "Sprite", tileset : "tileset_env", start_x: 15, start_y:15, frames: 1 },
 
 
