@@ -33,7 +33,6 @@ function Actor(w, entDef) {
 
     this.loot = entDef.loot || false;
     this.passable = (entDef.passable !== undefined) ? entDef.passable : true;
-    this.key = entDef.key || false;
     this.killable = entDef.killable || false;
     this.renderBackground = entDef.renderBackground || false;
   } catch (err) {

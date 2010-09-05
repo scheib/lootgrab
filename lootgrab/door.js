@@ -13,7 +13,7 @@ tdl.base.inherit(Door, Actor);
  */
 Door.prototype.canPass = function(other) {
   if (other == this.world.hero
-      && other.hasKey()) {
+      && other.hasItem("key")) {
     return true;
   } else {
     return Actor.prototype.canPass.call(this, other);
