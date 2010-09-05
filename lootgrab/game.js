@@ -24,7 +24,7 @@ Game.prototype.debug_draw = function(ctx, scale) {
         c.y * scale,
         scale,
         scale);
-    ctx.strokeText(c.ent)
+    ctx.strokeText(c.ground_ent.id, c.x * scale, (c.y + .5) * scale, scale);
 
   }
 
