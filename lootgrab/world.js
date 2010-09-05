@@ -206,6 +206,10 @@ World.prototype.actorsInCell = function(x, y) {
   return result;
 }
 
+World.prototype.lineOfSight = function(x,y,heading) {
+  
+}
+
 World.prototype.draw_dbg = function (ctx) {
   cell_width = this.tileVisualWidth();
   cell_height = tile.tileVisualHeight();
