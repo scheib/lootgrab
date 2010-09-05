@@ -30,6 +30,7 @@ function Actor(w, entDef) {
     this.passable = entDef.passable || true;
     this.key = entDef.key || false;
     this.killable = entDef.killable || false;
+    this.renderBackground = entDef.renderBackground || false;
   } catch (err) {
     alert("Couldn't create Actor: " + err.toString());
   }

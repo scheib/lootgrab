@@ -15,7 +15,13 @@ function Trapdoor(w, def) {
 };
 tdl.base.inherit(Trapdoor, Trap);
 
+var minTrapDistance = 0.1;
+
 Trapdoor.prototype.onCollide = function(other) {
-  this.open = true;
-  this.sprite = this.world.newEntity(this.openSprite);
+  if (other.position.sub(this.position).len() < minTrapDistance) {
+    this.open = true;
+    this.sprite = this.world.newEntity(this.openSprite);
+    if (other.killable)
+      other.kill();
+  }
 };
