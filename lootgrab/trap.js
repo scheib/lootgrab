@@ -20,10 +20,11 @@ var minTrapdoorDistance = 0.1;
 
 Trapdoor.prototype.onCollide = function(other) {
   if (other.position.sub(this.position).len() < minTrapdoorDistance) {
-    if (other.killable)
+    if (other.killable) {
       other.kill();
-    this.open = true;
-    this.sprite = this.world.newEntity(this.openSprite);
+      this.open = true;
+      this.sprite = this.world.newEntity(this.openSprite);
+    }
   }
 };
 
