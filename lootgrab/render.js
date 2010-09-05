@@ -50,7 +50,6 @@ function Sprite(world, tile_def) {
     g_imageDB[tileset_def.image] = img;
   }
   this.img = img;
-
 }
 Sprite.prototype.draw = function(ctx, x,y,w,h) {
   var tileWidth = 32;

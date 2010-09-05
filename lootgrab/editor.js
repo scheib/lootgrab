@@ -53,13 +53,11 @@ lootgrab.editor = (function() {
  // The element that is the cursor in the tile list.
  var tileCursor;
 
- // The tile the user will draw with.
- var currentTileDef;
- var currentTileEntity;
+ // The action the editor is drawing with.
+ var currentEditorAction;
 
- // The cell defs
- var cellDefs = [];
- var cellEntities = [];
+ // The actions available
+ var editorActions = [];
 
  // buttons
  var playButton;
@@ -97,10 +95,9 @@ lootgrab.editor = (function() {
    $(tileCursor).hide();
  }
 
- function setCurrentTile(index) {
-   if (index < cellDefs.length) {
-     currentTileDef = cellDefs[index];
-     currentTileEntity = cellEntities[index];
+ function setCurrentAction(index) {
+   if (index < editorActions.length) {
+     currentEditorAction = editorActions[index];
    }
  }
 
@@ -109,7 +106,7 @@ lootgrab.editor = (function() {
    var ti = getTileListInfo();
    var pos = computeTileCoords(e, this);
    var index = pos.y * ti.tilesAcross + pos.x;
-   setCurrentTile(index);
+   setCurrentAction(index);
    return false;
  }
 
@@ -140,9 +137,9 @@ lootgrab.editor = (function() {
    $(cellCursor).hide();
  }
 
- function setCell(pos) {
-   if (drawing && currentTileDef) {
-     world.setCellDef(pos.x, pos.y, currentTileDef);
+ function applyAction(pos) {
+   if (drawing && currentEditorAction) {
+     currentEditorAction.apply(pos.x, pos.y);
    }
  }
 
@@ -153,7 +150,7 @@ lootgrab.editor = (function() {
    cellCursor.style.top = pos.y * pos.tileHeight;
    cellCursor.style.width = pos.tileWidth.toString() + "px";
    cellCursor.style.height = pos.tileHeight.toString() + "px";
-   setCell(pos);
+   applyAction(pos);
  }
 
  function cellMouseup(e) {
@@ -163,8 +160,13 @@ lootgrab.editor = (function() {
  function cellMousedown(e) {
    var pos = computeTileCoords(e, this);
    drawing = true;
-   $(selector).bind('mouseup', cellMouseup);
-   setCell(pos);
+   if(currentEditorAction.type == "click") {
+     applyAction(pos);
+     drawing = false;
+   } else {
+     $(selector).bind('mouseup', cellMouseup);
+     applyAction(pos);
+   }
    return false;
  }
 
@@ -174,21 +176,14 @@ lootgrab.editor = (function() {
    world = _world;
 
    currenTileEntity = null;
-   cellEntities = [];
+   editorActions = [];
 
    currentTileCtx.fillStyle = "gray";
    currentTileCtx.fillRect(0, 0, 32, 32);
 
-   cellDefs = world.getCellDefs();
-   for (var ii = 0; ii < cellDefs.length; ++ii) {
-     var cellDef = cellDefs[ii];
-     var tileName = cellDef.sprite;
-     var ent = world.newEntity(tileName);
-     cellEntities.push(ent);
-   }
-
-   if (cellDefs.length) {
-     setCurrentTile(0);
+   editorActions = world.getEditorActions();
+   if (editorActions.length) {
+     setCurrentAction(0);
    }
 
    var worldPixelWidth = world.tileVisualWidth() * world.width;
@@ -207,11 +202,11 @@ lootgrab.editor = (function() {
    var ti = getTileListInfo();
 
    // TODO(gman): compute first tile and last instead of drawing all tiles.
-   for (var ii = 0; ii < cellEntities.length; ++ii) {
-     var ent = cellEntities[ii];
+   for (var ii = 0; ii < editorActions.length; ++ii) {
+     var action = editorActions[ii];
      var tx = ii % ti.tilesAcross;
      var ty = Math.floor(ii / ti.tilesAcross);
-     ent.draw(
+     action.sprite.draw(
          tileListCtx,
          tx * ti.tileWidth,
          ty * ti.tileHeight,
@@ -219,11 +214,11 @@ lootgrab.editor = (function() {
          ti.tileHeight);
    }
 
-   if (currentTileEntity) {
-     currentTileEntity.draw(currentTileCtx, 0, 0, 32, 32);
+   if (currentEditorAction) {
+     currentEditorAction.sprite.draw(currentTileCtx, 0, 0, 32, 32);
      cellCursorCtx.clearRect(0, 0, 32, 32);
      cellCursorCtx.globalAlpha = (renderCount % 8) / 16;
-     currentTileEntity.draw(cellCursorCtx, 0, 0, 32, 32);
+     currentEditorAction.sprite.draw(cellCursorCtx, 0, 0, 32, 32);
    }
  }
 
