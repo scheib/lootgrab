@@ -89,8 +89,11 @@ Sprite.prototype.draw = function(ctx, x,y,w,h) {
                   x,y,w,h);
   } catch(e) {
     if(this.error_printed===undefined) {
-      tdl.log("problem with image " + this.entDefID);
+      tdl.log("problem with image " + this.entDefID);     
       this.error_printed = true;
+      tdl.log("img.src = ", this.img.src);
+      tdl.log("srcx, srcy = ", tx, ty);
+      tdl.log("img.width, img.height ", this.img.width, this.img.height);
     }
   }
 }

@@ -111,9 +111,9 @@ var getEntityDefs = function() {
       tile_width: 32,
       tile_height: 32,
     },
-    "spriteGoldBars" : { type : "Sprite", tileset : "tileset_features", start_x: 12, start_y:  1, frames: 1 },
+    "spriteGoldBars" : { type : "Sprite", tileset : "tileset_features", start_x: 11, start_y:  1, frames: 1 },
     "spriteSkull"    : { type : "Sprite", tileset : "tileset_features", start_x:  0, start_y:  6, frames: 1 },
     "spriteGrate"    : { type : "Sprite", tileset : "tileset_features", start_x:  0, start_y:  1, frames: 1 },
-    "spriteCircle"   : { type : "Sprite", tileset : "tileset_features", start_x: 12, start_y:  3, frames: 1 },
+    "spriteCircle"   : { type : "Sprite", tileset : "tileset_features", start_x: 11, start_y:  3, frames: 1 },
   };
 }
