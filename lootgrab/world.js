@@ -319,9 +319,11 @@ World.prototype.getPlaytimeEditorActions = function() {
       var def = that._entity_defs[defName];
       actions.push({
         type: "click",
+        uiName: (def.uiName) ? def.uiName : ("Add uiName to: " + defName),
         sprite: that.newEntity(def.sprite),
         apply: function(x,y) {
           // Check that we can place the item
+          
           // OTODODODOTOTODO
           // OTODODODOTOTODO
           // OTODODODOTOTODO
@@ -332,6 +334,7 @@ World.prototype.getPlaytimeEditorActions = function() {
           // OTODODODOTOTODO
           // OTODODODOTOTODO
           // OTODODODOTOTODO
+          // Disable this click
         }
       });
     })();
