@@ -85,5 +85,24 @@ CANVAS {
   padding:10px;
   background:#99c;
 }
-
-
+.deathmessage {
+  position:absolute;
+  bottom:-10px;
+  left:50%;
+  width:400px;
+  margin-left:-225px;
+  -webkit-border-radius:5px;
+  background-color:black;
+  color:white;
+  text-align:center;
+  opacity:0;
+  font-size:16px;
+  font-weight:bold;
+  padding:25px;
+  -webkit-transition:all 0.3s;
+  z-index:5000;
+}
+.deathmessage.done {
+  opacity:1;
+  bottom:10px;
+}

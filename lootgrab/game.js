@@ -47,9 +47,11 @@ Game.prototype.update = function(tick, elapsed) {
   for (var i = 0, corpse; corpse = freshlyDead[i]; i++) {
     if (corpse == this.world.hero) {
       var death_message = document.createElement('div');
-      death_message.style.backgroundColor = 'red';
+      death_message.className = 'deathmessage'
       death_message.appendChild(document.createTextNode("You died"));
-      document.getElementById('toolbar').appendChild(death_message);
+      document.body.appendChild(death_message);
+      setTimeout(function() {death_message.className = 'deathmessage done';}, 1);
+      
       this.status = Game.LOSS;
     }
     corpse.killed();
