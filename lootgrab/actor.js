@@ -21,6 +21,9 @@ function Actor(w, entDef) {
   this.isAlive = true;
 
   this.sprite = this.world.newEntity(entDef.render_tile);
+
+  this.loot = 'loot' in entDef ? entDef.loot : false;
+  this.passable = 'passable' in entDef ? entDef.passable : true;
 }
 
 Actor.prototype.draw = function(ctx, cw, ch) {
