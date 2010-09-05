@@ -26,6 +26,7 @@ Fire.prototype.update = function(tick, elapsed) {
   }
 }
 
+
 Fire.prototype.onCollide = function(other) {
   other.kill();
   this.respawn();
