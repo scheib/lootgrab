@@ -24,9 +24,6 @@ function initialize() {
   var editor = lootgrab.editor.init(document.getElementById("game"));
   var gfx = editor.gfx;
 
-  gfx.entityCtx.fillStyle = "rgb(255,0,0)";
-  gfx.entityCtx.fillRect(10,10,30,10);
-
   var entityDefs = getEntityDefs("level1");
   var world = getLevelData("level1");
   var w = new World(entityDefs, world);
