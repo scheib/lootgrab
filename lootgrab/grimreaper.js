@@ -67,5 +67,6 @@ GrimReaper.prototype.update = function(world, tick, elapsed) {
 }
 
 GrimReaper.prototype.onCollide = function(other) {
-  other.kill();
+  if (other.killable)
+    other.kill();
 }

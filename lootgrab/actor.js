@@ -27,6 +27,7 @@ function Actor(w, entDef) {
     this.loot = 'loot' in entDef ? entDef.loot : false;
     this.passable = 'passable' in entDef ? entDef.passable : true;
     this.key = 'key' in entDef ? entDef.key : false;
+    this.killable = 'killable' in entDef ? entDef.killable : false;
   } catch (err) {
     alert("Couldn't create Actor: " + err.toString());
   }

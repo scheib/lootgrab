@@ -3,11 +3,11 @@ tdl.provide("tiles");
 var getEntityDefs = function() {
   return {
     // Actors
-    "actorHero"           : { type : "Hero",      sprite : "spriteHero",            speed : .025 },
-    "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", speed : .015 },
-    "actorFlameSkull"     : { type : "FSkull",    sprite : "spriteFlamingSkull",    speed : .01, speed2 : .04 },
-    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper",    speed : .025 },
-    "actorKey"            : { type : "Key",       sprite : "spriteKey",             loot : true, key : true },
+    "actorHero"           : { type : "Hero",      sprite : "spriteHero",            speed : .025, killable: true },
+    "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", speed : .015, killable: true },
+    "actorFlameSkull"     : { type : "FSkull",    sprite : "spriteFlamingSkull",    speed : .01, speed2 : .04, killable: true },
+    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper",    speed : .025, killable: true },
+    "actorKey"            : { type : "Key",       sprite : "spriteKey",             loot : true },
     "actorShield"         : { type : "Shield",    sprite : "spriteShield",          loot : true },
     "actorFire"           : { type : "Fire",      sprite : "spriteFire",            loot : true },
     "actorWand"           : { type : "Wand",      sprite : "spriteWand",            loot : true },
@@ -22,6 +22,7 @@ var getEntityDefs = function() {
     "actorCircle"         : { type : "Circle",    sprite : "spriteCircle",          loot : true },
     "actorExit"           : { type : "Exit",      sprite : "spriteStairsUp",        loot : true },
     "actorDoor"           : { type : "Door",      sprite : "spriteDoor",            loot : false },
+    "actorTrapdoor"       : { type : "Trapdoor",  sprite : "spriteTrapdoorClosed",  loot : false },
 
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
@@ -34,8 +35,6 @@ var getEntityDefs = function() {
     "cellHole"            : { type: "Cell", sprite: "spriteHole"           , passable : true },
     "cellStairsDown"      : { type: "Cell", sprite: "spriteStairsDown"     , passable : true },
     "cellStairsUp"        : { type: "Cell", sprite: "spriteStairsUp"       , passable : true },
-    "cellTrapdoorClosed"  : { type: "Cell", sprite: "spriteTrapdoorClosed" , passable : true },
-    "cellTrapdoorOpen"    : { type: "Cell", sprite: "spriteTrapdoorOpen"   , passable : true },
     "cellWallH"           : { type: "Cell", sprite: "spriteWallH"          , passable : false },
     "cellWallHCrumbled"   : { type: "Cell", sprite: "spriteWallHCrumbled"  , passable : false },
     "cellWallHTorch"      : { type: "Cell", sprite: "spriteWallHTorch"     , passable : false },
