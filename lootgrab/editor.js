@@ -5,7 +5,7 @@ var W;
 
 lootgrab.editor = (function() {
 
- var editorHTML = '' +
+var editorHTML = '' +
 '<div id="editor">' +
 '<div id="toolbar">' +
  '<h1>lufthansagrabber</h1>' +
@@ -296,7 +296,9 @@ W = _world;
        }
        return false;
      });
-
+   editor.find("#reset").click(function() {
+     world_.reset();
+   });
 
    togglePause();
 
