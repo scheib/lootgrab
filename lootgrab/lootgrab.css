@@ -5,6 +5,10 @@ html, body {
   padding: 0px;
   margin: 0px;
   font-family: sans-serif;
+  font-size: small;
+}
+h1 {
+  font-size: medium;
 }
 CANVAS {
   background-color: gray;
