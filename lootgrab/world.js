@@ -42,10 +42,8 @@ function World(entityDefs, level) {
   }
 
   this.actors = [];
-  i = 0;
   for(var actorID in level.actors) {
-    var a = this.newEntity(level.actors[actorID]);
-    this.actors[i] = a;
+    this.actors.push(this.newEntity(level.actors[actorID]));
   }
 }
 
