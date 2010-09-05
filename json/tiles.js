@@ -3,9 +3,10 @@ tdl.provide("tiles");
 var getEntityDefs = function() {
   return {
     // Actors
-    "actorHero"           : { type : "Hero",      sprite : "spriteHero",            },
-    "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", },
-    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper", },
+    "actorHero"           : { type : "Hero",      sprite : "spriteHero",            speed : .025 },
+    "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", speed : .015 },
+    "actorFlameSkull"     : { type : "FSkull",    sprite : "spriteFlamingSkull",    speed : .1, speed2 : .4 },
+    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper",    speed : .2 },
     "actorKey"            : { type : "Key",       sprite : "spriteKey",             },
     "actorShield"         : { type : "Shield",    sprite : "spriteShield",          },
     "actorFire"           : { type : "Fire",      sprite : "spriteFire",            },
@@ -15,10 +16,11 @@ var getEntityDefs = function() {
     "actorMeat"           : { type : "Meat",      sprite : "spriteMeat",            },
     "actorGoldChest"      : { type : "GoldChest", sprite : "spriteGoldChest",       },
     "actorGoldBars"       : { type : "GoldBars",  sprite : "spriteGoldBars",        },
-    "actorGoldBars"       : { type : "GoldBars",  sprite: "spriteGoldBars",         },
-    "actorSkull"          : { type : "Skull",     sprite: "spriteSkull",            },
-    "actorGrate"          : { type : "Grate",     sprite: "spriteGrate",            },
-    "actorCircle"         : { type : "Circle",    sprite: "spriteCircle",           },
+    "actorGoldBars"       : { type : "GoldBars",  sprite : "spriteGoldBars",        },
+    "actorSkull"          : { type : "Skull",     sprite : "spriteSkull",           },
+    "actorGrate"          : { type : "Grate",     sprite : "spriteGrate",           },
+    "actorCircle"         : { type : "Circle",    sprite : "spriteCircle",          },
+    "actorExit"           : { type : "Exit",      sprite : "spriteStairsUp",        },
     
     // Level pieces
     "cellFloorA"          : { type: "Cell", sprite: "spriteFloorA"         , passable : true },
