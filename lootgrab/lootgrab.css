@@ -25,6 +25,12 @@ CANVAS {
   left: 0;
   top: 0;
 }
+#cellCursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0);
+}
 #currentTile { background-color: #cc0; }
 #tileListContainer {
   position: relative;
