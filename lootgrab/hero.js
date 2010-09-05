@@ -103,7 +103,7 @@ Hero.prototype.drawPath = function(ctx, cw, ch) {
     for(var i = 0; i < this.currentPath.length; ++i) {
       ctx.lineTo((this.currentPath[i][0]+0.5) * cw, (this.currentPath[i][1]+0.5)* ch);
     }
-    ctx.strokeStyle = "rgba(127,127,127,0.5)";
+    ctx.strokeStyle = "rgba(235,169,28,0.5)";
     ctx.lineWidth = 4;
     ctx.stroke();
   }

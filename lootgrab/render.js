@@ -130,13 +130,17 @@ Render.prototype.draw = function() {
     if (!actor.isDead() && actor.renderBackground)
       actor.draw(ctx, cellWidth, cellHeight);
   }
+  
+  // draw the hero's path
+  w.hero.drawPath(ctx, cellWidth, cellHeight);
+  
   // Render foreground actors.
   for(var i = 0, actor; actor = w.actors[i]; ++i) {
     if (!actor.isDead() && !actor.renderBackground)
       actor.draw(ctx, cellWidth, cellHeight);
   }
 
-  w.hero.drawPath(ctx, cellWidth, cellHeight);
+
   
   if(DEBUG)
     w.draw_dbg(ctx);
