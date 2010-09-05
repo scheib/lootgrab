@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>lutefiskgrabber</title>
+<link type="text/css" href="lootgrab.css" rel="stylesheet" />
+<link type="text/css" href="editor.css" rel="stylesheet" />
+<link type="text/css" href="../jquery-ui-1.8.2.custom/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-ui-1.8.2.custom.min.js"></script>
+<script type="text/javascript" src="../tdl/base.js"></script>
+<script type="text/javascript">
+tdl.require('json.tiles');
+tdl.require('json.level1');
+tdl.require('lootgrab.audio');
+tdl.require('lootgrab.editor');
+tdl.require('lootgrab.game');
+tdl.require('lootgrab.render');
+tdl.require('lootgrab.route');
+tdl.require('lootgrab.world');
+tdl.require('tdl.log');
+
+var DEBUG = false;
+
+function initialize() {
+  var editor = lootgrab.editor.init(document.getElementById("game"));
+  var gfx = editor.gfx;
+
+  gfx.entityCtx.fillStyle = "rgb(255,0,0)";
+  gfx.entityCtx.fillRect(10,10,30,10);
+
+  var entityDefs = getEntityDefs("level1");
+  var world = getLevelData("level1");
+  var w = new World(entityDefs, world);
+  var r = new Render(w,gfx.tileCtx);
+  var g = new Game(w);
+  tdl.log("World created: ", w.width, w.height)
+
+  editor.setup(w);
+
+  var tick = 0;
+
+  var drawIntervalID = setInterval(gameloop, 32);
+  function gameloop() {
+    tick = tick + 1;
+    g.update(tick,1)
+    if (DEBUG) {
+      g.debug_draw(gfx.entityCtx,32);
+    }
+    r.draw();
+    editor.render();
+  }
+
+  window.onkeydown = function(evt) {
+    if(evt.keyCode == 192) { // ~
+      DEBUG = !DEBUG;
+    }
+  }
+}
+
+$(function(){
+  initialize();
+  lootgrab.audio.init();
+});
+
+</script>
+</head>
+<body>
+<div id="game">
+</div>
+</body>
+</html>
