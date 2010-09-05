@@ -39,7 +39,7 @@ lootgrab.route = (function() {
         return;
       }
 
-      if (!w.isBlocking(x, y)) {
+      if (!w.isBlocking(x, y, w.hero)) {
         toVisit.push([x, y]);
         setDistAt(x, y, d);
       } else {
