@@ -29,6 +29,9 @@ lootgrab.editor = (function() {
  var gfx;
  var drawing = false;
 
+ // the 2d context for the tile list.
+ var tileListCtx;
+
  // The element that covers the world to capture mouse events.
  var selector;
 
@@ -44,9 +47,9 @@ lootgrab.editor = (function() {
  // The tile the user will draw with.
  var currentTile;
 
- function setup(_world) {
-   world = _world;
- };
+ // The cell names
+ var cellNames = [];
+ var cellEntities = [];
 
  function computeTileCoords(e, elem) {
    var tileWidth = world.tileVisualWidth(gfx.tileCtx);
@@ -124,6 +127,42 @@ lootgrab.editor = (function() {
    return false;
  }
 
+
+ // Grabs all the tile types from the world.
+ function setup(_world) {
+   world = _world;
+
+   cellEntities = [];
+
+   cellDefs = world.getCellDefs();
+   for (var ii = 0; ii < cellDefs.length; ++ii) {
+     var cellDef = cellDefs[ii];
+     var tileName = cellDef.render_tile;
+     var ent = world.newEntity(tileName);
+     cellEntities.push(ent);
+   }
+ }
+
+ function render() {
+   var tileWidth = world.tileVisualWidth(gfx.tileCtx);
+   var tileHeight = world.tileVisualHeight(gfx.tileCtx);
+   var tilesAcross = Math.floor(tileListCtx.canvas.width / tileWidth);
+   var tilesDown = Math.floor(tileListCtx.canvas.height / tileHeight);
+
+   // TODO(gman): compute first tile and last instead of drawing all tiles.
+   for (var ii = 0; ii < cellEntities.length; ++ii) {
+     var ent = cellEntities[ii];
+     var tx = ii % tilesAcross;
+     var ty = Math.floor(ii / tilesAcross);
+     ent.draw(
+         tileListCtx,
+         tx * tileWidth,
+         ty * tileHeight,
+         tileWidth,
+         tileHeight);
+   }
+ }
+
  function init(element) {
    var editor = $('<div></div>').html(editorHTML);
    var canvases = editor.find('CANVAS');
@@ -161,6 +200,8 @@ lootgrab.editor = (function() {
    ctx.fillRect(30, 0, 2, 32);
    ctx.fillRect(0, 30, 32, 2);
 
+   tileListCtx = editor.find("#tileList").get()[0].getContext("2d");
+
    gfx = {
      tileCtx: canvases.get()[0].getContext("2d"),
      entityCtx: canvases.get()[1].getContext("2d"),
@@ -169,6 +210,7 @@ lootgrab.editor = (function() {
 
    return {
      setup: setup,
+     render: render,
      gfx: gfx
    };
  }
@@ -189,7 +231,6 @@ lootgrab.editor = (function() {
 
  return {
    init: init,
-
 
    end: null
  };
