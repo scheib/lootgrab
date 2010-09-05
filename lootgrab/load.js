@@ -19,8 +19,12 @@ lootgrab.load = (function() {
     }
     html.push('</ol>');
     loadDialog_.find("#levels").replaceWith(html.join(""));
-    loadDialog_.find("#levels").selectable({selected: function(event, ui) {
+    loadDialog_.find("#levels").selectable({selected:
+      function(event, ui) {
+        loadDialog_.dialog('close');
         tdl.log("clicked: ", ui.selected.id);
+        var index = parseInt(ui.selected.id.substring(5));
+        world.setLevel(levels[index]);
     }});
 
     loadDialog_.dialog('open');
