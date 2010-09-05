@@ -314,7 +314,7 @@ var editorHTML = '' +
        if (running_) {
          togglePause();
        }
-       saveDialog.show(world_);
+       saveDialog.show(world_, gfx_);
        if (oldRunning) {
          togglePause();
        }

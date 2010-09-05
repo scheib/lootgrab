@@ -112,7 +112,20 @@ World.prototype.setLevelCellAt = function(defName, x, y) {
   this.levelData_.cells[y * this.width + x] = defName;
 };
 
-World.prototype.serializeLevel = function() {
+World.prototype.serializeLevel = function(gfx) {
+  var canvas = document.createElement("canvas");
+  canvas.width = 128;
+  canvas.height = 96;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(gfx.tileCtx.canvas, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(gfx.entityCtx.canvas, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(gfx.effectCtx.canvas, 0, 0, canvas.width, canvas.height);
+  try {
+    this.levelData_.img = canvas.toDataURL();
+  } catch (e) {
+    tdl.log("Could not make screenshot:", e);
+    this.levelData_.img = ""; // TODO: put generic URL.
+  }
   return JSON.stringify(this.levelData_);
 }
 

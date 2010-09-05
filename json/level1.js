@@ -6,6 +6,7 @@ function getLevelData(level) {
 
     return {
         name : "world name",
+        img: "",
         width : 16,
         height : 12,
         cells : ["cellWallV", "cellWallHTorch", "cellWallV",         "cellWallHTorch", "cellWallV", "cellWallH", "cellWallH", "cellWallV","cellWallV", "cellWallHTorch", "cellWallHCrumbled", "cellWallHTorch", "cellWallV", "cellWallH", "cellWallH", "cellWallV",
@@ -56,7 +57,7 @@ function getLevelData(level) {
           { actor_def: "actorDoor",position : { x : 4, y : 6 } },
         ],
         placeables : [
-          "actorKey", 
+          "actorKey",
           "actorDoor",
           "actorTimedWall",
         ],
