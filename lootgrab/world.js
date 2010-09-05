@@ -13,7 +13,7 @@ Cell.prototype.setType = function(def) {
   if(this.ground_ent === undefined)
     throw "Cell.setType() could instantiate a ground_ent by using:" + def.sprite
   this.passable = 'passable' in def ? def.passable : true;
-Ç}
+}
 
 Cell.prototype.draw = function(ctx, x, y, w, h) {
   this.ground_ent.draw(ctx,x,y,w,h);
