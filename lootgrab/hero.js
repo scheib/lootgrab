@@ -71,9 +71,9 @@ Hero.prototype.update = function(world, tick, elapsed) {
 
 Hero.prototype.inventory = [];
 
-Hero.prototype.hasKey = function() {
+Hero.prototype.hasItem = function(name) {
   for (var i = 0; i < this.inventory.length; ++i) {
-    if (this.inventory[i].key) return true;
+    if (this.inventory[i][name]) return true;
   }
   return false;
 }
