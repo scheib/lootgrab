@@ -158,3 +158,4 @@ Actor.prototype.moveToClampedCell = function(tick, elapsed, nextcell) {
   }
   return false;
 }
+
