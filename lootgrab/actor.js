@@ -8,6 +8,8 @@ tdl.require("lootgrab.math")
  * @param entDef
  */
 function Actor(w, entDef) {
+  if (entDef === undefined)
+    console.error("Undefined entity def.");
   this.world = w;
   this.entityDef = entDef;
 
