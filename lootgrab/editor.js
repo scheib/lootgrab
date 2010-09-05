@@ -1,6 +1,9 @@
 
 tdl.provide('lootgrab.editor');
 
+tdl.require('lootgrab.load');
+tdl.require('lootgrab.save');
+
 lootgrab.editor = (function() {
 
 var editorHTML = '' +
@@ -364,3 +367,4 @@ var editorHTML = '' +
    end: null
  };
 })();
+
