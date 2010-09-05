@@ -88,7 +88,7 @@ CANVAS {
 }
 .deathmessage {
   position:absolute;
-  bottom:-10px;
+  bottom:10px;
   left:50%;
   width:400px;
   margin-left:-225px;
@@ -105,6 +105,6 @@ CANVAS {
   -webkit-box-shadow:1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 .deathmessage.done {
-  opacity:1;
-  bottom:10px;
+  opacity:0.9;
+  bottom:30px;
 }
