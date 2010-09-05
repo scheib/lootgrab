@@ -22,6 +22,10 @@ Game.RUNNING = "running";
 
 Game.prototype.status = Game.RUNNING;
 
+Game.prototype.reset = function() {
+  this.status = Game.RUNNING;
+}
+
 /**
  * Update loop for the game
  * @param tick
