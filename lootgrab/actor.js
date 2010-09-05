@@ -13,8 +13,8 @@ function Actor(w, entDef) {
 
   this.position = ('position' in entDef)
       ? new Vec2(entDef.position.x + .5,  entDef.position.y + .5)
-      : new Vec2(1.5, 1.5);
-  this.heading = Vec2.RIGHT;
+      : new Vec2(1.5,1.5);
+  this.heading = Vec2.CENTER;
   this.speed = .025;
   this.radius = .25;
 
@@ -26,8 +26,18 @@ function Actor(w, entDef) {
   this.passable = 'passable' in entDef ? entDef.passable : true;
 }
 
+Actor.prototype.init = function(instanceDef) {
+  if ('position' in instanceDef) {
+    var pos = new Vec2(instanceDef.position.x + .5, instanceDef.position.y + .5);
+    this.position = pos;
+  }
+  if ('heading' in instanceDef) {
+    this.heading = eval("Vec2." + instanceDef.heading)
+  }
+}
+
 Actor.prototype.draw = function(ctx, cw, ch) {
-  // Actor position is center of cell, so subtract 
+  // Actor position is center of cell, so subtract
   // 0.5 so that we draw it in the right position
   this.sprite.draw(ctx, 
       (this.position.x - 0.5) * cw, 

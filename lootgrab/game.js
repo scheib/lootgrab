@@ -75,11 +75,11 @@ Game.prototype.debug_draw = function(ctx) {
   for (var cIdx in this.world.cells) {
     var c = this.world.cells[cIdx];
     ctx.strokeRect(
-        c.x * xscale,
-        c.y * yscale,
+        c.x_ * xscale,
+        c.y_ * yscale,
         xscale,
         yscale);x
-    ctx.strokeText(c.ground_ent.id, c.x * xscale, (c.y + .5) * yscale, xscale);
+    ctx.strokeText(c.ground_ent.id, c.x_ * xscale, (c.y_ + .5) * yscale, xscale);
 
   }
 
@@ -87,8 +87,8 @@ Game.prototype.debug_draw = function(ctx) {
     var a = this.world.actors[aIdx];
     ctx.beginPath();
     ctx.arc(
-        a.position.x * xscale,
-        a.position.y * yscale,
+        a.position.x_ * xscale,
+        a.position.y_ * yscale,
         a.radius,
         0,
         2 * Math.PI);

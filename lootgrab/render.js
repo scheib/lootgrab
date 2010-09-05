@@ -80,8 +80,8 @@ Render.prototype.draw = function() {
 
   for(var i = 0; i < w.cells.length; ++i) {
     var cell = w.cells[i];
-    x = cell.x * cell_width;
-    y = cell.y * cell_height;
+    x = cell.x_ * cell_width;
+    y = cell.y_ * cell_height;
     w.cells[i].draw(ctx,x,y,cell_width,cell_height);
   }
 
