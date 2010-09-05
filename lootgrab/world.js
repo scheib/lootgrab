@@ -90,7 +90,7 @@ World.prototype.draw_dbg = function (ctx) {
   }
 }
 
-World.prototype.actors = {};
+World.prototype.actors = [];
 
 World.prototype.tileVisualWidth = function(ctx) {
   return ctx.canvas.clientWidth / this.width;
