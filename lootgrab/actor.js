@@ -43,7 +43,6 @@ Actor.prototype.draw = function(ctx, cw, ch) {
  */
 Actor.prototype.update = function(tick, elapsed) {
   var nextpos = this.position.add(this.heading.mul(0.5))
-  window.console.log(nextpos.y);
   if (this.world.isBlocking(nextpos.x, nextpos.y)) {
     this.heading = this.heading.negate();
   }
