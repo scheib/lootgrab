@@ -11,6 +11,10 @@ var getData = function() {
                 type : "image",
                 img : "images/previewenv.png",
             },
+            "baddie" : {
+                type : "image",
+                img : "images/previewenv.png",
+            }
         },
 
         cells : {
@@ -31,8 +35,8 @@ var getData = function() {
 
         world : {
             name : "world name",
-            width : 12,
-            height : 12,
+            width : 8,
+            height : 8,
             cells : ["5", "6", "7", "8", "5", "6", "7", "8",
                      "5", "6", "7", "8", "5", "6", "7", "8",
                      "5", "6", "7", "8", "5", "6", "7", "8",
