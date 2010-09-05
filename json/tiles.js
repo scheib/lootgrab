@@ -3,10 +3,10 @@ tdl.provide("tiles");
 var getEntityDefs = function() {
   return {
     // Actors
-    "actorHero"           : { type : "Hero",      sprite : "spriteHero",            speed : .6 },
-    "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", speed : .4 },
-    "actorFlameSkull"     : { type : "FSkull",    sprite : "spriteFlamingSkull",    speed : .1, speed2 : .9 },
-    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper",    speed : .6 },
+    "actorHero"           : { type : "Hero",      sprite : "spriteHero",            speed : .025 },
+    "actorSkeleton"       : { type : "Skeleton",  sprite : "spriteSkeletonWarrior", speed : .015 },
+    "actorFlameSkull"     : { type : "FSkull",    sprite : "spriteFlamingSkull",    speed : .01, speed2 : .04 },
+    "actorGrimReaper"     : { type : "GrimReaper",  sprite : "spriteGrimReaper",    speed : .025 },
     "actorKey"            : { type : "Key",       sprite : "spriteKey",             loot : true },
     "actorShield"         : { type : "Shield",    sprite : "spriteShield",          loot : true },
     "actorFire"           : { type : "Fire",      sprite : "spriteFire",            loot : true },

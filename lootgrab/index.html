@@ -41,7 +41,7 @@ function initialize() {
     var ts = (new Date()).getTime() / 1000;
     tick = tick + 1;
     if (editor.isRunning()) {
-      g.update(tick, ts - last_ts);
+      g.update(tick, ts);
     }
     if (DEBUG) {
       g.debug_draw(gfx.entityCtx, 32);

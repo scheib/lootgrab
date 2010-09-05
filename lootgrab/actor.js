@@ -77,7 +77,7 @@ Actor.prototype.update = function(world, tick, elapsed) {
   if (this.world.isBlocking(nextpos.x, nextpos.y)) {
     this.heading = this.heading.negate();
   }
-  this.updatePosition(elapsed);
+  this.updatePosition();
 }
 
 /**
@@ -104,8 +104,8 @@ Actor.prototype.killed = function() {
   this.heading = Vec2.CENTER;
 }
 
-Actor.prototype.updatePosition = function(elapsed) {
+Actor.prototype.updatePosition = function() {
   this.position = this.position.add(
-      this.heading.mul(this.speed * elapsed));
+      this.heading.mul(this.speed));
 }
 
