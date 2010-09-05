@@ -306,18 +306,12 @@ var editorHTML = '' +
    editor.find(".button").button();
    playButton_ = editor.find("#play").click(togglePause);
 
-   var levels_ = [
-   { name: "foobar", img: "foo", },
-   { name: "foobar2", img: "foo1", },
-   { name: "foobar3", img: "foo2", },
-   ];
-
    var loadDialog = lootgrab.load.init();
    editor.find("#load").click(function(){
        if (running_) {
          togglePause();
        }
-       loadDialog.show(world_, levels_);
+       loadDialog.show(world_);
        return false;
      });
 

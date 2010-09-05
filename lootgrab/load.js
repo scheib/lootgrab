@@ -1,10 +1,13 @@
 
 tdl.provide('lootgrab.load');
 
+tdl.require('lootgrab.levels');
+
 lootgrab.load = (function() {
   var loadDialog_;
 
-  function show(world, levels) {
+  function show(world) {
+    var levels = lootgrab.levels.getLevels();
     var html = ['<ol id="levels">'];
     for (var ii = 0; ii < levels.length; ++ii) {
       var level = levels[ii];
