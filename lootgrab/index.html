@@ -34,7 +34,7 @@ function initialize() {
   var g = new Game(w);
   tdl.log("World created: ", w.width, w.height)
 
-  editor.setup(w);
+  editor.setup(w, "PlaytimeMode"); // vs "LevelEditMode"
 
   var tick = 0;
   var last_ts = (new Date()).getTime() / 1000;
