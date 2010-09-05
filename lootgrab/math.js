@@ -32,6 +32,7 @@ Vec2.prototype.dot = function(v) {
 
 Vec2.prototype.mul = function(s) {
   var result = new Vec2(this.x * s, this.y *s);
+  return result;
 }
 
 Vec2.prototype.len = function() {

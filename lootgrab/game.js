@@ -1,6 +1,9 @@
 tdl.provide("game");
 tdl.require("lootgrab.actor");
+tdl.require("lootgrab.hero");
 tdl.require("lootgrab.world");
+
+
 
 /**
  *
@@ -8,6 +11,8 @@ tdl.require("lootgrab.world");
  */
 function Game(w) {
   this.world = w;
+
+  this.hero = null;
 }
 
 Game.WIN = "win";
@@ -28,13 +33,12 @@ Game.prototype.update = function(tick, elapsed) {
     a.update(tick, elapsed);
   }
 
-  for (var corpseId in dead) {
-    delete this.world.actors[dead[corpseId]];
-  }
-
   this.resolveCollisions();
 
   for (var corpseId in dead) {
+    if (this.world.actors[dead[corpseId]] == this.hero) {
+      this.status = Game.LOSS;
+    }
     delete this.world.actors[dead[corpseId]];
   }
 }

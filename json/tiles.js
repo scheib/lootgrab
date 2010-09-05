@@ -2,6 +2,11 @@ tdl.provide("tiles");
 
 var getEntityDefs = function() {
   return {
+    "Hero" : {
+      type : "Hero",
+      position : { x : 2, y : 2}
+    },
+    
     "dirtCell" : {
         type: "Cell",
         render_tile: "FloorA",
@@ -10,7 +15,11 @@ var getEntityDefs = function() {
         type : "Cell",
         render_tile: "FloorRug",
     },
-
+    "wallCell" : {
+        type : "Cell",
+        render_tile: "WallH",
+        passable : false
+    },
     "tileset_env" : {
       type : "tileset",
       image: "images/lofi_environment_a_4x.png",
@@ -37,7 +46,7 @@ var getEntityDefs = function() {
       tile_width: 32,
       tile_height: 32,
     },
-    "Bob"             : { type : "TileEntity", tileset : "tileset_char", start_x: 12, start_y: 30, frames: 4 },
+    "HeroTile"        : { type : "TileEntity", tileset : "tileset_char", start_x: 12, start_y: 30, frames: 4 },
     "Skeleton"        : { type : "TileEntity", tileset : "tileset_char", start_x:  0, start_y:  6, frames: 1 },
     "SkeletonWarrior" : { type : "TileEntity", tileset : "tileset_char", start_x:  1, start_y:  6, frames: 1 },
     "Bat"             : { type : "TileEntity", tileset : "tileset_char", start_x: 15, start_y: 12, frames: 1 },
