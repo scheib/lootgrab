@@ -34,13 +34,14 @@ function initialize() {
   editor.setup(w);
 
   var tick = 0;
-
+  var last_ts = (new Date()).getTime() / 1000;
   var drawIntervalID = setInterval(gameloop, 32);
+
   function gameloop() {
     var ts = (new Date()).getTime() / 1000;
     tick = tick + 1;
     if (editor.isRunning()) {
-      g.update(tick, ts)
+      g.update(tick, ts - last_ts);
     }
     if (DEBUG) {
       g.debug_draw(gfx.entityCtx, 32);
@@ -48,6 +49,7 @@ function initialize() {
     r.update(ts);
     r.draw();
     editor.render();
+    last_ts = ts;
   }
 
   window.onkeydown = function(evt) {

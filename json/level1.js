@@ -23,7 +23,7 @@ function getLevelData(level) {
             heading : "RIGHT",
           },
           { actor_def: "actorSkeleton",
-            position : { x : 6, y : 1 },
+            position : { x : 12, y : 1 },
             heading : "DOWN",
           },
           { actor_def: "actorSkeleton",
@@ -34,7 +34,7 @@ function getLevelData(level) {
             position : { x : 2, y : 6 },
             heading : "UP",
           },
-          { actor_def: "actorKey", position : { x : 14, y : 3 } },
+          { actor_def: "actorKey", position : { x : 8, y : 2 } },
           { actor_def: "actorExit",position : { x : 15, y : 4 } },
         ],
     }

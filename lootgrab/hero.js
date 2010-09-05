@@ -38,5 +38,5 @@ Hero.prototype.update = function(world, tick, elapsed) {
     this.heading = Vec2.CENTER;
   }
 
-  this.updatePosition();
+  this.updatePosition(elapsed);
 }
