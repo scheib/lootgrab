@@ -19,6 +19,9 @@ Cell.prototype.draw = function(ctx, x, y, w, h) {
   this.ground_ent.draw(ctx,x,y,w,h);
 }
 
+Cell.prototype.update = function(ts) {
+}
+
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -27,11 +30,12 @@ function World(entityDefs, level) {
   this.height = level.height;
   this.hero = null;
   this.game = null;
+  this.renderEnts = []
 
   // entity defs are demand-initalized so that
   // entity defs can reference other entity defs during load
   this._entity_defs = entityDefs;
-
+  
   // init the cell grid
   this.cells = []
   var i = 0;
@@ -51,8 +55,8 @@ function World(entityDefs, level) {
 
     this.actors.push(a);
   }
-}
 
+}
 
 World.prototype.newEntity = function(entDefID) {
   def = this.getDef(entDefID);
