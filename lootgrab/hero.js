@@ -1,6 +1,7 @@
 tdl.provide('hero');
 tdl.require('lootgrab.actor');
 tdl.require('lootgrab.route');
+tdl.require('lootgrab.audio');
 
 function Hero(w, def) {
   Actor.call(this, w, def);
@@ -23,18 +24,27 @@ Hero.prototype.update = function(world, tick, elapsed) {
   if (this.nextCell == null) {
     updateRoute = true;
   } else {
-    updateRoute = this.moveToClampedCell(tick, elapsed, this.nextcell);
+    updateRoute = this.moveToClampedCell(tick, elapsed, this.nextCell);
   }
 
   if (updateRoute) {
-    var pos = [
-      Math.floor(this.position.x - this.heading.x * 0.5),
-      Math.floor(this.position.y - this.heading.y * 0.5)
-    ];
+    this.lastCell = this.nextCell;
+
+    var pos = null;
+    if (this.lastCell != null) {
+      pos = [
+        Math.floor(this.lastCell.x),
+        Math.floor(this.lastCell.y)
+      ];
+    } else {
+      pos = [
+        Math.floor(this.position.x - this.heading.x * 0.5),
+        Math.floor(this.position.y - this.heading.y * 0.5)
+      ];
+    }
 
     var path = lootgrab.route.findRoute(world, pos);
     if (path.length) {
-      this.lastCell = this.nextCell;
       this.nextCell = new Vec2(path[0][0] + 0.5, path[0][1] + 0.5);
 
       if (this.lastCell == null) {
@@ -60,12 +70,27 @@ Hero.prototype.update = function(world, tick, elapsed) {
 
 Hero.prototype.inventory = [];
 
+Hero.prototype.hasKey = function() {
+  for (var i = 0; i < this.inventory.length; ++i) {
+    if (this.inventory[i].isKey) return true;
+  }
+  return false;
+}
 
+Hero.prototype.useKey = function() {
+  for (var i = 0; i < this.inventory.length; ++i) {
+    if (this.inventory[i].isKey) {
+      delete this.inventory[i];
+      return;
+    }
+  }
+}
 
 Hero.prototype.onCollide = function(other) {
   if (other.loot) {
+    lootgrab.audio.play_sound("treasure");
     other.loot = false;
-    other.kill()
-        
+    this.inventory.push(other);
+    other.kill();    
   }
 }

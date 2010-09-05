@@ -307,8 +307,8 @@ World.prototype.showMessage = function(text, className) {
 
   var msg_node = document.createElement('div');
   this.message_node_ = msg_node;
-  this.message_node_.className = className;
+  this.message_node_.className = "message " + className;
   this.message_node_.appendChild(document.createTextNode(text));
   document.body.appendChild(this.message_node_);
-  setTimeout(function() {msg_node.className = className + ' done';}, 1);
+  setTimeout(function() {msg_node.className = className + ' message done';}, 1);
 }

@@ -8,9 +8,6 @@ html, body {
   font-size: small;
   background-color: #222;
 }
-h1 {
-  font-size: medium;
-}
 CANVAS {
   background-color: gray;
 }
@@ -64,16 +61,6 @@ CANVAS {
   background-color: rgba(0,0,0,0);
   cursor: pointer;
 }
-
-#editor {
-  width: 782px;
-  margin:0 auto;
-  background: #99c;
-}
-#toolbar {
-  padding: 5px 10px;
-  background: #ddd;
-}
 #level {
   float:left;
   width:532px;
@@ -86,29 +73,9 @@ CANVAS {
   padding:10px;
   background:#99c;
 }
-.deathmessage {
-  position:absolute;
-  bottom:10px;
-  left:50%;
-  width:400px;
-  margin-left:-225px;
-  -webkit-border-radius:5px;
-  background-color:black;
-  color:white;
-  text-align:center;
-  opacity:0;
-  font-size:16px;
-  font-weight:bold;
-  padding:25px;
-  -webkit-transition:all 0.3s;
-  z-index:5000;
-  -webkit-box-shadow:1px 1px 5px rgba(0, 0, 0, 0.5);
-}
-.deathmessage.done {
-  opacity:0.9;
-  bottom:30px;
-}
-.winmessage {
+.message {
+  font-family: 'IM Fell English SC', arial, serif;
+  font-size:42px;
   position:absolute;
   bottom:10px;
   left:50%;
@@ -125,6 +92,18 @@ CANVAS {
   -webkit-transition:all 0.3s;
   z-index:5000;
   -webkit-box-shadow:1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+.deathmessage {
+  background-color:black;
+  color:white;
+}
+.message.done {
+  opacity:0.9;
+  bottom:30px;
+}
+.winmessage {
+  background-color:white;
+  color:black;
 }
 .winmessage.done {
   opacity:0.9;
