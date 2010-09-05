@@ -28,6 +28,7 @@ lootgrab.editor = (function() {
  var world;
  var gfx;
  var drawing = false;
+ var renderCount = 0;
 
  // the 2d context for the tile list.
  var tileListCtx;
@@ -175,6 +176,7 @@ lootgrab.editor = (function() {
  }
 
  function render() {
+   renderCount++;
    var ti = getTileListInfo();
 
    // TODO(gman): compute first tile and last instead of drawing all tiles.
@@ -192,6 +194,9 @@ lootgrab.editor = (function() {
 
    if (currentTileEntity) {
      currentTileEntity.draw(currentTileCtx, 0, 0, 32, 32);
+     cellCursorCtx.clearRect(0, 0, 32, 32);
+     cellCursorCtx.globalAlpha = (renderCount % 8) / 16;
+     currentTileEntity.draw(cellCursorCtx, 0, 0, 32, 32);
    }
  }
 
