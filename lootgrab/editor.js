@@ -141,7 +141,7 @@ var editorHTML = '' +
  }
 
  function applyAction(pos) {
-   if (drawing_ && currentEditorAction_) {
+   if (drawing_ && currentEditorAction_ && !currentEditorAction_.disabled) {
      currentEditorAction_.apply(pos.x, pos.y);
    }
  }
@@ -191,7 +191,7 @@ var editorHTML = '' +
    default:
      throw "editor setup() called with editorMode==='" + editorMode + "' which isn't supported.";
    }
-   
+
    if (editorActions_.length) {
      setCurrentAction(0);
    }
@@ -218,21 +218,29 @@ var editorHTML = '' +
      var action = editorActions_[ii];
      var tx = ii % ti.tilesAcross;
      var ty = Math.floor(ii / ti.tilesAcross);
+     if (action.disabled)
+       tileListCtx_.globalAlpha = 0.2;
      action.sprite.draw(
          tileListCtx_,
          tx * ti.tileWidth,
          ty * ti.tileHeight,
          ti.tileWidth,
          ti.tileHeight);
+     if (action.disabled)
+       tileListCtx_.globalAlpha = 1;
    }
 
    if (currentEditorAction_) {
      currentTileCtx.clearRect(0,0, currentTileCtx.canvas.width, currentTileCtx.canvas.height);
-     currentEditorAction_.sprite.draw(currentTileCtx, 0, 0, 32, 32);
+     if (!currentEditorAction_.disabled) {
+       currentEditorAction_.sprite.draw(currentTileCtx, 0, 0, 32, 32);
+     }
 
      cellCursorCtx_.clearRect(0,0, cellCursorCtx_.canvas.width, cellCursorCtx_.canvas.height);
-     cellCursorCtx_.globalAlpha = (renderCount_ % 8) / 16 + 0.25;
-     currentEditorAction_.sprite.draw(cellCursorCtx_, 0, 0, 32, 32);
+     if (!currentEditorAction_.disabled) {
+       cellCursorCtx_.globalAlpha = (renderCount_ % 8) / 16 + 0.25;
+       currentEditorAction_.sprite.draw(cellCursorCtx_, 0, 0, 32, 32);
+     }
    }
  }
 
@@ -285,12 +293,18 @@ var editorHTML = '' +
    editor.find(".button").button();
    playButton_ = editor.find("#play").click(togglePause);
 
+   var levels_ = [
+   { name: "foobar", img: "foo", },
+   { name: "foobar2", img: "foo1", },
+   { name: "foobar3", img: "foo2", },
+   ];
+
    var loadDialog = lootgrab.load.init();
    editor.find("#load").click(function(){
        if (running_) {
          togglePause();
        }
-       loadDialog.dialog('open');
+       loadDialog.show(world_, levels_);
        return false;
      });
 
