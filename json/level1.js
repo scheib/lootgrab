@@ -36,7 +36,7 @@ function getLevelData(level) {
           { actor_def: "actorKey", position : { x : 8, y : 2 } },
           { actor_def: "actorKey", position : { x : 9, y : 6 } },
           { actor_def: "actorExit",position : { x : 15, y : 4 } },
-          { actor_def: "actorDoor",position : { x : 6, y : 2 } },
+          { actor_def: "actorDoor",position : { x : 4, y : 2 } },
         ],
     }
 }
