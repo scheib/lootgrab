@@ -94,8 +94,7 @@ lootgrab.route = (function() {
         else if (isDistAt(x, y + 1, d - 1))
           y++;
         else {
-          console.error("routing: couldn't find distance");
-          return source;
+          return [source];
         }
       }
       return path;
