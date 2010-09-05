@@ -93,17 +93,28 @@ World.prototype.getDef = function(entDefID) {
 World.prototype.cellAt = function(x,y) {
   idx = Math.floor(y) * this.width + Math.floor(x);
   return this.cells[idx];
-}
+};
+
+World.prototype.setCellAt = function(x, y, defName) {
+tdl.log(defName);
+  var def = this._entity_defs[defName];
+  if(def.type != "Cell") {
+    throw "non Cell type used in setCellAt";
+  }
+
+  this.levelData_.cells[y * this.width + x] = defName;
+  this.cellAt(x, y).setType(def);
+};
 
 World.prototype.defAt = function(x, y) {
   return this.getDef(this.cellAt(x, y).id);
-}
+};
 
 // Convenience function for whether or not a given cell is not passable.
 World.prototype.isBlocking = function(x, y) {
   var cell = this.cellAt(x, y);
   return cell ? !cell.passable : false;
-}
+};
 
 // Convenience function for whether or not a given cell has something the
 // player wants to run towards.
@@ -198,12 +209,13 @@ World.prototype.getEditorActions = function() {
   for(var defName in this._entity_defs) {
     (function() {
       var def = that._entity_defs[defName];
+      var name = defName;
       if(def.type == "Cell"){
         actions.push({
           type: "paint",
           sprite: that.newEntity(def.sprite),
           apply: function(x,y) {
-            that.cellAt(x,y).setType(def);
+            that.setCellAt(x, y, name);
           }
         });
       }
