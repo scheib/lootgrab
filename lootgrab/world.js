@@ -351,9 +351,13 @@ World.prototype.getPlaytimeEditorActions = function() {
           if (!cell.passable)
             return;
 
-          // Place it
-          world.deleteActorsInCell(x, y);
-          world.addActor(defName, x, y);
+          if (def.type == "Cell") {
+            world.setCellAt(defName, x, y);
+          } else {
+            // Place it
+            world.deleteActorsInCell(x, y);
+            world.addActor(defName, x, y);
+          }
           // If we are placing the item, remove it from inventory
           // Disable this action
           this.disabled = true;
