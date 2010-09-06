@@ -6,7 +6,7 @@ lootgrab.editor = (function() {
 var editorHTML = '' +
 '<div id="editor">' +
 '<div id="toolbar">' +
- '<h1>lufthansagrabber</h1>' +
+ '<h1>LootGrab</h1>' +
  '<div id="menu">' +
   '<div id="play" class="button">play</div>' +
   '<div id="reset" class="button">reset</div>' +

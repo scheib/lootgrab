@@ -7,12 +7,14 @@
 }
 #toolbar h1 {
   font-family: 'IM Fell English SC', arial, serif;
-  font-size: 36px;
-  margin:0px;
+  font-size: 24px;
   color:#eee;
   float:left;
 }
 #menu {
-  padding-top:12px;
+  padding-top:18px;
   float:right;
+}
+#level {
+  clear:both;
 }
