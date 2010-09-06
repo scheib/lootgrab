@@ -8,17 +8,16 @@
 <script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="../jquery-ui-1.8.2.custom/js/jquery-ui-1.8.2.custom.min.js"></script>
 <script type="text/javascript" src="../tdl/base.js"></script>
+<script type="text/javascript" src="../json/default.level"></script>
 <script type="text/javascript">
 tdl.require('json.tiles');
-tdl.require('json.level1');
 tdl.require('lootgrab.audio');
 tdl.require('lootgrab.editor');
 tdl.require('lootgrab.game');
 tdl.require('lootgrab.render');
 tdl.require('lootgrab.route');
 tdl.require('lootgrab.world');
-tdl.require('lootgrab.save');
-tdl.require('lootgrab.load');
+tdl.require('lootgrab.levels');
 tdl.require('tdl.log');
 
 var DEBUG = false;
@@ -26,15 +25,16 @@ var DEBUG = false;
 function initialize() {
   var editor = lootgrab.editor.init(document.getElementById("game"));
   var gfx = editor.gfx;
+  lootgrab.levels.init();
   var levelName = "level1";
   var entityDefs = getEntityDefs(levelName);
-  var world = getLevelData(levelName);
-  var w = new World(entityDefs, world);
+  var level = lootgrab.levels.getLevels()[0];
+  var w = new World(entityDefs, level);
   var r = new Render(w, gfx.tileCtx);
-  var g = new Game(w);
+  var g = new Game(w, editor);
   tdl.log("World created: ", w.width, w.height)
 
-  editor.setup(w, "PlaytimeMode"); // "LevelEditMode" or "PlaytimeMode"
+  editor.setup(w, "PlaytimeMode");
 
   var tick = 0;
   var last_ts = (new Date()).getTime() / 1000;
@@ -72,5 +72,6 @@ $(function(){
 <body>
 <div id="game">
 </div>
+<div id="license">Made using the <a href="http://forums.tigsource.com/index.php?topic=8970">Oryx Lo-Fi Fantasy 2D/3D Tileset</a></div>
 </body>
 </html>
