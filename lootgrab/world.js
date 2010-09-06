@@ -39,6 +39,8 @@ function World(entityDefs, level) {
 }
 
 World.prototype.reset = function() {
+  if (this.game && this.game.editor)
+    this.game.editor.reset();
   this.clearMessage();
   delete this.hero;
   this.init_(this.levelData_);

@@ -177,8 +177,15 @@ var editorHTML = '' +
    return false;
  }
 
+ function reset() {
+   if (editMode_) {
+     setEditorMode(editMode_);
+     console.log(this);
+   }
+ }
+
  function setEditorMode(mode) {
-   this.editMode_ = mode;
+   editMode_ = mode;
 
    switch(mode) {
    case "LevelEditMode":
@@ -190,7 +197,7 @@ var editorHTML = '' +
      editButton_.button( "option", "label", "edit" );
    break;
    default:
-     throw "editor setup() called with editorMode==='" + editorMode + "' which isn't supported.";
+     throw "editor setup() called with editorMode==='" + editMode_ + "' which isn't supported.";
    }
  }
 
@@ -205,7 +212,7 @@ var editorHTML = '' +
      setCurrentAction(0);
    }
 
-   setEditorMode(editorMode);
+  setEditorMode(editorMode);
 
    var worldPixelWidth = world_.tileVisualWidth() * world_.width;
    var worldPixelHeight = world_.tileVisualHeight() * world_.height;
@@ -364,6 +371,7 @@ var editorHTML = '' +
      isRunning: isRunning,
      setup: setup,
      render: render,
+     reset: reset,
      gfx: gfx_
    };
  }

@@ -31,10 +31,10 @@ function initialize() {
   var level = lootgrab.levels.getLevels()[0];
   var w = new World(entityDefs, level);
   var r = new Render(w, gfx.tileCtx);
-  var g = new Game(w);
+  var g = new Game(w, editor);
   tdl.log("World created: ", w.width, w.height)
 
-  editor.setup(w, "PlaytimeMode"); // "LevelEditMode" or "PlaytimeMode"
+  editor.setup(w, "PlaytimeMode");
 
   var tick = 0;
   var last_ts = (new Date()).getTime() / 1000;

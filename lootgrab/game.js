@@ -2,6 +2,7 @@ tdl.provide("game");
 tdl.require("lootgrab.actor");
 tdl.require("lootgrab.audio");
 tdl.require("lootgrab.door");
+tdl.require("lootgrab.editor");
 tdl.require("lootgrab.exit");
 tdl.require("lootgrab.fire");
 tdl.require("lootgrab.hero");
@@ -17,8 +18,9 @@ tdl.require("lootgrab.world");
  *
  * @param {World} w
  */
-function Game(w) {
+function Game(w, e) {
   this.world = w;
+  this.editor = e;
   this.world.game = this;
 }
 
