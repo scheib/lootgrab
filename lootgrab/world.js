@@ -35,15 +35,24 @@ function World(entityDefs, level) {
   // entity defs are demand-initalized so that
   // entity defs can reference other entity defs during load
   this._entity_defs = entityDefs;
-  this.levelData_ = level;
-  this.init_(this.levelData_);
+  this.setLevel(level);
 }
 
 World.prototype.reset = function() {
+  if (this.game && this.game.editor)
+    this.game.editor.reset();
   this.clearMessage();
+  delete this.hero;
   this.init_(this.levelData_);
-  this.game.reset();
-}
+  if (this.game) {
+    this.game.reset();
+  }
+};
+
+World.prototype.setLevel = function(level) {
+  this.levelData_ = JSON.parse(JSON.stringify(level));
+  this.reset();
+};
 
 World.prototype.init_ = function() {
   // init the cell grid
@@ -66,7 +75,7 @@ World.prototype.init_ = function() {
 
     this.actors.push(a);
   }
-}
+};
 
 World.prototype.newEntity = function(entDefID) {
   def = this.getDef(entDefID);
@@ -112,7 +121,22 @@ World.prototype.setLevelCellAt = function(defName, x, y) {
   this.levelData_.cells[y * this.width + x] = defName;
 };
 
-World.prototype.serializeLevel = function() {
+World.prototype.serializeLevel = function(gfx) {
+  var canvas = document.createElement("canvas");
+  var width = 128;
+  var height = 96;
+  canvas.width = width;
+  canvas.height = height;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(gfx.tileCtx.canvas, 0, 0, width, height);
+  ctx.drawImage(gfx.entityCtx.canvas, 0, 0, width, height);
+  ctx.drawImage(gfx.effectCtx.canvas, 0, 0, width, height);
+  try {
+    this.levelData_.img = canvas.toDataURL();
+  } catch (e) {
+    tdl.log("Could not make screenshot:", e);
+    this.levelData_.img = ""; // TODO: put generic URL.
+  }
   return JSON.stringify(this.levelData_);
 }
 
@@ -144,8 +168,8 @@ World.prototype.deleteActorsInCell = function(x, y) {
 World.prototype.deleteActorsInLevelData = function(x, y) {
   var ii = 0;
   while (ii < this.levelData_.actors.length) {
-    var actor = this.levelData_.actors.length;
-    if (actor.x == x && actor.y == y) {
+    var actor = this.levelData_.actors[ii];
+    if (actor.position.x == x && actor.position.y == y) {
       this.levelData_.actors.splice(ii, 1);
     } else {
       ++ii;
@@ -167,13 +191,13 @@ World.prototype.defAt = function(x, y) {
 };
 
 // Convenience function for whether or not a given cell is not passable.
-World.prototype.isBlocking = function(x, y) {
+World.prototype.isBlocking = function(x, y, testActor) {
   var cell = this.cellAt(x, y);
   var actors = this.actorsInCell(x,y);
   var result = cell.passable;
 
   for (var i = 0; result && ( i < actors.length); ++i) {
-    result = result && actors[i].canPass(this.hero);
+    result = result && actors[i].canPass(testActor);
   }
 
   return !result;
@@ -193,6 +217,8 @@ World.prototype.isDesirable = function(x, y) {
 
 World.prototype.actorsInCell = function(x, y) {
   var result = [];
+  x = Math.floor(x);
+  y = Math.floor(y);
   for (var j = 0; j < this.actors.length; ++j) {
     var actor = this.actors[j];
     if (Math.floor(actor.position.x) != x ||
@@ -204,16 +230,11 @@ World.prototype.actorsInCell = function(x, y) {
   return result;
 }
 
+World.prototype.lineOfSight = function(x,y,heading) {
+
+}
+
 World.prototype.draw_dbg = function (ctx) {
-  cell_width = this.tileVisualWidth();
-  cell_height = tile.tileVisualHeight();
-  for(var i = 0; i < this.cells.length; ++i) {
-    var cell =this.cells[i];
-    ctx.strokeStyle = "rgb(255,255,0)";
-    ctx.strokeRect(cell_width * cell.x_,
-                   cell_height * cell.y_,
-                   cell_width, cell_height);
-  }
 }
 
 World.prototype.actors = [];
@@ -258,6 +279,7 @@ World.prototype.getEditorActions = function() {
   // Delete actor actions
   actions.push({
     type: "click",
+    uiName: "Delete actor",
     sprite: this.newEntity("spriteCancel"),
     apply: function(x,y) {
       that.deleteActorsInCell(x, y);
@@ -273,6 +295,7 @@ World.prototype.getEditorActions = function() {
       if(def.type == "Cell"){
         actions.push({
           type: "paint",
+          uiName: (def.uiName) ? def.uiName : ("Add uiName to: " + defName),
           sprite: that.newEntity(def.sprite),
           apply: function(x,y) {
             that.setCellAt(name, x, y);
@@ -291,6 +314,7 @@ World.prototype.getEditorActions = function() {
       if(defName.match(/^actor/)) {
         actions.push({
           type: "click",
+          uiName: (def.uiName) ? def.uiName : ("Add uiName to: " + defName),
           sprite: that.newEntity(def.sprite),
           apply: function(x,y) {
             that.deleteActorsInCell(x, y);
@@ -309,29 +333,36 @@ World.prototype.getEditorActions = function() {
  * Gets the possible PLAYTIME typs of actions within the editor
  */
 World.prototype.getPlaytimeEditorActions = function() {
-  var that = this;
+  var world = this;
   var actions = [];
 
   // Add actor actions
   for(var i = 0; i < this.levelData_.placeables.length; ++i) {
     (function() {
-      var defName = that.levelData_.placeables[i];
-      var def = that._entity_defs[defName];
+      var defName = world.levelData_.placeables[i];
+      var def = world._entity_defs[defName];
       actions.push({
         type: "click",
-        sprite: that.newEntity(def.sprite),
+        uiName: (def.uiName) ? def.uiName : ("Add uiName to: " + defName),
+        sprite: world.newEntity(def.sprite),
         apply: function(x,y) {
           // Check that we can place the item
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
-          // Place it
-          that.deleteActorsInCell(x, y);
-          that.addActor(defName, x, y);
+          if (world.actorsInCell(x,y).length)
+            return;
+          var cell = world.cellAt(x, y);
+          if (!cell.passable)
+            return;
+
+          if (def.type == "Cell") {
+            world.setCellAt(defName, x, y);
+          } else {
+            // Place it
+            world.deleteActorsInCell(x, y);
+            world.addActor(defName, x, y);
+          }
           // If we are placing the item, remove it from inventory
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
-          // OTODODODOTOTODO
+          // Disable this action
+          this.disabled = true;
         }
       });
     })();

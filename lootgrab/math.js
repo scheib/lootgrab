@@ -20,6 +20,10 @@ Vec2.UP = new Vec2(0,-1);
 Vec2.DOWN = new Vec2(0,1);
 Vec2.CENTER = new Vec2(0,0);
 
+Vec2.prototype.clone = function() {
+  return new Vec2(this.x_, this.y_);
+}
+
 Vec2.prototype.toString = function() {
   return "(" + this.x_.toString() + ", " + this.y_.toString() + ")";
 }

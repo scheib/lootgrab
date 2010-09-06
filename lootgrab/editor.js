@@ -1,6 +1,9 @@
 
 tdl.provide('lootgrab.editor');
 
+tdl.require('lootgrab.load');
+tdl.require('lootgrab.save');
+
 lootgrab.editor = (function() {
 
 var editorHTML = '' +
@@ -25,7 +28,7 @@ var editorHTML = '' +
 '</div>' +
 '</div>' +
 '<div id="tiles">' +
- '<canvas id="currentTile" width="32" height="32"></canvas>' +
+ '<canvas id="currentTile" width="230" height="32"></canvas>' +
  '<div id="tileListContainer">' +
   '<canvas id="tileList" width="230" height="352"></canvas>' +
   '<canvas id="tileCursor" width="32" height="32"></canvas>' +
@@ -64,6 +67,7 @@ var editorHTML = '' +
 
  // buttons
  var playButton_;
+ var editButton_;
 
  function getTileListInfo() {
    var tileWidth = world_.tileVisualWidth(gfx_.tileCtx);
@@ -141,7 +145,7 @@ var editorHTML = '' +
  }
 
  function applyAction(pos) {
-   if (drawing_ && currentEditorAction_) {
+   if (drawing_ && currentEditorAction_ && !currentEditorAction_.disabled) {
      currentEditorAction_.apply(pos.x, pos.y);
    }
  }
@@ -173,6 +177,29 @@ var editorHTML = '' +
    return false;
  }
 
+ function reset() {
+   if (editMode_) {
+     setEditorMode(editMode_);
+     console.log(this);
+   }
+ }
+
+ function setEditorMode(mode) {
+   editMode_ = mode;
+
+   switch(mode) {
+   case "LevelEditMode":
+     editorActions_ = world_.getEditorActions();
+     editButton_.button( "option", "label", "game" );
+   break;
+   case "PlaytimeMode":
+     editorActions_ = world_.getPlaytimeEditorActions();
+     editButton_.button( "option", "label", "edit" );
+   break;
+   default:
+     throw "editor setup() called with editorMode==='" + editMode_ + "' which isn't supported.";
+   }
+ }
 
  // Grabs all the tile types from the world.
  function setup(_world, editorMode) {
@@ -181,20 +208,11 @@ var editorHTML = '' +
    currenTileEntity = null;
    editorActions_ = [];
 
-   switch(editorMode) {
-   case "LevelEditMode":
-     editorActions_ = world_.getEditorActions();
-   break;
-   case "PlaytimeMode":
-     editorActions_ = world_.getPlaytimeEditorActions();
-   break;
-   default:
-     throw "editor setup() called with editorMode==='" + editorMode + "' which isn't supported.";
-   }
-   
    if (editorActions_.length) {
      setCurrentAction(0);
    }
+
+  setEditorMode(editorMode);
 
    var worldPixelWidth = world_.tileVisualWidth() * world_.width;
    var worldPixelHeight = world_.tileVisualHeight() * world_.height;
@@ -218,28 +236,50 @@ var editorHTML = '' +
      var action = editorActions_[ii];
      var tx = ii % ti.tilesAcross;
      var ty = Math.floor(ii / ti.tilesAcross);
+     if (action.disabled)
+       tileListCtx_.globalAlpha = 0.2;
      action.sprite.draw(
          tileListCtx_,
          tx * ti.tileWidth,
          ty * ti.tileHeight,
          ti.tileWidth,
          ti.tileHeight);
+     if (action.disabled)
+       tileListCtx_.globalAlpha = 1;
    }
 
    if (currentEditorAction_) {
      currentTileCtx.clearRect(0,0, currentTileCtx.canvas.width, currentTileCtx.canvas.height);
-     currentEditorAction_.sprite.draw(currentTileCtx, 0, 0, 32, 32);
 
+
+     // disable icon on the editor action
+     if (!currentEditorAction_.disabled) {
+       currentEditorAction_.sprite.draw(currentTileCtx, 0, 0, 32, 32);
+
+       // text for the editor action
+       currentTileCtx.fillStyle = "rgba(0,0,0,1)";
+       currentTileCtx.textAlign = "left";
+       currentTileCtx.textBaseline = "middle";
+       currentTileCtx.fillText(currentEditorAction_.uiName, 34, 16);
+     }
+
+     // editor action on the map
      cellCursorCtx_.clearRect(0,0, cellCursorCtx_.canvas.width, cellCursorCtx_.canvas.height);
-     cellCursorCtx_.globalAlpha = (renderCount_ % 8) / 16 + 0.25;
-     currentEditorAction_.sprite.draw(cellCursorCtx_, 0, 0, 32, 32);
+     if (!currentEditorAction_.disabled) {
+       cellCursorCtx_.globalAlpha = (renderCount_ % 8) / 16 + 0.25;
+       currentEditorAction_.sprite.draw(cellCursorCtx_, 0, 0, 32, 32);
+     }
    }
  }
 
- function togglePause() {
-   running_ = !running_;
+ function setPause(paused) {
+   running_ = !paused;
    playButton_.button( "option", "label",
                       running_ ? "pause" : "play");
+ }
+
+ function togglePause() {
+   setPause(running_);
  };
 
  function init(element) {
@@ -284,13 +324,14 @@ var editorHTML = '' +
 
    editor.find(".button").button();
    playButton_ = editor.find("#play").click(togglePause);
+   editButton_ = editor.find("#edit").click();
 
    var loadDialog = lootgrab.load.init();
    editor.find("#load").click(function(){
        if (running_) {
          togglePause();
        }
-       loadDialog.dialog('open');
+       loadDialog.show(world_);
        return false;
      });
 
@@ -300,13 +341,21 @@ var editorHTML = '' +
        if (running_) {
          togglePause();
        }
-       saveDialog.show(world_);
+       saveDialog.show(world_, gfx_);
        if (oldRunning) {
          togglePause();
        }
        return false;
      });
    editor.find("#reset").click(function() {
+     world_.reset();
+     for (var i=0; i < editorActions_.length; ++i) {
+       editorActions_[i].disabled = false;
+     }
+   });
+   editor.find("#edit").click(function() {
+     setPause(true);
+     setEditorMode(editMode_ == "LevelEditMode" ? "PlaytimeMode" : "LevelEditMode");
      world_.reset();
    });
 
@@ -322,6 +371,7 @@ var editorHTML = '' +
      isRunning: isRunning,
      setup: setup,
      render: render,
+     reset: reset,
      gfx: gfx_
    };
  }
@@ -350,3 +400,4 @@ var editorHTML = '' +
    end: null
  };
 })();
+

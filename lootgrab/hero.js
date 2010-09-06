@@ -8,8 +8,41 @@ function Hero(w, def) {
   w.setHero(this);
   this.nextCell = null;
   this.lastCell = null;
+  this.ticks = 0;
+  this.inventory = [];
 }
 tdl.base.inherit(Hero, Actor);
+
+/**
+ *
+ * @param {CanvasContext} ctx
+ * @param {Number} cw
+ * @param {Number} ch
+ */
+Hero.prototype.draw = function(ctx, cw, ch) {
+  // Actor position is center of cell, so subtract
+  // 0.5 so that we draw it in the right position.
+  this.sprite.draw(ctx,
+      (this.position.x - 0.5) * cw,
+      (this.position.y - 0.5) * ch,
+      cw, ch);
+
+  if (this.inventory.length > 0) {
+    var showInventory = [];
+    for (var i = 0; i < this.inventory.length; ++i)
+      if (!this.inventory[i].inventoryHide)
+        showInventory.push(this.inventory[i]);
+
+    if (showInventory.length > 0) {
+      var idx = Math.floor(this.ticks / 20) % showInventory.length;
+      showInventory[idx].sprite.draw(ctx,
+        (this.position.x) * cw,
+        (this.position.y) * ch,
+        cw/1.5, ch/1.5);
+    }
+  }
+
+}
 
 /**
  * Update the actor at the beginning of the frame
@@ -19,7 +52,24 @@ tdl.base.inherit(Hero, Actor);
  * @param elapsed
  */
 Hero.prototype.update = function(world, tick, elapsed) {
+  this.ticks = tick;
   if (this.tempSpeedTicksLeft > 0) this.tempSpeedTicksLeft--;
+
+  var pos = null;
+  if (this.nextCell != null) {
+    pos = [
+      Math.floor(this.nextCell.x),
+      Math.floor(this.nextCell.y)
+    ];
+  } else {
+    pos = [
+      Math.floor(this.position.x - this.heading.x * 0.5),
+      Math.floor(this.position.y - this.heading.y * 0.5)
+    ];
+  }
+
+  var path = lootgrab.route.findRoute(world, pos);
+  this.currentPath = path;
 
   var updateRoute = false;
   if (this.nextCell == null) {
@@ -31,20 +81,6 @@ Hero.prototype.update = function(world, tick, elapsed) {
   if (updateRoute) {
     this.lastCell = this.nextCell;
 
-    var pos = null;
-    if (this.lastCell != null) {
-      pos = [
-        Math.floor(this.lastCell.x),
-        Math.floor(this.lastCell.y)
-      ];
-    } else {
-      pos = [
-        Math.floor(this.position.x - this.heading.x * 0.5),
-        Math.floor(this.position.y - this.heading.y * 0.5)
-      ];
-    }
-
-    var path = lootgrab.route.findRoute(world, pos);
     if (path.length) {
       this.nextCell = new Vec2(path[0][0] + 0.5, path[0][1] + 0.5);
 
@@ -64,12 +100,11 @@ Hero.prototype.update = function(world, tick, elapsed) {
         this.heading = this.nextCell.sub(this.lastCell);
       }
     }
+    this.currentPath = path;
   }
 
   this.updatePosition();
 }
-
-Hero.prototype.inventory = [];
 
 Hero.prototype.hasItem = function(name) {
   for (var i = 0; i < this.inventory.length; ++i) {
@@ -78,10 +113,10 @@ Hero.prototype.hasItem = function(name) {
   return false;
 }
 
-Hero.prototype.useKey = function() {
+Hero.prototype.useItem = function(itemName) {
   for (var i = 0; i < this.inventory.length; ++i) {
-    if (this.inventory[i].isKey) {
-      delete this.inventory[i];
+    if (this.inventory[i][itemName]) {
+      this.inventory.splice(i, 1);
       return;
     }
   }
@@ -92,5 +127,21 @@ Hero.prototype.onCollide = function(other) {
     lootgrab.audio.play_sound("treasure");
     other.loot = false;
     this.inventory.push(other);
+  }
+}
+
+Hero.prototype.drawPath = function(ctx, cw, ch) {
+  if (this.isDead()) return;
+  if (this.currentPath && this.currentPath.length) {
+    ctx.beginPath();
+    ctx.moveTo(this.position.x * cw, this.position.y * ch);
+    if (this.nextCell)
+      ctx.lineTo(this.nextCell.x * cw, this.nextCell.y * ch);
+    for(var i = 0; i < this.currentPath.length; ++i) {
+      ctx.lineTo((this.currentPath[i][0]+0.5) * cw, (this.currentPath[i][1]+0.5)* ch);
+    }
+    ctx.strokeStyle = "rgba(235,169,28,0.5)";
+    ctx.lineWidth = 4;
+    ctx.stroke();
   }
 }

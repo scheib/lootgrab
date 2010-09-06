@@ -2,20 +2,25 @@ tdl.provide("game");
 tdl.require("lootgrab.actor");
 tdl.require("lootgrab.audio");
 tdl.require("lootgrab.door");
+tdl.require("lootgrab.editor");
 tdl.require("lootgrab.exit");
+tdl.require("lootgrab.fire");
 tdl.require("lootgrab.hero");
 tdl.require("lootgrab.loot");
 tdl.require("lootgrab.skeleton");
+tdl.require("lootgrab.skull");
 tdl.require("lootgrab.grimreaper");
 tdl.require("lootgrab.trap");
+tdl.require("lootgrab.wall");
 tdl.require("lootgrab.world");
 
 /**
  *
  * @param {World} w
  */
-function Game(w) {
+function Game(w, e) {
   this.world = w;
+  this.editor = e;
   this.world.game = this;
 }
 
@@ -47,16 +52,19 @@ Game.prototype.update = function(tick, elapsed) {
   this.resolveCollisions();
   for (var i = 0, actor; actor = this.world.actors[i]; i++) {
     if (actor.deathState == Actor.DYING) {
-      freshlyDead.push(actor);
+      freshlyDead.push(i);
     }
   }
 
-  for (var i = 0, corpse; corpse = freshlyDead[i]; i++) {
+  for (var i = 0, corpse; corpse = this.world.actors[freshlyDead[i]]; i++) {
     if (corpse == this.world.hero) {
       this.lose();
     }
     corpse.killed();
+    this.world.actors.splice(freshlyDead[i], 1); 
   }
+
+  
 }
 
 Game.prototype.resolveCollisions = function() {
@@ -99,7 +107,7 @@ Game.prototype.debug_draw = function(ctx) {
   var xscale = this.world.tileVisualWidth(ctx);
   var yscale = this.world.tileVisualHeight(ctx);
 
-  for (var cIdx in this.world.cells) {
+/*  for (var cIdx in this.world.cells) {
     var c = this.world.cells[cIdx];
     ctx.strokeRect(
         c.x_ * xscale,
@@ -108,7 +116,7 @@ Game.prototype.debug_draw = function(ctx) {
         yscale);x
     ctx.strokeText(c.ground_ent.id, c.x_ * xscale, (c.y_ + .5) * yscale, xscale);
 
-  }
+  }*/
 
   for(var aIdx in this.world.actors) {
     var a = this.world.actors[aIdx];
