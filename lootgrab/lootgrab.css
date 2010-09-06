@@ -73,6 +73,13 @@ CANVAS {
   padding:10px;
   background:#555;
 }
+#license {
+  font-size:14px;
+  color: white;
+  position:absolute;
+  left:50%;
+  top:460px;
+}
 .message {
   font-family: 'IM Fell English SC', arial, serif;
   font-size:42px;
