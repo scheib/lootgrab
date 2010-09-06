@@ -4,6 +4,7 @@ tdl.require("lootgrab.actor");
 function Exit(w, entDef) {
   Actor.call(this, w, entDef);
   this.exit = true;
+  this.inventoryHide = true;
 }
 
 tdl.base.inherit(Exit,Actor);
