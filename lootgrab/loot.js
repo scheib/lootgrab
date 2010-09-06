@@ -49,6 +49,7 @@ function Meat(w, def) {
   this.target = null;
   this.meat = true;
   this.ticks = 75;
+  this.inventoryHide = true;
 };
 tdl.base.inherit(Meat, Loot);
 Meat.prototype.onCollide = function(other) {
@@ -72,10 +73,12 @@ Meat.prototype.update = function(ticks, elapsed) {
 
 function GoldChest(w, def) {
   Loot.call(this, w, def);
+  this.inventoryHide = true;
 };
 tdl.base.inherit(GoldChest, Loot);
 
 function GoldBars(w, def) {
   Loot.call(this, w, def);
+  this.inventoryHide = true;
 };
 tdl.base.inherit(GoldBars, Loot);

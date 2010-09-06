@@ -28,11 +28,18 @@ Hero.prototype.draw = function(ctx, cw, ch) {
       cw, ch);
 
   if (this.inventory.length > 0) {
-    var idx = Math.floor(this.ticks / 20) % this.inventory.length;
-    this.inventory[idx].sprite.draw(ctx,
-      (this.position.x) * cw,
-      (this.position.y) * ch,
-      cw/1.5, ch/1.5);
+    var showInventory = [];
+    for (var i = 0; i < this.inventory.length; ++i)
+      if (!this.inventory[i].inventoryHide)
+        showInventory.push(this.inventory[i]);
+
+    if (showInventory.length > 0) {
+      var idx = Math.floor(this.ticks / 20) % showInventory.length;
+      showInventory[idx].sprite.draw(ctx,
+        (this.position.x) * cw,
+        (this.position.y) * ch,
+        cw/1.5, ch/1.5);
+    }
   }
 
 }
