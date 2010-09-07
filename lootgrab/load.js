@@ -13,7 +13,7 @@ lootgrab.load = (function() {
       var level = levels[ii];
       html.push(
         '<li class="ui-widget-content" id="level' + ii + '"><div>' +
-        '<div class="levelname">name: ' + level.name + '</div>' +
+        '<div class="levelname">' + level.name + '</div>' +
         '<img class="levelicon" src="' + level.img + '" />' +
         '</div></li>');
     }
