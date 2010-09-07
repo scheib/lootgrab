@@ -5,9 +5,8 @@ tdl.require('tdl.io');
 lootgrab.levels = (function() {
 
   var urls_ = [
+    "../json/tutorial-key-sword.level",
     "../json/enne-fire_alley.level",
-    "../json/level1.level",
-    "../json/level2.level",
   ];
 
   var levels_ = [];
