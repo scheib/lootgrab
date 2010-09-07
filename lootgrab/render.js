@@ -32,14 +32,14 @@ function Sprite(world, tile_def) {
 
   var that = this;
   if(tile_def === undefined)
-    throw "Tile def could not be found!"
+    throw "Tile def could not be found!";
 
-  var tileset_def = world.getDef(tile_def.tileset)
+  var tileset_def = world.getDef(tile_def.tileset);
   if(tileset_def === undefined)
-    throw "Tileset could not be found"
+    throw "Tileset could not be found";
 
   this.tileset_def = tileset_def;
-  this.tile_def = tile_def
+  this.tile_def = tile_def;
   var img = g_imageDB[tileset_def.image];
   if(!img) {
     img = new Image();
@@ -77,8 +77,8 @@ Sprite.prototype.draw = function(ctx, x,y,w,h) {
     return;
   }
 
-  var tileWidth = 32;
-  var tileHeight = 32;
+  var tileWidth = this.tileset_def.tile_width;
+  var tileHeight = this.tileset_def.tile_height;
   var tx = tileWidth * this.tile_def.start_x;
   var ty = tileHeight * this.tile_def.start_y;
   tx += this._cur_frame * tileWidth;
@@ -90,7 +90,7 @@ Sprite.prototype.draw = function(ctx, x,y,w,h) {
                   x,y,w,h);
   } catch(e) {
     if(this.error_printed===undefined) {
-      tdl.log("problem with image " + this.entDefID);     
+      tdl.log("problem with image " + this.entDefID);
       this.error_printed = true;
       tdl.log("img.src = ", this.img.src);
       tdl.log("srcx, srcy = ", tx, ty);
@@ -137,13 +137,13 @@ Render.prototype.draw = function() {
 
   // draw the hero's path
   w.hero.drawPath(ctx, cellWidth, cellHeight);
-  
+
   // Render foreground actors.
   for(var i = 0, actor; actor = w.actors[i]; ++i) {
     if (!actor.isDead() && !actor.renderBackground)
       actor.draw(ctx, cellWidth, cellHeight);
   }
-  
+
   if(DEBUG)
     w.draw_dbg(ctx);
 }
