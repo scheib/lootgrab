@@ -14,7 +14,6 @@ var editorHTML = '' +
   '<div id="play" class="button">play</div>' +
   '<div id="reset" class="button">reset</div>' +
   '<div id="edit" class="button">edit</div>' +
-  '<div id="undo" class="button">undo</div>' +
   '<div id="load" class="button">load</div>' +
   '<div id="save" class="button">save</div>' +
   '<div id="help" class="button">help</div>' +
@@ -368,8 +367,8 @@ var editorHTML = '' +
          autoOpen: false,
          title: 'Help',
          modal: true,
-         width: 512,
-         height: 384,
+         width: 600,
+         height: 400,
        });
    helpDialog_.find("#close").button();
    helpDialog_.find("#close").click(function() {
