@@ -6,11 +6,13 @@ lootgrab.levels = (function() {
 
   // UI will sort these by the name defined in the level - not the filename.
   var urls_ = [
-    //default: "../json/tutorial-1-key-sword.level",
+    //"../json/tutorial-1-key-sword.level", // It's the default level
     "../json/tutorial-2-loot.level",
-
+    "../json/tutorial-3-timed-wall.level",
+    
     "../json/gamejam.level",
     "../json/enne-fire_alley.level",
+    "../json/z-all-placeables-test.level",
   ];
 
   var levels_ = [];
