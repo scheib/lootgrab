@@ -34,7 +34,6 @@ var getEntityDefs = function() {
     "cellFloorRug3"       : { type: "Cell", sprite: "spriteFloorRug3"      , uiName: "Rug 3",            passable : true },
     "cellFloorRug4"       : { type: "Cell", sprite: "spriteFloorRug4"      , uiName: "Rug 4",            passable : true },
     "cellStairsDown"      : { type: "Cell", sprite: "spriteStairsDown"     , uiName: "Stairs down",      passable : true },
-    "cellStairsUp"        : { type: "Cell", sprite: "spriteStairsUp"       , uiName: "Stairs up",        passable : true },
     "cellWallH"           : { type: "Cell", sprite: "smartWall"            , uiName: "Wall H",           passable : false },
     "cellWallHCrumbled"   : { type: "Cell", sprite: "smartWall"            , uiName: "Wall H Crumbled",  passable : false },
     "cellWallHTorch"      : { type: "Cell", sprite: "smartWall"            , uiName: "Wall H Torch",     passable : false,  decoration: "spriteWallHTorch" },
