@@ -6,14 +6,14 @@ tdl.require('lootgrab.levels');
 lootgrab.load = (function() {
   var loadDialog_;
 
-  function show(world) {
+  function show(editor, world) {
     var levels = lootgrab.levels.getLevels();
     var html = ['<ol id="levels">'];
     for (var ii = 0; ii < levels.length; ++ii) {
       var level = levels[ii];
       html.push(
         '<li class="ui-widget-content" id="level' + ii + '"><div>' +
-        '<div class="levelname">name: ' + level.name + '</div>' +
+        '<div class="levelname">' + level.name + '</div>' +
         '<img class="levelicon" src="' + level.img + '" />' +
         '</div></li>');
     }
@@ -25,6 +25,7 @@ lootgrab.load = (function() {
         tdl.log("clicked: ", ui.selected.id);
         var index = parseInt(ui.selected.id.substring(5));
         world.setLevel(levels[index]);
+        editor.setup(world, "PlaytimeMode"); // "LevelEditMode" or "PlaytimeMode"
     }});
 
     loadDialog_.dialog('open');

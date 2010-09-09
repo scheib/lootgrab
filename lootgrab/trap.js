@@ -19,6 +19,8 @@ var minTrapdoorDistance = 0.1;
 
 
 Trapdoor.prototype.onCollide = function(other) {
+  if (this.open) // one time trap, once open people avoid it.
+    return;
   if (other.position.sub(this.position).len() < minTrapdoorDistance) {
     if (other.killable) {
       other.kill();

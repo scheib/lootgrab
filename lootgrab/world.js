@@ -9,18 +9,28 @@ function Cell(world,def,x,y) {
 }
 
 Cell.prototype.setType = function(def) {
-  this.ground_ent = this.world.newEntity(def.sprite)
+  this.ground_ent = this.world.newEntity(def.sprite);
   if(this.ground_ent === undefined)
-    throw "Cell.setType() could instantiate a ground_ent by using:" + def.sprite
+    throw "Cell.setType() could instantiate a ground_ent by using:" + def.sprite;
+
+  if(def.decoration) {
+    this.decoration = this.world.newEntity(def.decoration);
+    if(!this.decoration)
+      throw "Cell.setType() could not instantiate a decoration using: " + def.decoration;
+  }
+
   this.passable = 'passable' in def ? def.passable : true;
-}
+};
 
 Cell.prototype.draw = function(ctx, x, y, w, h) {
   this.ground_ent.draw(ctx,x,y,w,h);
-}
+  if(this.decoration) {
+    this.decoration.draw(ctx,x,y,w,h);
+  }
+};
 
 Cell.prototype.update = function(ts) {
-}
+};
 
 
 ///////////////////////////////////////////////////////////////////////////
