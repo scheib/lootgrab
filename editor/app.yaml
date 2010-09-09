@@ -1,0 +1,11 @@
+application: lootjam
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /game
+  static_dir: game
+
+- url: .*
+  script: main.py
