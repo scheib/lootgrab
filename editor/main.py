@@ -32,162 +32,78 @@ def id_decode(s):
     n = n * BASE + ALPHABET_REVERSE[c]
   return n
 
-def get_data(obj):
-  data = {}
-  data['id'] = obj.get_id()
-  for name in obj.properties():
-    data[name] = getattr(obj, name)
-
-  for name in obj.dynamic_properties():
-    data[name] = getattr(obj, name)
-
-  return data
-
-# Models
-class Entity(db.Expando):
+class Level(db.Expando):
   name = db.StringProperty()
+  owner = db.UserProperty()
+  json = db.BlobProperty()
+  public = db.BooleanProperty(default=False)
   def get_id(self):
     return id_encode(self.key().id())
 
-def dbEntity(id):
-  return Entity.get_by_id(int(id_decode(id)))
-
-
-class Cell(db.Expando):
-  entities = db.ListProperty(str, default=[])
-  def get_id(self):
-    return id_encode(self.key().id())
-
-def dbCell(id):
-  return Cell.get_by_id(int(id_decode(id)))
-
-
-class World(db.Expando):
-  name = db.StringProperty()
-  cells = db.ListProperty(str, default=[])
-  def get_id(self):
-    return id_encode(self.key().id())
-  def get_all_data(self):
-    data = get_data(self)
-    data['cells'] = {}
-    data['entities'] = {}
-
-    entities_to_get = {}
-
-    for cell_id in self.cells:
-      cell = dbCell(cell_id)
-      if not cell: continue
-      for entity_id in cell.entities:
-        entities_to_get[entity_id] = entity_id
-      data['cells'][cell_id] = get_data(cell)
-
-    for entity_id in entities_to_get:
-      entity = dbEntity(entity_id)
-      if not entity: continue
-      data['entities'][entity_id] = get_data(entity)
-    return data
-
-def dbWorld(id):
-  return World.get_by_id(int(id_decode(id)))
-
+def dbLevel(id):
+  return Level.get_by_id(int(id_decode(id)))
 
 # Handlers
 class MainHandler(webapp.RequestHandler):
   def get(self):
     self.response.out.write('Hello world!')
 
+class EditorHandler(webapp.RequestHandler):
+  def get(self):
+    self.response.out.write('Hello world!')
 
-class SaveEntity(webapp.RequestHandler):
-  def post(self):
+class SaveLevel(webapp.RequestHandler):
+  def post(self, id):
+    user = users.get_current_user()
+    if not user:
+      return
+
     data = simplejson.loads(self.request.body)
+    level = None
 
-    entity = None
-    if 'id' in data and data['id'] != "":
-      entity = dbEntity(data['id'])
-    if not entity:
-      entity = Entity()
-    
-    for name in data:
-      if name == 'id': continue
-      setattr(entity, name, data[name])
-    entity.put()
-
-    self.response.out.write(entity.get_id())
-
-
-class SaveCell(webapp.RequestHandler):
-  def post(self):
-    data = simplejson.loads(self.request.body)
-
-    cell = None
-    if 'id' in data and data['id'] != "":
-      cell = dbCell(data['id'])
-    
-    if not cell:
-      cell = Cell()
-    
-    for name in data:
-      if name == 'id': continue
-      setattr(cell, name, data[name])
-    cell.put()
-
-    self.response.out.write(cell.get_id())
-
-class SaveWorld(webapp.RequestHandler):
-  def post(self):
-    data = simplejson.loads(self.request.body)
-    world = None
-
-    if 'id' in data:
-      world = dbWorld(data['id'])
+    if id:
+      level = dbLevel(data['id'])
+      if level.owner != user:
+        return
     else:
-      world = World()
+      level = Level()
+      level.owner = user
     
-    for name in data:
-      if name == 'id': continue
-      setattr(world, name, data[name])
-    world.put()
+    if 'name' in data:
+      level.name = data['name']
 
-    self.response.out.write(world.get_id())
+    level.json = self.request.body
+    level.put()
 
+    self.response.out.write(level.get_id())
 
-class GetWorld(webapp.RequestHandler):
+class ListLevels(webapp.RequestHandler):
+  def get(self):
+    levels = Levels.gql("WHERE owner = :1", users.get_current_user()).fetch(100)
+    data = []
+    for level in levels:
+      data.push({
+        'id' : level.get_id()
+        'name' : level.name
+      })
+    self.response.out.write(simplejson.dumps(data))
+
+class GetLevel(webapp.RequestHandler):
   def get(self, id):
-    world = dbWorld(id)
-    if not world:
+    level = dbLevel(id)
+    if not level:
       return
     
-    self.response.out.write(simplejson.dumps(world.get_all_data()))
-
-class DbgEditor(webapp.RequestHandler):
-  def get(self):
-    worlds = World.all().fetch(1000)
-    worldlist = [];
-    for world in worlds:
-      worldlist.append({
-        'name' : world.name,
-        'id' : world.get_id()
-      })
-
-    world_json = ""
-    if self.request.get("id"):
-      world_json = simplejson.dumps(dbWorld(self.request.get("id")).get_all_data())
-
-    path = os.path.join(os.path.dirname(__file__), "files/dbgeditor.html")
-    self.response.out.write(template.render(path, {
-      'worlds' : worldlist,
-      'world_json' : world_json
-    }))
+    self.response.out.write(level.json)
 
 # Main
 def main():
   application = webapp.WSGIApplication([
-    ('/', DbgEditor),
-    ('/api/saveentity', SaveEntity),
-    ('/api/savecell', SaveCell),
-    ('/api/saveworld', SaveWorld),
-    ('/api/getworld/(.*)', GetWorld),
-    #('/images/(.*)', GetImage),
+    ('/', MainHandler),
+    ('/editor/', Editor),
+    ('/editor/savelevel/(.*)', SaveLevel),
+    ('/editor/listlevels/(.*)', ListLevels),
+    ('/getlevel/(.*)', GetLevel),
   ], debug=True)
   util.run_wsgi_app(application)
 
