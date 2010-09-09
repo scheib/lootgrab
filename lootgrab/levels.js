@@ -9,6 +9,7 @@ lootgrab.levels = (function() {
     //"../json/tutorial-1-key-sword.level", // It's the default level
     "../json/tutorial-2-loot.level",
     "../json/tutorial-3-timed-wall.level",
+    "../json/tutorial-4-meat.level",
     
     "../json/gamejam.level",
     "../json/enne-fire_alley.level",
