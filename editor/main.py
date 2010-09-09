@@ -4,6 +4,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 from google.appengine.ext.webapp import template
 from google.appengine.ext import db
+from google.appengine.api import users
 from django.utils import simplejson
 
 # Functions
@@ -50,7 +51,11 @@ class MainHandler(webapp.RequestHandler):
 
 class EditorHandler(webapp.RequestHandler):
   def get(self):
-    self.response.out.write('Hello world!')
+    user = users.get_current_user()
+    if not user:
+      self.response.out.write("<a href=\"/editor/\">Sign in or register</a>.")
+    else:
+      self.response.out.write("Hello")
 
 class SaveLevel(webapp.RequestHandler):
   def post(self, id):
@@ -79,11 +84,20 @@ class SaveLevel(webapp.RequestHandler):
 
 class ListLevels(webapp.RequestHandler):
   def get(self):
-    levels = Levels.gql("WHERE owner = :1", users.get_current_user()).fetch(100)
-    data = []
+    data = {
+      'public' : [],
+      'personal' : []
+    }
+    public = Level.gql("WHERE public = True AND owner != :1", users.get_current_user()).fetch(100)
+    for level in public:
+      data['public'].push({
+        'id' : level.get_id(),
+        'name' : level.name
+      })
+    levels = Level.gql("WHERE owner = :1", users.get_current_user()).fetch(100)
     for level in levels:
-      data.push({
-        'id' : level.get_id()
+      data['personal'].push({
+        'id' : level.get_id(),
         'name' : level.name
       })
     self.response.out.write(simplejson.dumps(data))
@@ -100,9 +114,9 @@ class GetLevel(webapp.RequestHandler):
 def main():
   application = webapp.WSGIApplication([
     ('/', MainHandler),
-    ('/editor/', Editor),
+    ('/editor/', EditorHandler),
     ('/editor/savelevel/(.*)', SaveLevel),
-    ('/editor/listlevels/(.*)', ListLevels),
+    ('/editor/listlevels/', ListLevels),
     ('/getlevel/(.*)', GetLevel),
   ], debug=True)
   util.run_wsgi_app(application)
