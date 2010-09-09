@@ -94,7 +94,7 @@ Game.prototype.lose = function() {
 
 Game.prototype.win = function() {
   lootgrab.audio.play_sound("escape");
-  this.world.showMessage("You won", "winmessage");
+  this.world.showMessage("You won! Load a new level, or Edit one!", "winmessage");
   this.status = Game.WIN;
 }
 

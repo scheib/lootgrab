@@ -14,9 +14,9 @@ var editorHTML = '' +
   '<div id="play" class="button">play</div>' +
   '<div id="reset" class="button">reset</div>' +
   '<div id="edit" class="button">edit</div>' +
-  '<div id="undo" class="button">undo</div>' +
   '<div id="load" class="button">load</div>' +
   '<div id="save" class="button">save</div>' +
+  '<div id="help" class="button">help</div>' +
  '</div>' +
 '</div>' +
 '<div id="level">' +
@@ -38,6 +38,7 @@ var editorHTML = '' +
 '</div>' +
 '</div>';
 
+ var editorHack_;
  var world_;
  var gfx_;
  var running_ = false;
@@ -282,7 +283,7 @@ var editorHTML = '' +
    setPause(running_);
  };
 
- function init(element) {
+ function init(element, helpText) {
    var editor = $('<div></div>').html(editorHTML);
    var canvases = editor.find('CANVAS');
 
@@ -331,7 +332,7 @@ var editorHTML = '' +
        if (running_) {
          togglePause();
        }
-       loadDialog.show(world_);
+       loadDialog.show(editorHack_, world_);
        return false;
      });
 
@@ -359,7 +360,37 @@ var editorHTML = '' +
      world_.reset();
    });
 
+   var oldRunning_;
+   var helpDialog_ = $('<div></div>')
+       .html(helpText + '<br/><br/><div id="close">Close</div>')
+       .dialog({
+         autoOpen: false,
+         title: 'Help',
+         modal: true,
+         width: 600,
+         height: 400,
+       });
+   helpDialog_.find("#close").button();
+   helpDialog_.find("#close").click(function() {
+     helpDialog_.dialog('close');
+     if (oldRunning && !running_) {
+       togglePause();
+     }
+   });
+   editor.find("#help").click(function(){
+     showHelp();
+   });
+
+   function showHelp() {
+     oldRunning = running_;
+     if (running_) {
+       togglePause();
+     }
+     helpDialog_.dialog('open');
+   }
+
    togglePause();
+   showHelp();
 
    gfx_ = {
      tileCtx: canvases.get()[0].getContext("2d"),
@@ -367,13 +398,14 @@ var editorHTML = '' +
      effectCtx: canvases.get()[2].getContext("2d")
    };
 
-   return {
+   editorHack_ = {
      isRunning: isRunning,
      setup: setup,
      render: render,
      reset: reset,
      gfx: gfx_
    };
+   return editorHack_;
  }
 
  function isRunning() {
