@@ -42,11 +42,17 @@ function initialize() {
   var last_ts = (new Date()).getTime() / 1000;
   var drawIntervalID = setInterval(gameloop, 32);
 
+  var simTime = undefined;
   function gameloop() {
     var ts = (new Date()).getTime() / 1000;
-    tick = tick + 1;
-    if (editor.isRunning()) {
-      g.update(tick, ts);
+    if (simTime === undefined)
+      simTime = ts;
+    while (simTime < ts) {      
+      simTime = simTime + 0.032;
+      tick = tick + 1;
+      if (editor.isRunning()) {
+        g.update(tick, simTime);
+      }
     }
     if (DEBUG) {
       g.debug_draw(gfx.entityCtx, 32);
