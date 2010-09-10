@@ -47,7 +47,7 @@ function initialize() {
     var ts = (new Date()).getTime() / 1000;
     if (simTime === undefined)
       simTime = ts;
-    while (simTime < ts) {      
+    while (simTime <= ts) {
       simTime = simTime + 0.032;
       tick = tick + 1;
       if (editor.isRunning()) {
