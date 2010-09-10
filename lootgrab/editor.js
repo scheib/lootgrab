@@ -192,10 +192,12 @@ var editorHTML = '' +
    case "LevelEditMode":
      editorActions_ = world_.getEditorActions();
      editButton_.button( "option", "label", "game" );
+     editButton_.css({"background":"FFaa80"});
    break;
    case "PlaytimeMode":
      editorActions_ = world_.getPlaytimeEditorActions();
      editButton_.button( "option", "label", "edit" );
+     editButton_.css({"background":""});
    break;
    default:
      throw "editor setup() called with editorMode==='" + editMode_ + "' which isn't supported.";
@@ -275,8 +277,12 @@ var editorHTML = '' +
 
  function setPause(paused) {
    running_ = !paused;
+   if (running_)
+     playButton_.css({"background":""});
+   else
+     playButton_.css({"background":"FFaa80"});
    playButton_.button( "option", "label",
-                      running_ ? "pause" : "play");
+                      running_ ? "pause" : "!PAUSED!");
  }
 
  function togglePause() {
