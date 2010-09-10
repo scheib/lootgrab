@@ -5,10 +5,10 @@
   "app": {
     "launch": {
       "local_path": "lootgrab/index.html"
-    },
+    }
   },
   "icons":{
   },
   "permissions": [
-  ],
+  ]
 }
