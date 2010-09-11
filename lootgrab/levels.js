@@ -10,6 +10,7 @@ lootgrab.levels = (function() {
     "../json/tutorial-2-loot.level",
     "../json/tutorial-3-timed-wall.level",
     "../json/tutorial-4-meat.level",
+    "../json/tutorial-5-grim-reaper.level",
     
     "../json/gamejam.level",
     "../json/enne-fire_alley.level",
