@@ -335,9 +335,7 @@ var editorHTML = '' +
 
    var loadDialog = lootgrab.load.init();
    editor.find("#load").click(function(){
-       if (running_) {
-         togglePause();
-       }
+       setPause(false);
        loadDialog.show(editorHack_, world_);
        return false;
      });
@@ -361,8 +359,8 @@ var editorHTML = '' +
      }
    });
    editor.find("#edit").click(function() {
-     setPause(true);
      setEditorMode(editMode_ == "LevelEditMode" ? "PlaytimeMode" : "LevelEditMode");
+     setPause(editMode_ == "LevelEditMode");
      world_.reset();
    });
 
