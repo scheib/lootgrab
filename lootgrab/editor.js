@@ -251,6 +251,8 @@ var editorHTML = '' +
        tileListCtx_.globalAlpha = 1;
    }
 
+   var currentTileCtxFillText = "Select an item to place.";
+   cellCursorCtx_.clearRect(0,0, cellCursorCtx_.canvas.width, cellCursorCtx_.canvas.height);
    if (currentEditorAction_) {
      currentTileCtx.clearRect(0,0, currentTileCtx.canvas.width, currentTileCtx.canvas.height);
 
@@ -263,16 +265,16 @@ var editorHTML = '' +
        currentTileCtx.fillStyle = "rgba(0,0,0,1)";
        currentTileCtx.textAlign = "left";
        currentTileCtx.textBaseline = "middle";
-       currentTileCtx.fillText(currentEditorAction_.uiName, 34, 16);
+       currentTileCtxFillText = currentEditorAction_.uiName;
      }
 
      // editor action on the map
-     cellCursorCtx_.clearRect(0,0, cellCursorCtx_.canvas.width, cellCursorCtx_.canvas.height);
      if (!currentEditorAction_.disabled) {
        cellCursorCtx_.globalAlpha = (renderCount_ % 8) / 16 + 0.25;
        currentEditorAction_.sprite.draw(cellCursorCtx_, 0, 0, 32, 32);
      }
    }
+   currentTileCtx.fillText(currentTileCtxFillText, 34, 16);
  }
 
  function setPause(paused) {
