@@ -8,6 +8,9 @@
     }
   },
   "icons":{
+	"16": "lootgrab-icon-16.png",
+	"24": "lootgrab-icon-24.png",
+	"128": "lootgrab-icon-128.png",
   },
   "permissions": [
   ]
